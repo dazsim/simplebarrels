@@ -104,7 +104,7 @@ public class BarrelHandler {
 			{
 				
 				TileEntityBarrel te2 = (TileEntityBarrel) te;
-				if (te2.barrelContents[0] == null)
+				if (te2.itemHandler.barrelContents[0] == null)
 				{
 					//do nothing
 					
@@ -112,13 +112,13 @@ public class BarrelHandler {
 				
 				} else
 				//if (te2.barrelContents[0].stackSize<64)
-				if (te2.count<te2.barrelContents[0].getMaxStackSize())
+				if (te2.itemHandler.count<te2.itemHandler.barrelContents[0].getMaxStackSize())
 				{
 					//EntityItem e = new EntityItem(event.getWorld(),event.getPos().getX(),event.getPos().getY(),event.getPos().getZ(),te2.barrelContents[0]);
 					
 					//event.getWorld().spawnEntityInWorld(e);
-					ItemStack istack = new ItemStack(te2.barrelContents[0].getItem(),te2.barrelContents[0].stackSize,te2.barrelContents[0].getItemDamage());
-					istack.setTagCompound(te2.barrelContents[0].getTagCompound());
+					ItemStack istack = new ItemStack(te2.itemHandler.barrelContents[0].getItem(),te2.itemHandler.barrelContents[0].stackSize,te2.itemHandler.barrelContents[0].getItemDamage());
+					istack.setTagCompound(te2.itemHandler.barrelContents[0].getTagCompound());
 					/*if (te2.tags!=null)
 					{
 						istack.writeToNBT(te2.tags);
@@ -127,8 +127,8 @@ public class BarrelHandler {
 					InventoryHelper.spawnItemStack(event.getWorld(), event.getPos().getX(), event.getPos().getY()+1.0, event.getPos().getZ(),istack);
 					
 					//event.getEntityPlayer().inventory.inventoryChanged=true;
-					te2.barrelContents[0] = null;
-					te2.count = 0;
+					te2.itemHandler.barrelContents[0] = null;
+					te2.itemHandler.count = 0;
 					//SimpleBarrels.BarrelNet.sendTo(new BarrelSyncClient(Items.APPLE.getUnlocalizedName(),0,te2.getPos().getX(),te2.getPos().getY(),te2.getPos().getZ()), (EntityPlayerMP) event.getEntityPlayer());
 					updateBarrel(te2);
 					event.setCanceled(true);
@@ -138,8 +138,8 @@ public class BarrelHandler {
 					//return all
 				} else
 				{
-					ItemStack istack = new ItemStack(te2.barrelContents[0].getItem(),te2.barrelContents[0].getMaxStackSize(),te2.barrelContents[0].getItemDamage());
-					istack.setTagCompound(te2.barrelContents[0].getTagCompound());
+					ItemStack istack = new ItemStack(te2.itemHandler.barrelContents[0].getItem(),te2.itemHandler.barrelContents[0].getMaxStackSize(),te2.itemHandler.barrelContents[0].getItemDamage());
+					istack.setTagCompound(te2.itemHandler.barrelContents[0].getTagCompound());
 					/*if (te2.tags!=null)
 					{
 						istack.writeToNBT(te2.tags);
@@ -149,10 +149,10 @@ public class BarrelHandler {
 					
 					//event.getEntityPlayer().inventory.inventoryChanged=true;
 					
-					te2.count -= te2.barrelContents[0].getMaxStackSize();
-					if (te2.count == 0)
+					te2.itemHandler.count -= te2.itemHandler.barrelContents[0].getMaxStackSize();
+					if (te2.itemHandler.count == 0)
 					{
-						te2.barrelContents[0] = null;
+						te2.itemHandler.barrelContents[0] = null;
 					}
 							
 					//SimpleBarrels.BarrelNet.sendTo(new BarrelSyncClient(Items.APPLE.getUnlocalizedName(),0,te2.getPos().getX(),te2.getPos().getY(),te2.getPos().getZ()), (EntityPlayerMP) event.getEntityPlayer());

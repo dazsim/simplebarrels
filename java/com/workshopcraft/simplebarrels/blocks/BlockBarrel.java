@@ -9,6 +9,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -27,8 +28,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -36,6 +35,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockBarrel extends BlockContainer{
 
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
+	public static final PropertyBool NoComparator = PropertyBool.create("NoComparator");
+	public static final PropertyBool NoItemFrame = PropertyBool.create("NoItemFrame");
 	
 	public BlockBarrel() {
 		
@@ -46,6 +47,11 @@ public class BlockBarrel extends BlockContainer{
         setResistance(6.0f);
         setHarvestLevel("Axe", 0);
         
+	}
+	
+	public void init(Boolean comp,Boolean frame)
+	{
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(NoComparator,comp).withProperty(NoItemFrame, frame));
 	}
 	
 	 @SideOnly(Side.CLIENT)
@@ -125,7 +131,7 @@ public class BlockBarrel extends BlockContainer{
         return new BlockStateContainer(this, new IProperty[] {FACING});
     }
     
-    public void updateBarrel(TileEntityBarrel t)
+    public static void updateBarrel(TileEntityBarrel t)
 	{
 		NBTTagCompound compound = new NBTTagCompound();
 		t.writeToNBT(compound );
@@ -148,7 +154,7 @@ public class BlockBarrel extends BlockContainer{
     				if (te instanceof TileEntityBarrel)
     				{
     					TileEntityBarrel te2 = (TileEntityBarrel) te;
-    					if (te2.barrelContents[0] == null)
+    					if (te2.itemHandler.barrelContents[0] == null)
     					{
     						if (heldItem != null) //place whatever is in hand in barrel
     						{
@@ -157,18 +163,19 @@ public class BlockBarrel extends BlockContainer{
     							n = heldItem.getTagCompound();
     							if (n!=null)
     							{
-    								System.out.println(n.toString());
+    								//System.out.println(n.toString());
     							}
     							
-    							te2.barrelContents[0] = new ItemStack(heldItem.getItem(),heldItem.stackSize,heldItem.getMetadata());
-    							te2.barrelContents[0].setTagCompound(n);
+    							te2.itemHandler.barrelContents[0] = new ItemStack(heldItem.getItem(),heldItem.stackSize,heldItem.getMetadata());
+    							te2.itemHandler.barrelContents[0].setTagCompound(n);
     							
-    							if (te2.tags == null)
+    							/*if (te2.tags == null)
     							{
     								te2.tags = new NBTTagCompound();
     							}
     							te2.tags = heldItem.getTagCompound();
-    							te2.count = heldItem.stackSize;
+    							*/
+    							te2.itemHandler.count = heldItem.stackSize;
     							playerIn.inventory.mainInventory[playerIn.inventory.currentItem].stackSize=0;
     							playerIn.inventory.inventoryChanged=true;
     							this.updateBarrel(te2);
@@ -177,9 +184,9 @@ public class BlockBarrel extends BlockContainer{
     						}
     					} else if (heldItem!=null) 
     					{
-    						if (te2.barrelContents[0].isItemEqual(heldItem))
+    						if (te2.itemHandler.barrelContents[0].isItemEqual(heldItem))
     						{
-    							NBTTagCompound t1 = te2.barrelContents[0].getTagCompound();
+    							NBTTagCompound t1 = te2.itemHandler.barrelContents[0].getTagCompound();
     							Boolean match = false;
     							if (t1!=null)
     							{
@@ -203,13 +210,13 @@ public class BlockBarrel extends BlockContainer{
     							if (match)
 								{
     							
-    								if (te2.count < te2.size)
+    								if (te2.itemHandler.count < te2.itemHandler.size)
     								{
     								
-    									int r = heldItem.stackSize+te2.count-te2.size;
+    									int r = heldItem.stackSize+te2.itemHandler.count-te2.itemHandler.size;
     									if (r<0)
     									{
-    										te2.count = (heldItem.stackSize+te2.count);
+    										te2.itemHandler.count = (heldItem.stackSize+te2.itemHandler.count);
     										playerIn.inventory.mainInventory[playerIn.inventory.currentItem].stackSize=0;
     										playerIn.inventory.inventoryChanged=true;
     										this.updateBarrel(te2);
@@ -217,7 +224,7 @@ public class BlockBarrel extends BlockContainer{
     										//event.setCanceled(true);
     									} else if (r<heldItem.stackSize)
     									{
-    										te2.count = te2.size;
+    										te2.itemHandler.count = te2.itemHandler.size;
     										playerIn.inventory.mainInventory[playerIn.inventory.currentItem].stackSize=r;
     										playerIn.inventory.inventoryChanged=true;
     										this.updateBarrel(te2);
