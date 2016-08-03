@@ -38,14 +38,31 @@ public class TileEntityBarrel extends TileEntity //implements ITickable
     public int numPlayersUsing;
     //public int maxsize = 4096;
     public int ticks = 0;
+    public Boolean comp,frame;
     public TileEntityBarrel()
+    {
+itemHandler = new BarrelItemHandler();
+    	
+    	itemHandler.t = this;
+    	comp=false;//this is inverted
+    	frame=false;//this is inverted
+    	
+    }
+    
+    public TileEntityBarrel(Boolean c, Boolean f)
     {
     	itemHandler = new BarrelItemHandler();
     	
     	itemHandler.t = this;
+    	comp=c;//this is inverted
+    	frame=f;//this is inverted
     	
     }
-    
+    public void init(Boolean c, Boolean f)
+    {
+    	comp = c;
+    	frame = f;
+    }
        /**
      * Get the name of this object. For players this returns their username
      */
@@ -88,6 +105,8 @@ public class TileEntityBarrel extends TileEntity //implements ITickable
             this.customName = compound.getString("CustomName");
         }
         
+        comp = compound.getBoolean("comp");
+        frame = compound.getBoolean("frame");
         
         if (itemHandler.count>0)
         {
@@ -136,8 +155,9 @@ public class TileEntityBarrel extends TileEntity //implements ITickable
             		}
             	
                     compound.setTag("Items", nbttaglist);
-
+                    
                     compound.setInteger("count", itemHandler.count);
+                    
                     //compound.setBoolean("isblock", this.itemIsBlock);
                     if (itemHandler.barrelContents[0]!=null)
                     {
@@ -148,7 +168,8 @@ public class TileEntityBarrel extends TileEntity //implements ITickable
                     }
             	}
             }
-
+            		compound.setBoolean("comp", comp);
+                    compound.setBoolean("frame", frame);
         if (this.hasCustomName())
         {
             compound.setString("CustomName", this.customName);
@@ -311,6 +332,8 @@ public class TileEntityBarrel extends TileEntity //implements ITickable
         		}*/
         		compound.setTag("Items", nbttaglist);
         		compound.setInteger("count", itemHandler.count); 
+        		compound.setBoolean("comp", comp);
+                compound.setBoolean("frame", frame);
                 
                 
         	       
@@ -364,7 +387,8 @@ public class TileEntityBarrel extends TileEntity //implements ITickable
         {
             this.customName = compound.getString("CustomName");
         }
-
+        comp = compound.getBoolean("comp");
+        frame = compound.getBoolean("frame");
         
             NBTTagList nbttaglist = compound.getTagList("Items", 10);
             

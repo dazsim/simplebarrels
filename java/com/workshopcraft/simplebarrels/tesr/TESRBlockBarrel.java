@@ -75,6 +75,7 @@ public class TESRBlockBarrel extends TileEntitySpecialRenderer<TileEntityBarrel>
         
         if (stack != null) 
         {
+        	
         	float f1 = 0.6666667F;
         	float f3 = 0.015625F * f1;
         	GlStateManager.pushMatrix();
@@ -91,7 +92,7 @@ public class TESRBlockBarrel extends TileEntitySpecialRenderer<TileEntityBarrel>
         	} else if (f==4)
         	{
         		GlStateManager.translate(0.96, 0.4+(0.5F * f1), 0.5+(0.01f * f1));
-        		GlStateManager.rotate(90, 0.04F, 1.0F, 0);
+        		GlStateManager.rotate(90, 0.0F, 1.0F, 0);
         	} else if (f==5) //east
         	{
         		GlStateManager.rotate(-90, 0.0F, 1.0F, 0);
@@ -105,8 +106,10 @@ public class TESRBlockBarrel extends TileEntitySpecialRenderer<TileEntityBarrel>
             GlStateManager.scale(f3, -f3, f3);
             GlStateManager.glNormal3f(0.0F, 0.0F, -1.0F * f3);
             GlStateManager.depthMask(false);	
-        	
-        	fontrenderer.drawString(s, 0-fontrenderer.getStringWidth(s) / 2, 0, 0);
+        	if (!te.comp)
+        	{
+        		fontrenderer.drawString(s, 0-fontrenderer.getStringWidth(s) / 2, 0, 0);
+        	}
             GlStateManager.popMatrix();
         	if (f==2)
         	{
@@ -123,7 +126,7 @@ public class TESRBlockBarrel extends TileEntitySpecialRenderer<TileEntityBarrel>
         	{
         		
         		GlStateManager.translate(0.96, 0.4, 0.5);
-        		GlStateManager.rotate(90, 0.04F, 1.0F, 0);
+        		GlStateManager.rotate(90, 0.0F, 1.0F, 0);
         	} else if (f==5)
         	{
         		
@@ -139,16 +142,18 @@ public class TESRBlockBarrel extends TileEntitySpecialRenderer<TileEntityBarrel>
             GlStateManager.pushMatrix();
             GlStateManager.disableLighting();
             
-            GlStateManager.rotate(180f,1.0f,0.0f,1.0f);
-            //GlStateManager.rotate(180f,0.0f,0.0f,1.0f);
+            GlStateManager.rotate(180f,1.0f,0.0f,0.0f);
+            GlStateManager.rotate(180f,0.0f,0.0f,1.0f);
             GlStateManager.scale(0.4F, 0.4F, 0.4F);
             GlStateManager.depthMask(true);
             GlStateManager.pushAttrib();
             RenderHelper.enableStandardItemLighting();
             
             
-            
-            itemRenderer.renderItem(entityitem.getEntityItem(), ItemCameraTransforms.TransformType.FIXED);
+            if (!te.frame)
+            {
+            	itemRenderer.renderItem(entityitem.getEntityItem(), ItemCameraTransforms.TransformType.FIXED);
+            }
             RenderHelper.disableStandardItemLighting();
             GlStateManager.popAttrib();
             

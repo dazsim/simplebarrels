@@ -1,7 +1,11 @@
 package com.workshopcraft.simplebarrels.blocks;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import javax.annotation.Nullable;
 
+import com.workshopcraft.simplebarrels.SimpleBarrels;
 import com.workshopcraft.simplebarrels.tesr.TESRBlockBarrel;
 import com.workshopcraft.simplebarrels.tiles.TileEntityBarrel;
 
@@ -9,15 +13,13 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -26,6 +28,7 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -35,24 +38,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockBarrel extends BlockContainer{
 
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
-	public static final PropertyBool NoComparator = PropertyBool.create("NoComparator");
-	public static final PropertyBool NoItemFrame = PropertyBool.create("NoItemFrame");
 	
 	public BlockBarrel() {
 		
 		super(Material.WOOD);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-        setCreativeTab(CreativeTabs.DECORATIONS);
+        setCreativeTab(SimpleBarrels.tabSimpleBarrels);
         setHardness(2.0f);
         setResistance(6.0f);
         setHarvestLevel("Axe", 0);
         
 	}
 	
-	public void init(Boolean comp,Boolean frame)
-	{
-		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(NoComparator,comp).withProperty(NoItemFrame, frame));
-	}
+	
 	
 	 @SideOnly(Side.CLIENT)
 	    public void initModel() {
@@ -81,24 +79,148 @@ public class BlockBarrel extends BlockContainer{
     public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
+        
     }
+    @Override
+    public void onBlockPlacedBy(World worldIn,BlockPos pos,IBlockState state,EntityLivingBase placer,ItemStack stack)
+    {
+    	//grab settings from itemstack
+    	if (worldIn == null)
+    	{
+    		System.out.println("EMPTY WORLD");
+    		return;
+    	}
+    	if (pos == null)
+    	{
+    		System.out.println("EMPTY POS");
+    		return;
+    	}
+    	if (stack == null)
+    	{
+    		System.out.println("EMPTY STACK");
+    		return;
+    	}
+    	Boolean c,f;
+    	NBTTagCompound n = new NBTTagCompound();
+    	n = stack.getTagCompound();
+    	if (n !=null)
+    	{
+    	
+    		c = n.getBoolean("comp");
+    		f = n.getBoolean("frame");
+	    	TileEntityBarrel t;
+	    	TileEntity t1;
+	    	
+	    	t1 = (worldIn.getTileEntity(pos));
+	    	if (t1 == null)
+	    	{
+	    	
+	    	return;
+	    	}
+	    	if (t1 instanceof TileEntityBarrel)
+	    	{
+	    		t = (TileEntityBarrel)t1;
+	    	} else
+	    	{
+	    		return;
+	    	}
+	    	if (t!=null)
+			{
+				t.init(c,f);
+				this.updateBarrel((TileEntityBarrel)worldIn.getTileEntity(pos));
+			}
+		}
     
+    }
+    /*
+    @Override 
+    public BlockBarrel removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, Boolean willHarvest) 
+    {
+        if (willHarvest) {
+            onBlockHarvested(world, pos, state, player);
+            return true;
+        } else {
+            return super.removedByPlayer(state, world, pos, player, willHarvest);
+        }
+        //this.removedByPlayer(state, world, pos, player, willHarvest)
+    }
+
+    @Override 
+    public void harvestBlock(World worldIn,EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te, ItemStack stack) 
+    {
+        super.harvestBlock(worldIn, player, pos, state, te, stack);
+        worldIn.setBlockToAir(pos);
+    }
+    @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
+        
         TileEntity tileentity = worldIn.getTileEntity(pos);
-
+         
+        
+        ItemStack istack;
         //check instance of barrel tile entity
-        if (tileentity instanceof IInventory)
+        if (tileentity instanceof TileEntityBarrel)
         {
-            // drop items 
-        	//InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory)tileentity);
-            
+        	TileEntityBarrel te2 = (TileEntityBarrel)tileentity;
+        	if (te2.itemHandler.barrelContents[0]!=null)
+        	{
+           
+        	istack = new ItemStack(te2.itemHandler.barrelContents[0].getItem(),te2.itemHandler.count,te2.itemHandler.barrelContents[0].getItemDamage());
+			istack.setTagCompound(te2.itemHandler.barrelContents[0].getTagCompound());
+			InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY()+1.0, pos.getZ(),istack);
+        	
+        	}
+        	
+        	/*istack = new ItemStack(this,1,0);
+        	NBTTagCompound n = new NBTTagCompound();
+        	n.setBoolean("comp", te2.comp);
+        	n.setBoolean("frame", te2.frame);
+        	istack.setTagCompound(n);
+        	
+        	
+        	InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY()+1.0, pos.getZ(),istack);
+        	*//*
         }
 
         super.breakBlock(worldIn, pos, state);
-    }
+        
+    }*/
+    @Override
+    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player)
+	{
+    	TileEntity tileentity = worldIn.getTileEntity(pos);
+         
+        
+        ItemStack istack;
+        //check instance of barrel tile entity
+        if (tileentity instanceof TileEntityBarrel)
+        {
+        	TileEntityBarrel te2 = (TileEntityBarrel)tileentity;
+        	if (te2.itemHandler.barrelContents[0]!=null)
+        	{
+           
+        	istack = new ItemStack(te2.itemHandler.barrelContents[0].getItem(),te2.itemHandler.count,te2.itemHandler.barrelContents[0].getItemDamage());
+			istack.setTagCompound(te2.itemHandler.barrelContents[0].getTagCompound());
+			InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY()+1.0, pos.getZ(),istack);
+        	
+        	}
+        	
+        	istack = new ItemStack(this,1,0);
+        	NBTTagCompound n = new NBTTagCompound();
+        	n.setBoolean("comp", te2.comp);
+        	n.setBoolean("frame", te2.frame);
+        	istack.setTagCompound(n);
+        	
+        	if (!worldIn.isRemote)
+        	{
+        		InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY()+1.0, pos.getZ(),istack);
+        	}
+        }
+	}
     
-    
+   
+  
     
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta)
@@ -140,7 +262,27 @@ public class BlockBarrel extends BlockContainer{
 		
 	}
     
- 
+    
+    
+    
+    
+    @Override
+    public ArrayList<ItemStack> getDrops(IBlockAccess world,BlockPos pos, IBlockState state, int fortune)
+    {
+		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+		TileEntity t = world.getTileEntity(pos);
+		if (t instanceof TileEntityBarrel)
+		{
+			TileEntityBarrel tile = (TileEntityBarrel)t;
+			ItemStack stack = new ItemStack(this,1,0);
+        	stack.setTagCompound(tile.getTileData());
+			items.add(stack);
+			stack = new ItemStack(tile.itemHandler.barrelContents[0].getItem(),tile.itemHandler.count);
+			items.add(stack);
+		}
+    	return items;
+    	
+    }
     
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
@@ -178,7 +320,9 @@ public class BlockBarrel extends BlockContainer{
     							te2.itemHandler.count = heldItem.stackSize;
     							playerIn.inventory.mainInventory[playerIn.inventory.currentItem].stackSize=0;
     							playerIn.inventory.inventoryChanged=true;
+    							//n.setBoolean("comp",this.);
     							this.updateBarrel(te2);
+    							
     							return true;
     							//event.setCanceled(true);
     						}

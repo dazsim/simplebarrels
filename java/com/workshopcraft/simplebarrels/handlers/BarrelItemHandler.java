@@ -4,6 +4,7 @@ import com.workshopcraft.simplebarrels.blocks.BlockBarrel;
 import com.workshopcraft.simplebarrels.tiles.TileEntityBarrel;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.IItemHandler;
 
 public class BarrelItemHandler implements IItemHandler{
@@ -68,6 +69,7 @@ public class BarrelItemHandler implements IItemHandler{
 			this.barrelContents[0]=stack;
 			
 				count = stack.stackSize;
+				BlockBarrel.updateBarrel(t);
 			}
 			return null;
 		}
@@ -78,27 +80,51 @@ public class BarrelItemHandler implements IItemHandler{
 		}
 		if (this.barrelContents[0].isItemEqual(stack))
 		{
-			if (stack.stackSize+count<=size)
+			NBTTagCompound t1 = this.barrelContents[0].getTagCompound();
+			Boolean match = false;
+			if (t1!=null)
 			{
-				//input stack will not fill barrel
-				if (!simulate)
+				if (stack !=null)
 				{
-					count+=stack.stackSize;
-					BlockBarrel.updateBarrel(t);
+					if (stack.getTagCompound()!=null)
+					{
+						if (t1.equals(stack.getTagCompound()))
+						{
+							match = true;
+						}
+					}
 				}
-				return null;
-			} else if (stack.stackSize+count>size)
-			{
-				//input stack will fill barrel
-				if (!simulate)
-				{
-					int a = size - count;
-					count = size;
-					stack.stackSize -= a;
-					BlockBarrel.updateBarrel(t);
-				}
-				return stack;
+				
 			
+			}
+			if ((t1==null) && (stack.getTagCompound()==null))
+			{
+				match = true;
+			}
+			if (match)
+			{
+				if (stack.stackSize+count<=size)
+				{
+					//input stack will not fill barrel
+					if (!simulate)
+					{
+						count+=stack.stackSize;
+						BlockBarrel.updateBarrel(t);
+					}
+					return null;
+				} else if (stack.stackSize+count>size)
+				{
+					//input stack will fill barrel
+					if (!simulate)
+					{
+						int a = size - count;
+						count = size;
+						stack.stackSize -= a;
+						BlockBarrel.updateBarrel(t);
+					}
+					return stack;
+			
+				}
 			}
 		}
 		return stack;

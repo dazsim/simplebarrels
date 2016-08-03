@@ -1,6 +1,8 @@
 package com.workshopcraft.simplebarrels.proxy;
 
 import com.workshopcraft.simplebarrels.SimpleBarrels;
+import com.workshopcraft.simplebarrels.items.ItemUpgradeComparator;
+import com.workshopcraft.simplebarrels.items.ItemUpgradeItemFrame;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
@@ -8,6 +10,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 
 public class clientbarrel extends barrelcommonproxy {
 	
@@ -23,8 +26,14 @@ public class clientbarrel extends barrelcommonproxy {
         renderItem.getItemModelMesher().register(Item.getItemFromBlock(SimpleBarrels.jungleBarrel), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(SimpleBarrels.jungleBarrel).getUnlocalizedName().substring(5),"inventory"));
         renderItem.getItemModelMesher().register(Item.getItemFromBlock(SimpleBarrels.acaciaBarrel), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(SimpleBarrels.acaciaBarrel).getUnlocalizedName().substring(5),"inventory"));
         renderItem.getItemModelMesher().register(Item.getItemFromBlock(SimpleBarrels.darkoakBarrel), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(SimpleBarrels.darkoakBarrel).getUnlocalizedName().substring(5),"inventory"));
+        
+        
+        renderItem.getItemModelMesher().register((Item)SimpleBarrels.upgradeComparator, 0,new ModelResourceLocation(SimpleBarrels.MODID+ ":"+((ItemUpgradeComparator) SimpleBarrels.upgradeComparator).getName(),"inventory"));
+        renderItem.getItemModelMesher().register((Item)SimpleBarrels.upgradeItemFrame, 0,new ModelResourceLocation(SimpleBarrels.MODID+ ":"+((ItemUpgradeItemFrame) SimpleBarrels.upgradeItemFrame).getName(),"inventory"));
         if (Loader.isModLoaded("forestry"))
         {
+			//RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
+			
         	renderItem.getItemModelMesher().register(Item.getItemFromBlock(SimpleBarrels.forestryacaciaBarrel), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(SimpleBarrels.forestryacaciaBarrel).getUnlocalizedName().substring(5),"inventory"));
         	renderItem.getItemModelMesher().register(Item.getItemFromBlock(SimpleBarrels.forestrybalsaBarrel), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(SimpleBarrels.forestrybalsaBarrel).getUnlocalizedName().substring(5),"inventory"));
         	renderItem.getItemModelMesher().register(Item.getItemFromBlock(SimpleBarrels.forestrybaobabBarrel), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(SimpleBarrels.forestrybaobabBarrel).getUnlocalizedName().substring(5),"inventory"));
@@ -56,9 +65,12 @@ public class clientbarrel extends barrelcommonproxy {
         	renderItem.getItemModelMesher().register(Item.getItemFromBlock(SimpleBarrels.forestryzebrawoodBarrel), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(SimpleBarrels.forestryzebrawoodBarrel).getUnlocalizedName().substring(5),"inventory"));
         	
         }
-        
 	}
 	
-	
+	@Override
+	public void postInit(FMLPostInitializationEvent event)
+	{
+		
+	}
 
 }
