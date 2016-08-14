@@ -202,7 +202,11 @@ public class BlockBarrel extends BlockContainer{
            
         	istack = new ItemStack(te2.itemHandler.barrelContents[0].getItem(),te2.itemHandler.count,te2.itemHandler.barrelContents[0].getItemDamage());
 			istack.setTagCompound(te2.itemHandler.barrelContents[0].getTagCompound());
-			InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY()+1.0, pos.getZ(),istack);
+			if (!worldIn.isRemote)
+        	{
+				InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY()+1.0, pos.getZ(),istack);
+        	}
+			
         	
         	}
         	
