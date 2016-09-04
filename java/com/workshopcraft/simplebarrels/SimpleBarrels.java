@@ -9,6 +9,8 @@ import com.workshopcraft.simplebarrels.items.ItemUpgradeItemFrame;
 import com.workshopcraft.simplebarrels.proxy.barrelcommonproxy;
 import com.workshopcraft.simplebarrels.tiles.TileEntityBarrel;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -120,9 +122,7 @@ public class SimpleBarrels
         acaciaBarrel = new BlockBarrel();
         acaciaBarrel.setUnlocalizedName("acaciabarrel");
         darkoakBarrel = new BlockBarrel();
-        darkoakBarrel.setUnlocalizedName("darkoakbarrel");
-        
-        
+        darkoakBarrel.setUnlocalizedName("darkoakbarrel");        
         
         
         proxy.preInit(event);
@@ -132,6 +132,7 @@ public class SimpleBarrels
     {
     	ItemStack i = new ItemStack(barrel,1);
         NBTTagCompound n = new NBTTagCompound();
+        
         n.setBoolean("frame", f);
         n.setBoolean("comp", c);
         i.setTagCompound(n);
@@ -145,7 +146,7 @@ public class SimpleBarrels
 					"WIW",
 					"FCR",
 					"WIW",
-					'W',plank,'C',"chest",'R',Items.COMPARATOR,'F',Items.ITEM_FRAME, 'I',Items.IRON_INGOT
+					'W',plank,'C',"chestWood",'R',Items.COMPARATOR,'F',Items.ITEM_FRAME, 'I',Items.IRON_INGOT
 			}));
         } else if (f && !c)
         {
@@ -153,7 +154,7 @@ public class SimpleBarrels
 					"WIW",
 					" CR",
 					"WIW",
-					'W',plank,'C',"chest",'R',Items.COMPARATOR,'F',Items.ITEM_FRAME, 'I',Items.IRON_INGOT
+					'W',plank,'C',"chestWood",'R',Items.COMPARATOR, 'I',Items.IRON_INGOT
 			}));
         } else if (!f && c)
         {
@@ -161,7 +162,7 @@ public class SimpleBarrels
 					"WIW",
 					"FC ",
 					"WIW",
-					'W',plank,'C',"chest",'R',Items.COMPARATOR,'F',Items.ITEM_FRAME, 'I',Items.IRON_INGOT
+					'W',plank,'C',"chestWood",'F',Items.ITEM_FRAME, 'I',Items.IRON_INGOT
 			}));
         } else if (f && c)
         {
@@ -169,7 +170,7 @@ public class SimpleBarrels
 					"WIW",
 					" C ",
 					"WIW",
-					'W',plank,'C',"chestWood",'R',Items.COMPARATOR,'F',Items.ITEM_FRAME, 'I',Items.IRON_INGOT
+					'W',plank,'C',"chestWood", 'I',Items.IRON_INGOT
 			}));
         }
     }
@@ -213,29 +214,29 @@ public class SimpleBarrels
         addBarrel(oakBarrel,false, true,new ItemStack(Blocks.PLANKS,1,0));
         addBarrel(oakBarrel,true, true,new ItemStack(Blocks.PLANKS,1,0));
         
-        addBarrel(spruceBarrel,true, true,new ItemStack(Blocks.PLANKS,1,1));
-        addBarrel(spruceBarrel,true, true,new ItemStack(Blocks.PLANKS,1,1));
-        addBarrel(spruceBarrel,true, true,new ItemStack(Blocks.PLANKS,1,1));
+        addBarrel(spruceBarrel,false, false,new ItemStack(Blocks.PLANKS,1,1));
+        addBarrel(spruceBarrel,true, false,new ItemStack(Blocks.PLANKS,1,1));
+        addBarrel(spruceBarrel,false, true,new ItemStack(Blocks.PLANKS,1,1));
         addBarrel(spruceBarrel,true, true,new ItemStack(Blocks.PLANKS,1,1));
         
-        addBarrel(birchBarrel,true, true,new ItemStack(Blocks.PLANKS,1,2));
-        addBarrel(birchBarrel,true, true,new ItemStack(Blocks.PLANKS,1,2));
-        addBarrel(birchBarrel,true, true,new ItemStack(Blocks.PLANKS,1,2));
+        addBarrel(birchBarrel,false, false,new ItemStack(Blocks.PLANKS,1,2));
+        addBarrel(birchBarrel,true, false,new ItemStack(Blocks.PLANKS,1,2));
+        addBarrel(birchBarrel,false, true,new ItemStack(Blocks.PLANKS,1,2));
         addBarrel(birchBarrel,true, true,new ItemStack(Blocks.PLANKS,1,2));
         
-        addBarrel(jungleBarrel,true, true,new ItemStack(Blocks.PLANKS,1,3));
-        addBarrel(jungleBarrel,true, true,new ItemStack(Blocks.PLANKS,1,3));
-        addBarrel(jungleBarrel,true, true,new ItemStack(Blocks.PLANKS,1,3));
+        addBarrel(jungleBarrel,false, false,new ItemStack(Blocks.PLANKS,1,3));
+        addBarrel(jungleBarrel,true, false,new ItemStack(Blocks.PLANKS,1,3));
+        addBarrel(jungleBarrel,false, true,new ItemStack(Blocks.PLANKS,1,3));
         addBarrel(jungleBarrel,true, true,new ItemStack(Blocks.PLANKS,1,3));
         
-        addBarrel(acaciaBarrel,true, true,new ItemStack(Blocks.PLANKS,1,4));
-        addBarrel(acaciaBarrel,true, true,new ItemStack(Blocks.PLANKS,1,4));
-        addBarrel(acaciaBarrel,true, true,new ItemStack(Blocks.PLANKS,1,4));
+        addBarrel(acaciaBarrel,false, false,new ItemStack(Blocks.PLANKS,1,4));
+        addBarrel(acaciaBarrel,true, false,new ItemStack(Blocks.PLANKS,1,4));
+        addBarrel(acaciaBarrel,false, true,new ItemStack(Blocks.PLANKS,1,4));
         addBarrel(acaciaBarrel,true, true,new ItemStack(Blocks.PLANKS,1,4));
         
-        addBarrel(darkoakBarrel,true, true,new ItemStack(Blocks.PLANKS,1,5));
-        addBarrel(darkoakBarrel,true, true,new ItemStack(Blocks.PLANKS,1,5));
-        addBarrel(darkoakBarrel,true, true,new ItemStack(Blocks.PLANKS,1,5));
+        addBarrel(darkoakBarrel,false, false,new ItemStack(Blocks.PLANKS,1,5));
+        addBarrel(darkoakBarrel,true, false,new ItemStack(Blocks.PLANKS,1,5));
+        addBarrel(darkoakBarrel,false, true,new ItemStack(Blocks.PLANKS,1,5));
         addBarrel(darkoakBarrel,true, true,new ItemStack(Blocks.PLANKS,1,5));
         
         
@@ -346,149 +347,149 @@ public class SimpleBarrels
         	Item tempPlank1= Item.REGISTRY.getObject(new ResourceLocation("forestry:planks.1"));
         	//Block tempPlank2 = Block.getBlockFromName("forestry:planks.cocobolo");
         	
-        	addBarrel(forestryacaciaBarrel,true, true,new ItemStack(tempPlank ,1,2));
+        	addBarrel(forestryacaciaBarrel,false, false,new ItemStack(tempPlank ,1,2));
+            addBarrel(forestryacaciaBarrel,false, true,new ItemStack(tempPlank ,1,2));
+            addBarrel(forestryacaciaBarrel,true, false,new ItemStack(tempPlank ,1,2));
             addBarrel(forestryacaciaBarrel,true, true,new ItemStack(tempPlank ,1,2));
-            addBarrel(forestryacaciaBarrel,true, true,new ItemStack(tempPlank ,1,2));
-            addBarrel(forestryacaciaBarrel,true, true,new ItemStack(tempPlank ,1,2));
             
-            addBarrel(forestrybalsaBarrel,true, true,new ItemStack(tempPlank ,1,11));
-            addBarrel(forestrybalsaBarrel,true, true,new ItemStack(tempPlank ,1,11));
-            addBarrel(forestrybalsaBarrel,true, true,new ItemStack(tempPlank ,1,11));
+            addBarrel(forestrybalsaBarrel,false, false,new ItemStack(tempPlank ,1,11));
+            addBarrel(forestrybalsaBarrel,false, true,new ItemStack(tempPlank ,1,11));
+            addBarrel(forestrybalsaBarrel,true, false,new ItemStack(tempPlank ,1,11));
             addBarrel(forestrybalsaBarrel,true, true,new ItemStack(tempPlank ,1,11));
             
+            addBarrel(forestrybaobabBarrel,false, false,new ItemStack(tempPlank ,1,6));
+            addBarrel(forestrybaobabBarrel,false, true,new ItemStack(tempPlank ,1,6));
+            addBarrel(forestrybaobabBarrel,true, false,new ItemStack(tempPlank ,1,6));
             addBarrel(forestrybaobabBarrel,true, true,new ItemStack(tempPlank ,1,6));
-            addBarrel(forestrybaobabBarrel,true, true,new ItemStack(tempPlank ,1,6));
-            addBarrel(forestrybaobabBarrel,true, true,new ItemStack(tempPlank ,1,6));
-            addBarrel(forestrybaobabBarrel,true, true,new ItemStack(tempPlank ,1,6));
             
-            addBarrel(forestrycherryBarrel,true, true,new ItemStack(tempPlank ,1,15));
-            addBarrel(forestrycherryBarrel,true, true,new ItemStack(tempPlank ,1,15));
-            addBarrel(forestrycherryBarrel,true, true,new ItemStack(tempPlank ,1,15));
+            addBarrel(forestrycherryBarrel,false, false,new ItemStack(tempPlank ,1,15));
+            addBarrel(forestrycherryBarrel,false, true,new ItemStack(tempPlank ,1,15));
+            addBarrel(forestrycherryBarrel,true, false,new ItemStack(tempPlank ,1,15));
             addBarrel(forestrycherryBarrel,true, true,new ItemStack(tempPlank ,1,15));
             
+            addBarrel(forestrychestnutBarrel,false, false,new ItemStack(tempPlank ,1,4));
+            addBarrel(forestrychestnutBarrel,false, true,new ItemStack(tempPlank ,1,4));
+            addBarrel(forestrychestnutBarrel,true, false,new ItemStack(tempPlank ,1,4));
             addBarrel(forestrychestnutBarrel,true, true,new ItemStack(tempPlank ,1,4));
-            addBarrel(forestrychestnutBarrel,true, true,new ItemStack(tempPlank ,1,4));
-            addBarrel(forestrychestnutBarrel,true, true,new ItemStack(tempPlank ,1,4));
-            addBarrel(forestrychestnutBarrel,true, true,new ItemStack(tempPlank ,1,4));
             
-            addBarrel(forestrycitrusBarrel,true, true,new ItemStack(tempPlank1 ,1,7));
-            addBarrel(forestrycitrusBarrel,true, true,new ItemStack(tempPlank1 ,1,7));
-            addBarrel(forestrycitrusBarrel,true, true,new ItemStack(tempPlank1 ,1,7));
+            addBarrel(forestrycitrusBarrel,false, false,new ItemStack(tempPlank1 ,1,7));
+            addBarrel(forestrycitrusBarrel,false, true,new ItemStack(tempPlank1 ,1,7));
+            addBarrel(forestrycitrusBarrel,true, false,new ItemStack(tempPlank1 ,1,7));
             addBarrel(forestrycitrusBarrel,true, true,new ItemStack(tempPlank1 ,1,7));
             
+            addBarrel(forestrycocoboloBarrel,false, false,new ItemStack(tempPlank1 ,1,11));
+            addBarrel(forestrycocoboloBarrel,false, true,new ItemStack(tempPlank1 ,1,11));
+            addBarrel(forestrycocoboloBarrel,true, false,new ItemStack(tempPlank1 ,1,11));
             addBarrel(forestrycocoboloBarrel,true, true,new ItemStack(tempPlank1 ,1,11));
-            addBarrel(forestrycocoboloBarrel,true, true,new ItemStack(tempPlank1 ,1,11));
-            addBarrel(forestrycocoboloBarrel,true, true,new ItemStack(tempPlank1 ,1,11));
-            addBarrel(forestrycocoboloBarrel,true, true,new ItemStack(tempPlank1 ,1,11));
             
-            addBarrel(forestryebonyBarrel,true, true,new ItemStack(tempPlank ,1,9));
-            addBarrel(forestryebonyBarrel,true, true,new ItemStack(tempPlank ,1,9));
-            addBarrel(forestryebonyBarrel,true, true,new ItemStack(tempPlank ,1,9));
+            addBarrel(forestryebonyBarrel,false, false,new ItemStack(tempPlank ,1,9));
+            addBarrel(forestryebonyBarrel,false, true,new ItemStack(tempPlank ,1,9));
+            addBarrel(forestryebonyBarrel,true, false,new ItemStack(tempPlank ,1,9));
             addBarrel(forestryebonyBarrel,true, true,new ItemStack(tempPlank ,1,9));
             
+            addBarrel(forestrygiganteumBarrel,false, false,new ItemStack(tempPlank1 ,1,8));
+            addBarrel(forestrygiganteumBarrel,false, true,new ItemStack(tempPlank1 ,1,8));
+            addBarrel(forestrygiganteumBarrel,true, false,new ItemStack(tempPlank1 ,1,8));
             addBarrel(forestrygiganteumBarrel,true, true,new ItemStack(tempPlank1 ,1,8));
-            addBarrel(forestrygiganteumBarrel,true, true,new ItemStack(tempPlank1 ,1,8));
-            addBarrel(forestrygiganteumBarrel,true, true,new ItemStack(tempPlank1 ,1,8));
-            addBarrel(forestrygiganteumBarrel,true, true,new ItemStack(tempPlank1 ,1,8));
             
-            addBarrel(forestrygreenheartBarrel,true, true,new ItemStack(tempPlank ,1,14));
-            addBarrel(forestrygreenheartBarrel,true, true,new ItemStack(tempPlank ,1,14));
-            addBarrel(forestrygreenheartBarrel,true, true,new ItemStack(tempPlank ,1,14));
+            addBarrel(forestrygreenheartBarrel,false, false,new ItemStack(tempPlank ,1,14));
+            addBarrel(forestrygreenheartBarrel,false, true,new ItemStack(tempPlank ,1,14));
+            addBarrel(forestrygreenheartBarrel,true, false,new ItemStack(tempPlank ,1,14));
             addBarrel(forestrygreenheartBarrel,true, true,new ItemStack(tempPlank ,1,14));
             
+            addBarrel(forestryipeBarrel,false, false,new ItemStack(tempPlank1 ,1,9));
+            addBarrel(forestryipeBarrel,false, true,new ItemStack(tempPlank1 ,1,9));
+            addBarrel(forestryipeBarrel,true, false,new ItemStack(tempPlank1 ,1,9));
             addBarrel(forestryipeBarrel,true, true,new ItemStack(tempPlank1 ,1,9));
-            addBarrel(forestryipeBarrel,true, true,new ItemStack(tempPlank1 ,1,9));
-            addBarrel(forestryipeBarrel,true, true,new ItemStack(tempPlank1 ,1,9));
-            addBarrel(forestryipeBarrel,true, true,new ItemStack(tempPlank1 ,1,9));
             
-            addBarrel(forestrykapokBarrel,true, true,new ItemStack(tempPlank ,1,8));
-            addBarrel(forestrykapokBarrel,true, true,new ItemStack(tempPlank ,1,8));
-            addBarrel(forestrykapokBarrel,true, true,new ItemStack(tempPlank ,1,8));
+            addBarrel(forestrykapokBarrel,false, false,new ItemStack(tempPlank ,1,8));
+            addBarrel(forestrykapokBarrel,false, true,new ItemStack(tempPlank ,1,8));
+            addBarrel(forestrykapokBarrel,true, false,new ItemStack(tempPlank ,1,8));
             addBarrel(forestrykapokBarrel,true, true,new ItemStack(tempPlank ,1,8));
             
+            addBarrel(forestrylarchBarrel,false, false,new ItemStack(tempPlank ,1,0));
+            addBarrel(forestrylarchBarrel,false, true,new ItemStack(tempPlank ,1,0));
+            addBarrel(forestrylarchBarrel,true, false,new ItemStack(tempPlank ,1,0));
             addBarrel(forestrylarchBarrel,true, true,new ItemStack(tempPlank ,1,0));
-            addBarrel(forestrylarchBarrel,true, true,new ItemStack(tempPlank ,1,0));
-            addBarrel(forestrylarchBarrel,true, true,new ItemStack(tempPlank ,1,0));
-            addBarrel(forestrylarchBarrel,true, true,new ItemStack(tempPlank ,1,0));
             
-            addBarrel(forestrylimeBarrel,true, true,new ItemStack(tempPlank ,1,3));
-            addBarrel(forestrylimeBarrel,true, true,new ItemStack(tempPlank ,1,3));
-            addBarrel(forestrylimeBarrel,true, true,new ItemStack(tempPlank ,1,3));
+            addBarrel(forestrylimeBarrel,false, false,new ItemStack(tempPlank ,1,3));
+            addBarrel(forestrylimeBarrel,false, true,new ItemStack(tempPlank ,1,3));
+            addBarrel(forestrylimeBarrel,true, false,new ItemStack(tempPlank ,1,3));
             addBarrel(forestrylimeBarrel,true, true,new ItemStack(tempPlank ,1,3));
             
+            addBarrel(forestrymahoeBarrel,false, false,new ItemStack(tempPlank1 ,1,0));
+            addBarrel(forestrymahoeBarrel,false, true,new ItemStack(tempPlank1 ,1,0));
+            addBarrel(forestrymahoeBarrel,true, false,new ItemStack(tempPlank1 ,1,0));
             addBarrel(forestrymahoeBarrel,true, true,new ItemStack(tempPlank1 ,1,0));
-            addBarrel(forestrymahoeBarrel,true, true,new ItemStack(tempPlank1 ,1,0));
-            addBarrel(forestrymahoeBarrel,true, true,new ItemStack(tempPlank1 ,1,0));
-            addBarrel(forestrymahoeBarrel,true, true,new ItemStack(tempPlank1 ,1,0));
             
-            addBarrel(forestrymahoganyBarrel,true, true,new ItemStack(tempPlank ,1,10));
-            addBarrel(forestrymahoganyBarrel,true, true,new ItemStack(tempPlank ,1,10));
-            addBarrel(forestrymahoganyBarrel,true, true,new ItemStack(tempPlank ,1,10));
+            addBarrel(forestrymahoganyBarrel,false, false,new ItemStack(tempPlank ,1,10));
+            addBarrel(forestrymahoganyBarrel,false, true,new ItemStack(tempPlank ,1,10));
+            addBarrel(forestrymahoganyBarrel,true, false,new ItemStack(tempPlank ,1,10));
             addBarrel(forestrymahoganyBarrel,true, true,new ItemStack(tempPlank ,1,10));
             
+            addBarrel(forestrymapleBarrel,false, false,new ItemStack(tempPlank1 ,1,6));
+            addBarrel(forestrymapleBarrel,false, true,new ItemStack(tempPlank1 ,1,6));
+            addBarrel(forestrymapleBarrel,true, false,new ItemStack(tempPlank1 ,1,6));
             addBarrel(forestrymapleBarrel,true, true,new ItemStack(tempPlank1 ,1,6));
-            addBarrel(forestrymapleBarrel,true, true,new ItemStack(tempPlank1 ,1,6));
-            addBarrel(forestrymapleBarrel,true, true,new ItemStack(tempPlank1 ,1,6));
-            addBarrel(forestrymapleBarrel,true, true,new ItemStack(tempPlank1 ,1,6));
             
-            addBarrel(forestrypadaukBarrel,true, true,new ItemStack(tempPlank1 ,1,10));
-            addBarrel(forestrypadaukBarrel,true, true,new ItemStack(tempPlank1 ,1,10));
-            addBarrel(forestrypadaukBarrel,true, true,new ItemStack(tempPlank1 ,1,10));
+            addBarrel(forestrypadaukBarrel,false, false,new ItemStack(tempPlank1 ,1,10));
+            addBarrel(forestrypadaukBarrel,false, true,new ItemStack(tempPlank1 ,1,10));
+            addBarrel(forestrypadaukBarrel,true, false,new ItemStack(tempPlank1 ,1,10));
             addBarrel(forestrypadaukBarrel,true, true,new ItemStack(tempPlank1 ,1,10));
             
+            addBarrel(forestrypalmBarrel,false, false,new ItemStack(tempPlank1 ,1,2));
+            addBarrel(forestrypalmBarrel,false, true,new ItemStack(tempPlank1 ,1,2));
+            addBarrel(forestrypalmBarrel,true, false,new ItemStack(tempPlank1 ,1,2));
             addBarrel(forestrypalmBarrel,true, true,new ItemStack(tempPlank1 ,1,2));
-            addBarrel(forestrypalmBarrel,true, true,new ItemStack(tempPlank1 ,1,2));
-            addBarrel(forestrypalmBarrel,true, true,new ItemStack(tempPlank1 ,1,2));
-            addBarrel(forestrypalmBarrel,true, true,new ItemStack(tempPlank1 ,1,2));
             
-            addBarrel(forestrypapayaBarrel,true, true,new ItemStack(tempPlank1 ,1,3));
-            addBarrel(forestrypapayaBarrel,true, true,new ItemStack(tempPlank1 ,1,3));
-            addBarrel(forestrypapayaBarrel,true, true,new ItemStack(tempPlank1 ,1,3));
+            addBarrel(forestrypapayaBarrel,false, false,new ItemStack(tempPlank1 ,1,3));
+            addBarrel(forestrypapayaBarrel,false, true,new ItemStack(tempPlank1 ,1,3));
+            addBarrel(forestrypapayaBarrel,true, false,new ItemStack(tempPlank1 ,1,3));
             addBarrel(forestrypapayaBarrel,true, true,new ItemStack(tempPlank1 ,1,3));
             
+            addBarrel(forestrypineBarrel,false, false,new ItemStack(tempPlank1, 1,4));
+            addBarrel(forestrypineBarrel,false, true,new ItemStack(tempPlank1, 1,4));
+            addBarrel(forestrypineBarrel,true, false,new ItemStack(tempPlank1, 1,4));
             addBarrel(forestrypineBarrel,true, true,new ItemStack(tempPlank1, 1,4));
-            addBarrel(forestrypineBarrel,true, true,new ItemStack(tempPlank1, 1,4));
-            addBarrel(forestrypineBarrel,true, true,new ItemStack(tempPlank1, 1,4));
-            addBarrel(forestrypineBarrel,true, true,new ItemStack(tempPlank1, 1,4));
             
-            addBarrel(forestryplumBarrel,true, true,new ItemStack(tempPlank1 ,1,5));
-            addBarrel(forestryplumBarrel,true, true,new ItemStack(tempPlank1 ,1,5));
-            addBarrel(forestryplumBarrel,true, true,new ItemStack(tempPlank1 ,1,5));
+            addBarrel(forestryplumBarrel,false, false,new ItemStack(tempPlank1 ,1,5));
+            addBarrel(forestryplumBarrel,false, true,new ItemStack(tempPlank1 ,1,5));
+            addBarrel(forestryplumBarrel,true, false,new ItemStack(tempPlank1 ,1,5));
             addBarrel(forestryplumBarrel,true, true,new ItemStack(tempPlank1 ,1,5));
             
+            addBarrel(forestrypoplarBarrel,false, false,new ItemStack(tempPlank1 ,1,1));
+            addBarrel(forestrypoplarBarrel,false, true,new ItemStack(tempPlank1 ,1,1));
+            addBarrel(forestrypoplarBarrel,true, false,new ItemStack(tempPlank1 ,1,1));
             addBarrel(forestrypoplarBarrel,true, true,new ItemStack(tempPlank1 ,1,1));
-            addBarrel(forestrypoplarBarrel,true, true,new ItemStack(tempPlank1 ,1,1));
-            addBarrel(forestrypoplarBarrel,true, true,new ItemStack(tempPlank1 ,1,1));
-            addBarrel(forestrypoplarBarrel,true, true,new ItemStack(tempPlank1 ,1,1));
             
-            addBarrel(forestrysequoiaBarrel,true, true,new ItemStack(tempPlank ,1,7));
-            addBarrel(forestrysequoiaBarrel,true, true,new ItemStack(tempPlank ,1,7));
-            addBarrel(forestrysequoiaBarrel,true, true,new ItemStack(tempPlank ,1,7));
+            addBarrel(forestrysequoiaBarrel,false, false,new ItemStack(tempPlank ,1,7));
+            addBarrel(forestrysequoiaBarrel,false, true,new ItemStack(tempPlank ,1,7));
+            addBarrel(forestrysequoiaBarrel,true, false,new ItemStack(tempPlank ,1,7));
             addBarrel(forestrysequoiaBarrel,true, true,new ItemStack(tempPlank ,1,7));
             
-            addBarrel(forestryteakBarrel,true, true,new ItemStack(tempPlank ,1,1));
-            addBarrel(forestryteakBarrel,true, true,new ItemStack(tempPlank ,1,1));
-            addBarrel(forestryteakBarrel,true, true,new ItemStack(tempPlank ,1,1));
+            addBarrel(forestryteakBarrel,false, false,new ItemStack(tempPlank ,1,1));
+            addBarrel(forestryteakBarrel,false, true,new ItemStack(tempPlank ,1,1));
+            addBarrel(forestryteakBarrel,true, false,new ItemStack(tempPlank ,1,1));
             addBarrel(forestryteakBarrel,true, true,new ItemStack(tempPlank ,1,1));
             
-            addBarrel(forestrywalnutBarrel,true, true,new ItemStack(tempPlank ,1,13));
-            addBarrel(forestrywalnutBarrel,true, true,new ItemStack(tempPlank ,1,13));
-            addBarrel(forestrywalnutBarrel,true, true,new ItemStack(tempPlank ,1,13));
+            addBarrel(forestrywalnutBarrel,false, false,new ItemStack(tempPlank ,1,13));
+            addBarrel(forestrywalnutBarrel,false, true,new ItemStack(tempPlank ,1,13));
+            addBarrel(forestrywalnutBarrel,true, false,new ItemStack(tempPlank ,1,13));
             addBarrel(forestrywalnutBarrel,true, true,new ItemStack(tempPlank ,1,13));
             
-            addBarrel(forestrywengeBarrel,true, true,new ItemStack(tempPlank ,1,5));
-            addBarrel(forestrywengeBarrel,true, true,new ItemStack(tempPlank ,1,5));
-            addBarrel(forestrywengeBarrel,true, true,new ItemStack(tempPlank ,1,5));
+            addBarrel(forestrywengeBarrel,false, false,new ItemStack(tempPlank ,1,5));
+            addBarrel(forestrywengeBarrel,false, true,new ItemStack(tempPlank ,1,5));
+            addBarrel(forestrywengeBarrel,true, false,new ItemStack(tempPlank ,1,5));
             addBarrel(forestrywengeBarrel,true, true,new ItemStack(tempPlank ,1,5));
             
-            addBarrel(forestrywillowBarrel,true, true,new ItemStack(tempPlank ,1,12));
-            addBarrel(forestrywillowBarrel,true, true,new ItemStack(tempPlank ,1,12));
-            addBarrel(forestrywillowBarrel,true, true,new ItemStack(tempPlank ,1,12));
+            addBarrel(forestrywillowBarrel,false, false,new ItemStack(tempPlank ,1,12));
+            addBarrel(forestrywillowBarrel,false, true,new ItemStack(tempPlank ,1,12));
+            addBarrel(forestrywillowBarrel,true, false,new ItemStack(tempPlank ,1,12));
             addBarrel(forestrywillowBarrel,true, true,new ItemStack(tempPlank ,1,12));
             
-            addBarrel(forestryzebrawoodBarrel,true, true,new ItemStack(tempPlank1 ,1,12));
-            addBarrel(forestryzebrawoodBarrel,true, true,new ItemStack(tempPlank1 ,1,12));
-            addBarrel(forestryzebrawoodBarrel,true, true,new ItemStack(tempPlank1 ,1,12));
+            addBarrel(forestryzebrawoodBarrel,false, false,new ItemStack(tempPlank1 ,1,12));
+            addBarrel(forestryzebrawoodBarrel,false, true,new ItemStack(tempPlank1 ,1,12));
+            addBarrel(forestryzebrawoodBarrel,true, false,new ItemStack(tempPlank1 ,1,12));
             addBarrel(forestryzebrawoodBarrel,true, true,new ItemStack(tempPlank1 ,1,12));
             
 			
