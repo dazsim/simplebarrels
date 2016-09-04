@@ -32,7 +32,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 public class SimpleBarrels
 {
     public static final String MODID = "simplebarrels";
-    public static final String VERSION = "1.25g";
+    public static final String VERSION = "1.25h";
     
     public static ItemUpgradeComparator upgradeComparator;
     public static ItemUpgradeItemFrame upgradeItemFrame;
