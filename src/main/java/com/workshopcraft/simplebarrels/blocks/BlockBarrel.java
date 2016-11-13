@@ -27,6 +27,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -48,6 +49,20 @@ public class BlockBarrel extends BlockContainer{
         setResistance(6.0f);
         setHarvestLevel("Axe", 0);
         
+	}
+	
+	public BlockBarrel(String uname)
+	{
+		super(Material.WOOD);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+        setCreativeTab(SimpleBarrels.tabSimpleBarrels);
+        setHardness(2.0f);
+        setResistance(6.0f);
+        setHarvestLevel("Axe", 0);
+        setUnlocalizedName(uname);
+        setRegistryName(uname);
+        //ResourceLocation rl = new ResourceLocation("")
+        //setRegistryName(new ResourceLocation(uname));
 	}
 	
 	

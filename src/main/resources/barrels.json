@@ -1,0 +1,48 @@
+{
+    barrels:[
+    
+        
+        { 
+            "name": "oakBarrel",
+            "unlocalizedname": "oakbarrel",
+            "sourceblock": "minecraft:planks",
+            "sourcemeta": "0"
+        },
+        
+        {
+            "name": "spruceBarrel",
+            "unlocalizedname": "sprucebarrel",
+            "sourceblock": "minecraft:planks",
+            "sourcemeta": "1"
+        },
+        
+        {
+            "name": "birchBarrel",
+            "unlocalizedname": "birchbarrel",
+            "sourceblock": "minecraft:planks",
+            "sourcemeta": "2"
+        },
+        
+        {
+            "name": "jungleBarrel",
+            "unlocalizedname": "junglebarrel",
+            "sourceblock": "minecraft:planks",
+            "sourcemeta": "3"
+        },
+        
+        {
+            "name": "acaciaBarrel",
+            "unlocalizedname": "acaciabarrel",
+            "sourceblock": "minecraft:planks",
+            "sourcemeta": "4"
+        },
+        
+        {
+            "name": "darkoakBarrel", 
+            "unlocalizedname": "darkoakbarrel",
+            "sourceblock": "minecraft:planks",
+            "sourcemeta": "5"
+        }
+    
+    ]
+}
