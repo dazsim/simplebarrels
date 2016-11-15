@@ -13,6 +13,6 @@ public class SimpleBarrelsTab extends CreativeTabs{
 	
 	@Override
 	public Item getTabIconItem() {
-		return Item.getItemFromBlock(SimpleBarrels.acaciaBarrel);
+		return Item.getItemFromBlock(SimpleBarrels.barrels.get(0));
 	}
 }

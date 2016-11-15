@@ -1,48 +1,67 @@
 {
-    barrels:[
-    
-        
-        { 
+    "barrels":[
+
+
+        {
             "name": "oakBarrel",
             "unlocalizedname": "oakbarrel",
             "sourceblock": "minecraft:planks",
-            "sourcemeta": "0"
+            "sourcemeta": "0",
+            "dependancy": ""
         },
-        
+
         {
             "name": "spruceBarrel",
             "unlocalizedname": "sprucebarrel",
             "sourceblock": "minecraft:planks",
-            "sourcemeta": "1"
+            "sourcemeta": "1",
+            "dependancy": ""
         },
-        
+
         {
             "name": "birchBarrel",
             "unlocalizedname": "birchbarrel",
             "sourceblock": "minecraft:planks",
-            "sourcemeta": "2"
+            "sourcemeta": "2",
+            "dependancy": ""
         },
-        
+
         {
             "name": "jungleBarrel",
             "unlocalizedname": "junglebarrel",
             "sourceblock": "minecraft:planks",
-            "sourcemeta": "3"
+            "sourcemeta": "3",
+            "dependancy": ""
         },
-        
+
         {
             "name": "acaciaBarrel",
             "unlocalizedname": "acaciabarrel",
             "sourceblock": "minecraft:planks",
-            "sourcemeta": "4"
+            "sourcemeta": "4",
+            "dependancy": ""
         },
-        
+
         {
-            "name": "darkoakBarrel", 
+            "name": "darkoakBarrel",
             "unlocalizedname": "darkoakbarrel",
             "sourceblock": "minecraft:planks",
-            "sourcemeta": "5"
+            "sourcemeta": "5",
+            "dependancy": ""
+        },
+        {
+            "name": "forestryacaciabarrel",
+            "unlocalizedname": "forestryacaciabarrel",
+            "sourceblock": "forestry:planks.0",
+            "sourcemeta": "2",
+            "dependancy": "forestry"
+        },
+        {
+            "name": "naturaredwoodbarrel",
+            "unlocalizedname": "naturaredwoodbarrel",
+            "sourceblock": "natura:redwood_logs",
+            "sourcemeta": "0",
+            "dependancy": "natura"
         }
-    
     ]
 }

@@ -274,8 +274,8 @@ public class SimpleBarrels
          */
         if (Loader.isModLoaded("forestry"))
         {
-        	forestryacaciaBarrel = new BlockBarrel();
-        	forestryacaciaBarrel.setUnlocalizedName("forestryacaciabarrel"); 
+        	//forestryacaciaBarrel = new BlockBarrel();
+        	//forestryacaciaBarrel.setUnlocalizedName("forestryacaciabarrel"); 
 	        forestrybalsaBarrel = new BlockBarrel();
 	        forestrybalsaBarrel.setUnlocalizedName("forestrybalsabarrel");
 	        forestrybaobabBarrel = new BlockBarrel();
@@ -336,7 +336,7 @@ public class SimpleBarrels
         }
     	if (Loader.isModLoaded("forestry"))
         {
-        	GameRegistry.registerBlock(forestryacaciaBarrel,"forestryacaciabarrel");
+        	//GameRegistry.registerBlock(forestryacaciaBarrel,"forestryacaciabarrel");
         	GameRegistry.registerBlock(forestrybalsaBarrel,"forestrybalsabarrel");
         	GameRegistry.registerBlock(forestrybaobabBarrel,"forestrybaobabbarrel");
         	GameRegistry.registerBlock(forestrycherryBarrel,"forestrycherrybarrel");
@@ -373,10 +373,10 @@ public class SimpleBarrels
         	Item tempPlank1= Item.REGISTRY.getObject(new ResourceLocation("forestry:planks.1"));
         	//Block tempPlank2 = Block.getBlockFromName("forestry:planks.cocobolo");
         	
-        	addBarrel(forestryacaciaBarrel,false, false,new ItemStack(tempPlank ,1,2));
-            addBarrel(forestryacaciaBarrel,false, true,new ItemStack(tempPlank ,1,2));
-            addBarrel(forestryacaciaBarrel,true, false,new ItemStack(tempPlank ,1,2));
-            addBarrel(forestryacaciaBarrel,true, true,new ItemStack(tempPlank ,1,2));
+        	//addBarrel(forestryacaciaBarrel,false, false,new ItemStack(tempPlank ,1,2));
+            //addBarrel(forestryacaciaBarrel,false, true,new ItemStack(tempPlank ,1,2));
+            //addBarrel(forestryacaciaBarrel,true, false,new ItemStack(tempPlank ,1,2));
+            //addBarrel(forestryacaciaBarrel,true, true,new ItemStack(tempPlank ,1,2));
             
             addBarrel(forestrybalsaBarrel,false, false,new ItemStack(tempPlank ,1,11));
             addBarrel(forestrybalsaBarrel,false, true,new ItemStack(tempPlank ,1,11));

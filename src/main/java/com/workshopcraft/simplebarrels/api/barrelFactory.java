@@ -24,6 +24,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
@@ -68,6 +69,7 @@ public class barrelFactory {
 								String tmpBarrelName = "";
 								String tmpBarrelSourceBlock = "";
 								int tmpBarrelSourceMeta = 0;
+								String tmpBarrelDependancy = "";
 								barrelList = new ArrayList<barrelData>();
 								while (j<jarrSize)
 								{
@@ -76,8 +78,8 @@ public class barrelFactory {
 								 
 								 tmpBarrelSourceBlock = bData.getAsJsonObject().get("sourceblock").getAsString();
 								 tmpBarrelSourceMeta = Integer.parseInt(bData.getAsJsonObject().get("sourcemeta").getAsString());
-								 
-								 barrelList.add(new barrelData(tmpBarrelName,tmpBarrelSourceBlock,tmpBarrelSourceMeta));
+								 tmpBarrelDependancy = bData.getAsJsonObject().get("dependancy").getAsString();
+								 barrelList.add(new barrelData(tmpBarrelName,tmpBarrelSourceBlock,tmpBarrelSourceMeta,tmpBarrelDependancy));
 								 j++;
 								}
 								//we have loaded our data into an array of barrelData.
@@ -88,9 +90,12 @@ public class barrelFactory {
 								BlockBarrel bBtmp;
 								while( i<barrelList.size())
 								{
-									bBtmp = new BlockBarrel(barrelList.get(i).unlocalizedName);
-									SimpleBarrels.barrels.add(bBtmp);
 									
+									bBtmp = new BlockBarrel(barrelList.get(i).unlocalizedName);
+									if (checkDependancy(barrelList.get(i).dependancy))
+									{
+										SimpleBarrels.barrels.add(bBtmp);
+									}
 									//System.out.println("name: "+barrelList.get(i).unlocalizedName);
 									//System.out.println("sourceBlock: "+barrelList.get(i).sourceBlock);
 									//System.out.println("sourceMeta: "+barrelList.get(i).sourceMeta);
@@ -121,7 +126,17 @@ public class barrelFactory {
 		
 		
 	}
-
+	public Boolean checkDependancy(String dependancy)
+	{
+		if (dependancy.equals("")) return true; //if its empty we dont call isModLoaded()
+		if (Loader.isModLoaded(dependancy))  
+		{
+			return true;
+		} else
+		{
+			return false;
+		}
+	}
 	public barrelFactory(JsonObject barrelList)
 	{
 		//barrelList.get
@@ -181,16 +196,18 @@ public class barrelFactory {
 		{
 			//bBtmp = new BlockBarrel(barrelList.get(i).unlocalizedName);
 			bBtmp = SimpleBarrels.barrels.get(i);
-			GameRegistry.register(bBtmp);
-	        GameRegistry.register(new ItemBlock(bBtmp), bBtmp.getRegistryName());
-	        Item mcPlank= Item.REGISTRY.getObject(new ResourceLocation(barrelList.get(i).sourceBlock));
-	        
-	        addBarrel(bBtmp,false, false, new ItemStack(mcPlank,1,barrelList.get(i).sourceMeta));
-	        addBarrel(bBtmp,true, false,new ItemStack(mcPlank,1,barrelList.get(i).sourceMeta));
-	        addBarrel(bBtmp,false, true,new ItemStack(mcPlank,1,barrelList.get(i).sourceMeta));
-	        addBarrel(bBtmp,true, true,new ItemStack(mcPlank,1,barrelList.get(i).sourceMeta));
-			i++;
-			
+			if (checkDependancy(barrelList.get(i).dependancy))
+			{
+				GameRegistry.register(bBtmp);
+		        GameRegistry.register(new ItemBlock(bBtmp), bBtmp.getRegistryName());
+		        Item mcPlank= Item.REGISTRY.getObject(new ResourceLocation(barrelList.get(i).sourceBlock));
+		        
+		        addBarrel(bBtmp,false, false, new ItemStack(mcPlank,1,barrelList.get(i).sourceMeta));
+		        addBarrel(bBtmp,true, false,new ItemStack(mcPlank,1,barrelList.get(i).sourceMeta));
+		        addBarrel(bBtmp,false, true,new ItemStack(mcPlank,1,barrelList.get(i).sourceMeta));
+		        addBarrel(bBtmp,true, true,new ItemStack(mcPlank,1,barrelList.get(i).sourceMeta));
+				i++;
+			}
 		}
 	}
 	
@@ -204,11 +221,12 @@ public class barrelFactory {
 		{
 			//bBtmp = new BlockBarrel(barrelList.get(i).unlocalizedName);
 			bBtmp = SimpleBarrels.barrels.get(i);
-			
-	        System.out.println(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(bBtmp).getUnlocalizedName().substring(5));
-	        renderItem.getItemModelMesher().register(Item.getItemFromBlock(bBtmp), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(bBtmp).getUnlocalizedName().substring(5),"inventory"));
-			i++;
-			
+			if (checkDependancy(barrelList.get(i).dependancy))
+			{
+		        //System.out.println(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(bBtmp).getUnlocalizedName().substring(5));
+		        renderItem.getItemModelMesher().register(Item.getItemFromBlock(bBtmp), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(bBtmp).getUnlocalizedName().substring(5),"inventory"));
+				i++;
+			}
 		}
 	}
 	

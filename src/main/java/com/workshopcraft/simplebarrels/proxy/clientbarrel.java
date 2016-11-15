@@ -37,7 +37,7 @@ public class clientbarrel extends barrelcommonproxy {
         {
 			//RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 			
-        	renderItem.getItemModelMesher().register(Item.getItemFromBlock(SimpleBarrels.forestryacaciaBarrel), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(SimpleBarrels.forestryacaciaBarrel).getUnlocalizedName().substring(5),"inventory"));
+        	//renderItem.getItemModelMesher().register(Item.getItemFromBlock(SimpleBarrels.forestryacaciaBarrel), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(SimpleBarrels.forestryacaciaBarrel).getUnlocalizedName().substring(5),"inventory"));
         	renderItem.getItemModelMesher().register(Item.getItemFromBlock(SimpleBarrels.forestrybalsaBarrel), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(SimpleBarrels.forestrybalsaBarrel).getUnlocalizedName().substring(5),"inventory"));
         	renderItem.getItemModelMesher().register(Item.getItemFromBlock(SimpleBarrels.forestrybaobabBarrel), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(SimpleBarrels.forestrybaobabBarrel).getUnlocalizedName().substring(5),"inventory"));
         	renderItem.getItemModelMesher().register(Item.getItemFromBlock(SimpleBarrels.forestrycherryBarrel), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(SimpleBarrels.forestrycherryBarrel).getUnlocalizedName().substring(5),"inventory"));

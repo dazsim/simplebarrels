@@ -1,0 +1,9 @@
+
+{
+    "parent" : "simplebarrels:block/oakbarrel",
+
+    "textures": {
+                    "particle": "natura:blocks/logs/overworld/redwood_bark",
+                    "texture": "natura:blocks/logs/overworld/redwood_bark"
+                }
+}
