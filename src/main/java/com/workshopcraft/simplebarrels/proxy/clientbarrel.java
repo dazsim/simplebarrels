@@ -33,11 +33,13 @@ public class clientbarrel extends barrelcommonproxy {
         
         renderItem.getItemModelMesher().register((Item)SimpleBarrels.upgradeComparator, 0,new ModelResourceLocation(SimpleBarrels.MODID+ ":"+((ItemUpgradeComparator) SimpleBarrels.upgradeComparator).getName(),"inventory"));
         renderItem.getItemModelMesher().register((Item)SimpleBarrels.upgradeItemFrame, 0,new ModelResourceLocation(SimpleBarrels.MODID+ ":"+((ItemUpgradeItemFrame) SimpleBarrels.upgradeItemFrame).getName(),"inventory"));
+        /*
         if (Loader.isModLoaded("forestry"))
         {
 			//RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 			
         	//renderItem.getItemModelMesher().register(Item.getItemFromBlock(SimpleBarrels.forestryacaciaBarrel), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(SimpleBarrels.forestryacaciaBarrel).getUnlocalizedName().substring(5),"inventory"));
+        	
         	renderItem.getItemModelMesher().register(Item.getItemFromBlock(SimpleBarrels.forestrybalsaBarrel), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(SimpleBarrels.forestrybalsaBarrel).getUnlocalizedName().substring(5),"inventory"));
         	renderItem.getItemModelMesher().register(Item.getItemFromBlock(SimpleBarrels.forestrybaobabBarrel), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(SimpleBarrels.forestrybaobabBarrel).getUnlocalizedName().substring(5),"inventory"));
         	renderItem.getItemModelMesher().register(Item.getItemFromBlock(SimpleBarrels.forestrycherryBarrel), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(SimpleBarrels.forestrycherryBarrel).getUnlocalizedName().substring(5),"inventory"));
@@ -67,7 +69,7 @@ public class clientbarrel extends barrelcommonproxy {
         	renderItem.getItemModelMesher().register(Item.getItemFromBlock(SimpleBarrels.forestrywillowBarrel), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(SimpleBarrels.forestrywillowBarrel).getUnlocalizedName().substring(5),"inventory"));
         	renderItem.getItemModelMesher().register(Item.getItemFromBlock(SimpleBarrels.forestryzebrawoodBarrel), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(SimpleBarrels.forestryzebrawoodBarrel).getUnlocalizedName().substring(5),"inventory"));
         	
-        }
+        }*/
 	}
 	
 	@Override
