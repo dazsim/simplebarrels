@@ -251,13 +251,6 @@
             "sourceblock": "forestry:planks.1",
             "sourcemeta": "12",
             "dependancy": "forestry"
-        },
-        {
-            "name": "naturaredwoodbarrel",
-            "unlocalizedname": "naturaredwoodbarrel",
-            "sourceblock": "natura:redwood_logs",
-            "sourcemeta": "0",
-            "dependancy": "natura"
         }
     ]
 }

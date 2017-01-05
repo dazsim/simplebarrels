@@ -9,7 +9,7 @@ import net.minecraftforge.items.IItemHandler;
 
 public class BarrelItemHandler implements IItemHandler{
 	
-	public ItemStack[] barrelContents = new ItemStack[1];
+	public ItemStack barrelContents; // = new ItemStack[1]
 	public TileEntityBarrel t;
 	public int count = 0;
 	public int size = 4096;
@@ -17,9 +17,9 @@ public class BarrelItemHandler implements IItemHandler{
 	public int getSlots() 
 	{
 		int a = size;
-		if (barrelContents[0]!=null)
+		if (barrelContents!=null)
 		{
-			a =(int) (a / this.barrelContents[0].getMaxStackSize());
+			a =(int) (a / this.barrelContents.getMaxStackSize());
 		}
 		else
 		{
@@ -31,18 +31,18 @@ public class BarrelItemHandler implements IItemHandler{
 	@Override
 	public ItemStack getStackInSlot(int slot) 
 	{
-		if (this.barrelContents[0]!= null)
+		if (this.barrelContents!= null)
 		{
-		if (slot < (int)(count/this.barrelContents[0].getMaxStackSize()))
+		if (slot < (int)(count/this.barrelContents.getMaxStackSize()))
 		{
-			ItemStack i = new ItemStack(this.barrelContents[0].getItem(),64,this.barrelContents[0].getItemDamage());
-    		i.setTagCompound(barrelContents[0].getTagCompound()); 
+			ItemStack i = new ItemStack(this.barrelContents.getItem(),64,this.barrelContents.getItemDamage());
+    		i.setTagCompound(barrelContents.getTagCompound()); 
     		return i;
-		} else if (slot == (int)(count/this.barrelContents[0].getMaxStackSize()))
+		} else if (slot == (int)(count/this.barrelContents.getMaxStackSize()))
 		{
-			int j = (int)(count%this.barrelContents[0].getMaxStackSize());
-			ItemStack i = new ItemStack(this.barrelContents[0].getItem(),j,this.barrelContents[0].getItemDamage());
-    		i.setTagCompound(barrelContents[0].getTagCompound()); 
+			int j = (int)(count%this.barrelContents.getMaxStackSize());
+			ItemStack i = new ItemStack(this.barrelContents.getItem(),j,this.barrelContents.getItemDamage());
+    		i.setTagCompound(barrelContents.getTagCompound()); 
     		
     		return i;
 		} else
@@ -56,7 +56,19 @@ public class BarrelItemHandler implements IItemHandler{
 		
 		
 	}
-
+	public int incItems(int count)
+	{
+		int a = 0;
+		a = this.size - ( count+this.count); 
+		if (a>0) {
+			this.count += count;
+		} else
+		{
+			this.count = this.size;
+			return -a;
+		} 
+		return 0;
+	}
 	@Override
 	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) 
 	{
@@ -66,7 +78,7 @@ public class BarrelItemHandler implements IItemHandler{
 		{
 			if (!simulate)
 			{
-			this.barrelContents[0]=stack;
+			this.barrelContents=stack;
 			
 				count = stack.stackSize;
 				BlockBarrel.updateBarrel(t);
@@ -78,9 +90,9 @@ public class BarrelItemHandler implements IItemHandler{
 			//barrel is full
 			return stack;
 		}
-		if (this.barrelContents[0].isItemEqual(stack))
+		if (this.barrelContents.isItemEqual(stack))
 		{
-			NBTTagCompound t1 = this.barrelContents[0].getTagCompound();
+			NBTTagCompound t1 = this.barrelContents.getTagCompound();
 			Boolean match = false;
 			if (t1!=null)
 			{
@@ -150,8 +162,8 @@ public class BarrelItemHandler implements IItemHandler{
 				{
 					a = count;
 				}
-				ItemStack i = new ItemStack(this.barrelContents[0].getItem(),a,this.barrelContents[0].getItemDamage());
-	    		i.setTagCompound(barrelContents[0].getTagCompound());
+				ItemStack i = new ItemStack(this.barrelContents.getItem(),a,this.barrelContents.getItemDamage());
+	    		i.setTagCompound(barrelContents.getTagCompound());
 	    		return i;
 			} else
 			{
@@ -162,12 +174,12 @@ public class BarrelItemHandler implements IItemHandler{
 				{
 					a = count;
 				}
-				ItemStack i = new ItemStack(this.barrelContents[0].getItem(),a,this.barrelContents[0].getItemDamage());
-	    		i.setTagCompound(barrelContents[0].getTagCompound());
+				ItemStack i = new ItemStack(this.barrelContents.getItem(),a,this.barrelContents.getItemDamage());
+	    		i.setTagCompound(barrelContents.getTagCompound());
 	    		count -= a;
 	    		if (count == 0)
 	    		{
-	    			this.barrelContents[0]=null;
+	    			this.barrelContents=null;
 	    		}
 	    		BlockBarrel.updateBarrel(t);
 	    		return i;

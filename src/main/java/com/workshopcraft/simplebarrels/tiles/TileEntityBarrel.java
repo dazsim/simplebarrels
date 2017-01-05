@@ -41,7 +41,7 @@ public class TileEntityBarrel extends TileEntity //implements ITickable
     public Boolean comp,frame;
     public TileEntityBarrel()
     {
-itemHandler = new BarrelItemHandler();
+    	itemHandler = new BarrelItemHandler();
     	
     	itemHandler.t = this;
     	comp=false;//this is inverted
@@ -107,10 +107,14 @@ itemHandler = new BarrelItemHandler();
         
         comp = compound.getBoolean("comp");
         frame = compound.getBoolean("frame");
-        
+        itemHandler.size = compound.getInteger("size");
+        if (itemHandler.size == 0)
+        {
+        	itemHandler.size = 4096;
+        }
         if (itemHandler.count>0)
         {
-        	itemHandler.barrelContents = new ItemStack[1];
+        	//itemHandler.barrelContents = new ItemStack[1];
         	//this.tags = compound.getCompoundTag("tags");
         	
         
@@ -123,9 +127,9 @@ itemHandler = new BarrelItemHandler();
             int j = nbttagcompound.getByte("Slot") & 255;
 
                 
-            itemHandler.barrelContents[0] = ItemStack.loadItemStackFromNBT(nbttagcompound);
+            itemHandler.barrelContents = ItemStack.loadItemStackFromNBT(nbttagcompound);
             //this.itemIsBlock = compound.getBoolean("isblock");        
-            itemHandler.barrelContents[0].setItemDamage(compound.getInteger("state"));
+            itemHandler.barrelContents.setItemDamage(compound.getInteger("state"));
         }
         
     }
@@ -143,11 +147,11 @@ itemHandler = new BarrelItemHandler();
             {
             	if (itemHandler.count>0)
             	{
-            		if (itemHandler.barrelContents[0] != null)
+            		if (itemHandler.barrelContents != null)
             		{
             			NBTTagCompound nbttagcompound = new NBTTagCompound();
             			nbttagcompound.setByte("Slot", (byte)0);
-            			itemHandler.barrelContents[0].writeToNBT(nbttagcompound);
+            			itemHandler.barrelContents.writeToNBT(nbttagcompound);
             			nbttaglist.appendTag(nbttagcompound);
             			
             			//NBTTagCompound
@@ -157,11 +161,11 @@ itemHandler = new BarrelItemHandler();
                     compound.setTag("Items", nbttaglist);
                     
                     compound.setInteger("count", itemHandler.count);
-                    
+                    compound.setInteger("size", itemHandler.size);
                     //compound.setBoolean("isblock", this.itemIsBlock);
-                    if (itemHandler.barrelContents[0]!=null)
+                    if (itemHandler.barrelContents!=null)
                     {
-                    	compound.setInteger("state", itemHandler.barrelContents[0].getItem().getMetadata(itemHandler.barrelContents[0]));
+                    	compound.setInteger("state", itemHandler.barrelContents.getItem().getMetadata(itemHandler.barrelContents));
                     }else
                     {
                     	compound.setInteger("state", 0);
@@ -233,11 +237,11 @@ itemHandler = new BarrelItemHandler();
      */
     public boolean isItemValidForSlot(int index, ItemStack stack)
     {
-    	if (itemHandler.barrelContents[0]!=null)
+    	if (itemHandler.barrelContents!=null)
     	{
-    	if (itemHandler.barrelContents[0].equals(stack))
+    	if (itemHandler.barrelContents.equals(stack))
     	{
-    		if (itemHandler.barrelContents[0].getTagCompound().equals(stack.getTagCompound()))
+    		if (itemHandler.barrelContents.getTagCompound().equals(stack.getTagCompound()))
     		{
     		return true;
     		}
@@ -281,7 +285,7 @@ itemHandler = new BarrelItemHandler();
     {
         
 
-    		itemHandler.barrelContents[0] = null;
+    		itemHandler.barrelContents = null;
     		itemHandler.count = 0;
         
     }
@@ -315,11 +319,11 @@ itemHandler = new BarrelItemHandler();
         {
         	if (itemHandler.count!=0)
         	{
-        		if (itemHandler.barrelContents[0] != null)
+        		if (itemHandler.barrelContents != null)
         		{
         			NBTTagCompound nbttagcompound = new NBTTagCompound();
         			nbttagcompound.setByte("Slot", (byte)0);
-        			itemHandler.barrelContents[0].writeToNBT(nbttagcompound);
+        			itemHandler.barrelContents.writeToNBT(nbttagcompound);
         			nbttaglist.appendTag(nbttagcompound);
         		}
         		/*
@@ -334,13 +338,13 @@ itemHandler = new BarrelItemHandler();
         		compound.setInteger("count", itemHandler.count); 
         		compound.setBoolean("comp", comp);
                 compound.setBoolean("frame", frame);
-                
+                compound.setInteger("size", itemHandler.size);
                 
         	       
                 //compound.setBoolean("isblock", this.itemIsBlock);
-                if (itemHandler.barrelContents[0]!=null)
+                if (itemHandler.barrelContents!=null)
                 {
-                	compound.setInteger("state", itemHandler.barrelContents[0].getItem().getMetadata(itemHandler.barrelContents[0]));
+                	compound.setInteger("state", itemHandler.barrelContents.getItem().getMetadata(itemHandler.barrelContents));
                 } else
                 {
                 	compound.setInteger("state", 0);
@@ -381,7 +385,7 @@ itemHandler = new BarrelItemHandler();
     	{
     		
     	
-			itemHandler.barrelContents = new ItemStack[1];
+			//itemHandler.barrelContents = new ItemStack();
 
         if (compound.hasKey("CustomName", 8))
         {
@@ -389,7 +393,11 @@ itemHandler = new BarrelItemHandler();
         }
         comp = compound.getBoolean("comp");
         frame = compound.getBoolean("frame");
-        
+        itemHandler.size = compound.getInteger("size");
+        if (itemHandler.size == 0)
+        {
+        	itemHandler.size = 4096;
+        }
             NBTTagList nbttaglist = compound.getTagList("Items", 10);
             
             
@@ -397,7 +405,7 @@ itemHandler = new BarrelItemHandler();
                 int j = nbttagcompound.getByte("Slot") & 255;
 
                 
-                	itemHandler.barrelContents[0] = ItemStack.loadItemStackFromNBT(nbttagcompound);
+                	itemHandler.barrelContents = ItemStack.loadItemStackFromNBT(nbttagcompound);
                 	itemHandler.count = compound.getInteger("count");
                     //this.itemIsBlock = compound.getBoolean("isblock");      
                     int st = compound.getInteger("state");
@@ -421,9 +429,9 @@ itemHandler = new BarrelItemHandler();
                     } 
                     if (!err)
                     {
-                    	if (itemHandler.barrelContents[0]!=null)
+                    	if (itemHandler.barrelContents!=null)
                     	{
-                    		itemHandler.barrelContents[0].getItem().setDamage(itemHandler.barrelContents[0], s);
+                    		itemHandler.barrelContents.getItem().setDamage(itemHandler.barrelContents, s);
                     	}
                     }
     	} 

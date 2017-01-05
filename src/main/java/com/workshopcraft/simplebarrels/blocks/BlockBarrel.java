@@ -61,8 +61,7 @@ public class BlockBarrel extends BlockContainer{
         setHarvestLevel("Axe", 0);
         setUnlocalizedName(uname);
         setRegistryName(uname);
-        //ResourceLocation rl = new ResourceLocation("")
-        //setRegistryName(new ResourceLocation(uname));
+       
 	}
 	
 	
@@ -116,6 +115,7 @@ public class BlockBarrel extends BlockContainer{
     		return;
     	}
     	Boolean c,f;
+    	int s;
     	NBTTagCompound n = new NBTTagCompound();
     	n = stack.getTagCompound();
     	if (n !=null)
@@ -123,6 +123,7 @@ public class BlockBarrel extends BlockContainer{
     	
     		c = n.getBoolean("comp");
     		f = n.getBoolean("frame");
+    		s = n.getInteger("size");
 	    	TileEntityBarrel t;
 	    	TileEntity t1;
 	    	
@@ -142,65 +143,13 @@ public class BlockBarrel extends BlockContainer{
 	    	if (t!=null)
 			{
 				t.init(c,f);
+				t.itemHandler.size = s;
 				this.updateBarrel((TileEntityBarrel)worldIn.getTileEntity(pos));
 			}
 		}
     
     }
-    /*
-    @Override 
-    public BlockBarrel removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, Boolean willHarvest) 
-    {
-        if (willHarvest) {
-            onBlockHarvested(world, pos, state, player);
-            return true;
-        } else {
-            return super.removedByPlayer(state, world, pos, player, willHarvest);
-        }
-        //this.removedByPlayer(state, world, pos, player, willHarvest)
-    }
-
-    @Override 
-    public void harvestBlock(World worldIn,EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te, ItemStack stack) 
-    {
-        super.harvestBlock(worldIn, player, pos, state, te, stack);
-        worldIn.setBlockToAir(pos);
-    }
-    @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
-    {
-        
-        TileEntity tileentity = worldIn.getTileEntity(pos);
-         
-        
-        ItemStack istack;
-        //check instance of barrel tile entity
-        if (tileentity instanceof TileEntityBarrel)
-        {
-        	TileEntityBarrel te2 = (TileEntityBarrel)tileentity;
-        	if (te2.itemHandler.barrelContents[0]!=null)
-        	{
-           
-        	istack = new ItemStack(te2.itemHandler.barrelContents[0].getItem(),te2.itemHandler.count,te2.itemHandler.barrelContents[0].getItemDamage());
-			istack.setTagCompound(te2.itemHandler.barrelContents[0].getTagCompound());
-			InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY()+1.0, pos.getZ(),istack);
-        	
-        	}
-        	
-        	/*istack = new ItemStack(this,1,0);
-        	NBTTagCompound n = new NBTTagCompound();
-        	n.setBoolean("comp", te2.comp);
-        	n.setBoolean("frame", te2.frame);
-        	istack.setTagCompound(n);
-        	
-        	
-        	InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY()+1.0, pos.getZ(),istack);
-        	*//*
-        }
-
-        super.breakBlock(worldIn, pos, state);
-        
-    }*/
+   
     @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
@@ -212,11 +161,12 @@ public class BlockBarrel extends BlockContainer{
         if (tileentity instanceof TileEntityBarrel)
         {
         	TileEntityBarrel te2 = (TileEntityBarrel)tileentity;
-        	if (te2.itemHandler.barrelContents[0]!=null)
+        	if (te2.itemHandler.extractItem(0, 1, true)!=null)
+        	//if (te2.itemHandler.barrelContents[0]!=null)
         	{
            
-        	istack = new ItemStack(te2.itemHandler.barrelContents[0].getItem(),te2.itemHandler.count,te2.itemHandler.barrelContents[0].getItemDamage());
-			istack.setTagCompound(te2.itemHandler.barrelContents[0].getTagCompound());
+        	istack = new ItemStack(te2.itemHandler.barrelContents.getItem(),te2.itemHandler.count,te2.itemHandler.barrelContents.getItemDamage());
+			istack.setTagCompound(te2.itemHandler.barrelContents.getTagCompound());
 			if (!worldIn.isRemote)
         	{
 				InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY()+1.0, pos.getZ(),istack);
@@ -229,6 +179,7 @@ public class BlockBarrel extends BlockContainer{
         	NBTTagCompound n = new NBTTagCompound();
         	n.setBoolean("comp", te2.comp);
         	n.setBoolean("frame", te2.frame);
+        	n.setInteger("size", te2.itemHandler.size);
         	istack.setTagCompound(n);
         	
         	if (!worldIn.isRemote)
@@ -295,11 +246,19 @@ public class BlockBarrel extends BlockContainer{
 			TileEntityBarrel tile = (TileEntityBarrel)t;
 			ItemStack stack = new ItemStack(this,1,0);
         	stack.setTagCompound(tile.getTileData());
+        	
 			items.add(stack);
-			stack = new ItemStack(tile.itemHandler.barrelContents[0].getItem(),tile.itemHandler.count);
-			items.add(stack);
+			if (tile.itemHandler !=null)
+			{
+				while (tile.itemHandler.extractItem(0, 1, true)!=null)
+				{
+					items.add(tile.itemHandler.extractItem(0, 64, false));
+				}
+				
+			}
 		}
-    	return items;
+	
+			return items;
     	
     }
     
@@ -311,109 +270,78 @@ public class BlockBarrel extends BlockContainer{
     		if (!worldIn.isRemote)
     		{
     			
-    				TileEntity te = (worldIn.getTileEntity(pos));
-    				if (te instanceof TileEntityBarrel)
-    				{
-    					TileEntityBarrel te2 = (TileEntityBarrel) te;
-    					if (te2.itemHandler.barrelContents[0] == null)
-    					{
-    						if (heldItem != null) //place whatever is in hand in barrel
-    						{
-    							NBTTagCompound n = new NBTTagCompound();
-    							
-    							n = heldItem.getTagCompound();
-    							if (n!=null)
-    							{
-    								//System.out.println(n.toString());
-    							}
-    							
-    							te2.itemHandler.barrelContents[0] = new ItemStack(heldItem.getItem(),heldItem.stackSize,heldItem.getMetadata());
-    							te2.itemHandler.barrelContents[0].setTagCompound(n);
-    							
-    							/*if (te2.tags == null)
-    							{
-    								te2.tags = new NBTTagCompound();
-    							}
-    							te2.tags = heldItem.getTagCompound();
-    							*/
-    							te2.itemHandler.count = heldItem.stackSize;
-    							playerIn.inventory.mainInventory[playerIn.inventory.currentItem].stackSize=0;
-    							playerIn.inventory.inventoryChanged=true;
-    							//n.setBoolean("comp",this.);
-    							this.updateBarrel(te2);
-    							
-    							return true;
-    							//event.setCanceled(true);
-    						}
-    					} else if (heldItem!=null) 
-    					{
-    						if (te2.itemHandler.barrelContents[0].isItemEqual(heldItem))
-    						{
-    							NBTTagCompound t1 = te2.itemHandler.barrelContents[0].getTagCompound();
-    							Boolean match = false;
-    							if (t1!=null)
-    							{
-    								if (heldItem !=null)
-    								{
-    									if (heldItem.getTagCompound()!=null)
-										{
-											if (t1.equals(heldItem.getTagCompound()))
-		    								{
-		    									match = true;
-		    								}
-										}
-    								}
-    								
-    							
-    							}
-    							if ((t1==null) && (heldItem.getTagCompound()==null))
-    							{
-    								match = true;
-    							}
-    							if (match)
-								{
-    							
-    								if (te2.itemHandler.count < te2.itemHandler.size)
-    								{
-    								
-    									int r = heldItem.stackSize+te2.itemHandler.count-te2.itemHandler.size;
-    									if (r<0)
-    									{
-    										te2.itemHandler.count = (heldItem.stackSize+te2.itemHandler.count);
-    										playerIn.inventory.mainInventory[playerIn.inventory.currentItem].stackSize=0;
+				TileEntity te = (worldIn.getTileEntity(pos));
+				if (te instanceof TileEntityBarrel)
+				{
+					TileEntityBarrel te2 = (TileEntityBarrel) te;
+					//System.out.println("ATTEMPTED");
+					
+					if (!(te2.itemHandler.extractItem(0, 1, true) instanceof ItemStack)) //If barrel is holding nothing
+					//if (te2.itemHandler.barrelContents[0] == null)
+					{
+						//System.out.println("BARREL EMPTY");
+						if (heldItem != null) //place whatever is in hand in barrel
+						{
+							NBTTagCompound n = new NBTTagCompound();
+							
+							ItemStack insertStack = new ItemStack(heldItem.getItem(),heldItem.stackSize,heldItem.getMetadata());
+							insertStack.setTagCompound(n);
+							te2.itemHandler.insertItem(0, insertStack ,false);
+							
+							
+							playerIn.inventory.mainInventory[playerIn.inventory.currentItem].stackSize=0;
+							playerIn.inventory.inventoryChanged=true;
+							
+							this.updateBarrel(te2);
+							
+							return true;
+							
+						}
+					} else { 
+						
+						
+						if (heldItem!=null) {
+							
+	    						if (te2.itemHandler.extractItem(0, 1, true).isItemEqual(heldItem)) {
+	    							
+	    							NBTTagCompound t1 = te2.itemHandler.extractItem(0, 1, true).getTagCompound();
+	    							Boolean match = false;
+	    							if (heldItem.getTagCompound()!=null) { //make sure we dont pass null
+										if (t1.equals(heldItem.getTagCompound())) { //compare t1 tags with held item tags
+	    									match = true; //match!
+	    									
+	    								}
+										
+									}
+	    							
+	    							
+	    							if ((t1.toString().equals("{}"))  &&  (heldItem.getTagCompound()==null)) { //also match if netiher have tags
+	    								
+		    								match = true;
+		    						}
+	    							if (match) {
+	    								if (te2.itemHandler.count < te2.itemHandler.size) {
+	    									
+	    									int incResult = te2.itemHandler.incItems(heldItem.stackSize);
+    										//heldItem.stackSize = incResult;
+    										
+    										
+    										playerIn.inventory.mainInventory[playerIn.inventory.currentItem].stackSize=incResult;
     										playerIn.inventory.inventoryChanged=true;
     										this.updateBarrel(te2);
     										return true;
-    										//event.setCanceled(true);
-    									} else if (r<heldItem.stackSize)
-    									{
-    										te2.itemHandler.count = te2.itemHandler.size;
-    										playerIn.inventory.mainInventory[playerIn.inventory.currentItem].stackSize=r;
-    										playerIn.inventory.inventoryChanged=true;
-    										this.updateBarrel(te2);
-    										return true;
-    										//event.setCanceled(true);
-    									} else 
-    									{
-    										return true;
-    										//event.setCanceled(true);
-    									}
-    								}
-    							}
-    						} else
-    						{
-    							return true;
-    							//event.setCanceled(true);
-    						}
-    					} else
-    					{
-    						return true;
-    						//event.setCanceled(true);
-    					}
-    				}
+	    									
+	    									
+	    								}
+	    							}
+	    						} else { return true; }
+							
+						} else { return true; }
+					} 
+				}
     		}
     		return true;
-    }
+    	}
     		
     }
 

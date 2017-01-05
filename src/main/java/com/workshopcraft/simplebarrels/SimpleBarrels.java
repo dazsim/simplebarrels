@@ -7,6 +7,10 @@ import com.workshopcraft.simplebarrels.blocks.BlockBarrel;
 import com.workshopcraft.simplebarrels.handlers.BarrelHandler;
 import com.workshopcraft.simplebarrels.items.ItemUpgradeComparator;
 import com.workshopcraft.simplebarrels.items.ItemUpgradeItemFrame;
+import com.workshopcraft.simplebarrels.items.ItemUpgradeMark1Compressor;
+import com.workshopcraft.simplebarrels.items.ItemUpgradeMark2Compressor;
+import com.workshopcraft.simplebarrels.items.ItemUpgradeMark3Compressor;
+import com.workshopcraft.simplebarrels.items.ItemUpgradeMark4Compressor;
 //import com.workshopcraft.simplebarrels.network.BarrelSyncClient;
 //import com.workshopcraft.simplebarrels.network.BarrelSyncServer;
 import com.workshopcraft.simplebarrels.proxy.barrelcommonproxy;
@@ -14,13 +18,9 @@ import com.workshopcraft.simplebarrels.tiles.TileEntityBarrel;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -34,10 +34,18 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 public class SimpleBarrels
 {
     public static final String MODID = "simplebarrels";
-    public static final String VERSION = "1.25h";
+    public static final String VERSION = "1.26";
     
     public static ItemUpgradeComparator upgradeComparator;
     public static ItemUpgradeItemFrame upgradeItemFrame;
+    public static ItemUpgradeMark1Compressor upgradeMark1Compressor;
+    public static ItemUpgradeMark2Compressor upgradeMark2Compressor;
+    public static ItemUpgradeMark3Compressor upgradeMark3Compressor;
+    public static ItemUpgradeMark4Compressor upgradeMark4Compressor;
+    
+    
+    
+    
     public static SimpleBarrelsTab tabSimpleBarrels;
     
     
@@ -49,34 +57,9 @@ public class SimpleBarrels
     /*
      * VANILLA
      */
-    public static BlockBarrel blockBarrel;
-    public static BlockBarrel oakBarrel;
-    public static BlockBarrel spruceBarrel;
-    public static BlockBarrel birchBarrel;
-    public static BlockBarrel jungleBarrel;
-    public static BlockBarrel acaciaBarrel;
-    public static BlockBarrel darkoakBarrel;
-    /*
-     * FORESTRY
-     */
-    
-    /*
-     * BIOMES O' PLENTY
-     */
     
     
-    /*
-     * NATURA
-     */
-    
-    
-    /*
-     * THAUMCRAFT
-     */
-    
-    
-    //public static SimpleNetworkWrapper BarrelNet= NetworkRegistry.INSTANCE.newSimpleChannel("barrelnet");
-    //public static SimpleNetworkWrapper BarrelNet2= NetworkRegistry.INSTANCE.newSimpleChannel("barrelnet2");
+   
     
     @SidedProxy(clientSide="com.workshopcraft.simplebarrels.proxy.clientbarrel",serverSide="com.workshopcraft.simplebarrels.proxy.serverbarrel")
     public static barrelcommonproxy proxy;
@@ -84,28 +67,15 @@ public class SimpleBarrels
     @EventHandler
     public void preinit(FMLPreInitializationEvent event)
     {
-    	//blockBarrel = new BlockBarrel();
-        //blockBarrel.setUnlocalizedName("blockbarrel");
-    	tabSimpleBarrels = new SimpleBarrelsTab("tabSimpleBarrelsTab");
+    		tabSimpleBarrels = new SimpleBarrelsTab("tabSimpleBarrelsTab");
     	upgradeComparator = new ItemUpgradeComparator("upgradecomparator");
     	upgradeItemFrame = new ItemUpgradeItemFrame("upgradeitemframe");
+    	upgradeMark1Compressor = new ItemUpgradeMark1Compressor("upgrademark1compressor");
+    	upgradeMark2Compressor = new ItemUpgradeMark2Compressor("upgrademark2compressor");
+    	upgradeMark3Compressor = new ItemUpgradeMark3Compressor("upgrademark3compressor");
+    	upgradeMark4Compressor = new ItemUpgradeMark4Compressor("upgrademark4compressor");
     	
-    	/*
-    	oakBarrel = new BlockBarrel("oakbarrel");
-        //oakBarrel.setUnlocalizedName("oakbarrel");
-    	
-        spruceBarrel = new BlockBarrel("sprucebarrel");
-        //spruceBarrel.setUnlocalizedName("sprucebarrel");
-        birchBarrel = new BlockBarrel("birchbarrel");
-        //birchBarrel.setUnlocalizedName("birchbarrel");
-        jungleBarrel = new BlockBarrel("junglebarrel");
-        //jungleBarrel.setUnlocalizedName("junglebarrel");
-        acaciaBarrel = new BlockBarrel("acaciabarrel");
-        //acaciaBarrel.setUnlocalizedName("acaciabarrel");
-        darkoakBarrel = new BlockBarrel("darkoakbarrel");
-        //darkoakBarrel.setUnlocalizedName("darkoakbarrel");        
-        */
-        bFactory = new barrelFactory();
+    	  bFactory = new barrelFactory();
         proxy.preInit(event);
         
     }
@@ -159,35 +129,8 @@ public class SimpleBarrels
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-        // some example code
         GameRegistry.registerTileEntity(TileEntityBarrel.class, "tile_entity_barrel");
-        //GameRegistry.registerBlock(blockBarrel , "blockbarrel");
-        //GameRegistry.registerBlock(oakBarrel , "oakbarrel");
         bFactory.init();
-        /*
-        GameRegistry.register(oakBarrel);
-        GameRegistry.register(new ItemBlock(oakBarrel), oakBarrel.getRegistryName());
-        GameRegistry.register(spruceBarrel);
-        GameRegistry.register(new ItemBlock(spruceBarrel), spruceBarrel.getRegistryName());
-        GameRegistry.register(birchBarrel);
-        GameRegistry.register(new ItemBlock(birchBarrel), birchBarrel.getRegistryName());
-        GameRegistry.register(jungleBarrel);
-        GameRegistry.register(new ItemBlock(jungleBarrel), jungleBarrel.getRegistryName());
-        GameRegistry.register(acaciaBarrel);
-        GameRegistry.register(new ItemBlock(acaciaBarrel), acaciaBarrel.getRegistryName());
-        GameRegistry.register(darkoakBarrel);
-        GameRegistry.register(new ItemBlock(darkoakBarrel), darkoakBarrel.getRegistryName());
-        */
-        //GameRegistry.registerBlock(spruceBarrel , "sprucebarrel");
-        //GameRegistry.registerBlock(birchBarrel , "birchbarrel");
-       // GameRegistry.registerBlock(jungleBarrel , "junglebarrel");
-       // GameRegistry.registerBlock(acaciaBarrel , "acaciabarrel");
-       // GameRegistry.registerBlock(darkoakBarrel , "darkoakbarrel");
-        /*
-         * FORESTRY
-         */
-        
-        
         GameRegistry.addRecipe(new ItemStack(this.upgradeComparator,1),new Object[] {
         		" A ",
         		"ABA",
@@ -200,50 +143,33 @@ public class SimpleBarrels
         		" A ",
         		'A',Items.STICK,'B',Items.ITEM_FRAME
         });
-       
+        GameRegistry.addRecipe(new ItemStack(this.upgradeMark1Compressor,1),new Object[] {
+        		" S ",
+        		"SPS",
+        		" S ",
+        		'S',Items.STICK,'B',Blocks.PISTON
+        });
+        GameRegistry.addRecipe(new ItemStack(this.upgradeMark2Compressor,1),new Object[] {
+        		" S ",
+        		"SPS",
+        		" S ",
+        		'S',this.upgradeMark1Compressor,'B',Items.IRON_INGOT
+        });
+        GameRegistry.addRecipe(new ItemStack(this.upgradeMark3Compressor,1),new Object[] {
+        		" S ",
+        		"SPS",
+        		" S ",
+        		'S',this.upgradeMark2Compressor,'B',Items.GOLD_INGOT
+        });
+        GameRegistry.addRecipe(new ItemStack(this.upgradeMark4Compressor,1),new Object[] {
+        		" S ",
+        		"SPS",
+        		" S ",
+        		'S',this.upgradeMark3Compressor,'B',Items.DIAMOND
+        });
         FMLCommonHandler.instance().bus().register(new BarrelHandler());
         
         
-        /*
-        Item mcPlank= Item.REGISTRY.getObject(new ResourceLocation("minecraft:planks"));
-        
-        addBarrel(oakBarrel,false, false, new ItemStack(mcPlank,1,0));
-        addBarrel(oakBarrel,true, false,new ItemStack(mcPlank,1,0));
-        addBarrel(oakBarrel,false, true,new ItemStack(mcPlank,1,0));
-        addBarrel(oakBarrel,true, true,new ItemStack(mcPlank,1,0));
-        
-        addBarrel(spruceBarrel,false, false,new ItemStack(Blocks.PLANKS,1,1));
-        addBarrel(spruceBarrel,true, false,new ItemStack(Blocks.PLANKS,1,1));
-        addBarrel(spruceBarrel,false, true,new ItemStack(Blocks.PLANKS,1,1));
-        addBarrel(spruceBarrel,true, true,new ItemStack(Blocks.PLANKS,1,1));
-        
-        addBarrel(birchBarrel,false, false,new ItemStack(Blocks.PLANKS,1,2));
-        addBarrel(birchBarrel,true, false,new ItemStack(Blocks.PLANKS,1,2));
-        addBarrel(birchBarrel,false, true,new ItemStack(Blocks.PLANKS,1,2));
-        addBarrel(birchBarrel,true, true,new ItemStack(Blocks.PLANKS,1,2));
-        
-        addBarrel(jungleBarrel,false, false,new ItemStack(Blocks.PLANKS,1,3));
-        addBarrel(jungleBarrel,true, false,new ItemStack(Blocks.PLANKS,1,3));
-        addBarrel(jungleBarrel,false, true,new ItemStack(Blocks.PLANKS,1,3));
-        addBarrel(jungleBarrel,true, true,new ItemStack(Blocks.PLANKS,1,3));
-        
-        addBarrel(acaciaBarrel,false, false,new ItemStack(Blocks.PLANKS,1,4));
-        addBarrel(acaciaBarrel,true, false,new ItemStack(Blocks.PLANKS,1,4));
-        addBarrel(acaciaBarrel,false, true,new ItemStack(Blocks.PLANKS,1,4));
-        addBarrel(acaciaBarrel,true, true,new ItemStack(Blocks.PLANKS,1,4));
-        
-        addBarrel(darkoakBarrel,false, false,new ItemStack(Blocks.PLANKS,1,5));
-        addBarrel(darkoakBarrel,true, false,new ItemStack(Blocks.PLANKS,1,5));
-        addBarrel(darkoakBarrel,false, true,new ItemStack(Blocks.PLANKS,1,5));
-        addBarrel(darkoakBarrel,true, true,new ItemStack(Blocks.PLANKS,1,5));
-        */
-        
-        /*
-         * FORESTRY
-         */
-        /*
-         * FORESTRY
-         */
         
         proxy.init(event);
         

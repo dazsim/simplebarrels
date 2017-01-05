@@ -17,11 +17,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemUpgradeComparator extends Item{
+public class ItemUpgradeMark3Compressor extends Item{
 
 	private String name="";
 	
-	public ItemUpgradeComparator()
+	public ItemUpgradeMark3Compressor()
 	{
 		if (name.equals(""))
 		{
@@ -36,7 +36,7 @@ public class ItemUpgradeComparator extends Item{
 		
 		
 	}
-	public ItemUpgradeComparator(String uname)
+	public ItemUpgradeMark3Compressor(String uname)
 	{
 		super();
 		GameRegistry.registerItem(this,uname);
@@ -64,14 +64,14 @@ public class ItemUpgradeComparator extends Item{
 					if ((TileEntityBarrel)t instanceof TileEntityBarrel)
 					{
 						TileEntityBarrel t2 = (TileEntityBarrel) t;
-						if (t2.comp)
+						if (t2.itemHandler.size==16384)
 						{
-							t2.comp = false;
+							t2.itemHandler.size = 32768;
 							stack.stackSize-=1;
 							Block b = (t2.getBlockType());
 							
 							((BlockBarrel) b).updateBarrel((TileEntityBarrel)worldIn.getTileEntity(pos));
-							//System.out.println("Forestry: "+Loader.isModLoaded("forestry"));
+							
 							return EnumActionResult.SUCCESS;
 						}
 					}

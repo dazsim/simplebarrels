@@ -30,35 +30,28 @@ public class TESRBlockBarrel extends TileEntitySpecialRenderer<TileEntityBarrel>
 	public void renderTileEntityAt(TileEntityBarrel te, double x, double y, double z, float partialTicks,
 			int destroyStage) {
 			//System.out.println("Foo");
-			if (te.itemHandler.barrelContents[0] != null)
+			int f = te.getBlockMetadata();
+			if (te.itemHandler.extractItem(0, 1, true)!=null)
+			
 			{
-				//ItemStack i = new ItemStack(te.barrelContents[0].getItem(),te.barrelContents[0].stackSize);
 				GlStateManager.pushMatrix();
-				
-	        // Translate to the location of our tile entity
-				 GlStateManager.translate(x,y, z);
-				 GlStateManager.disableRescaleNormal();
-				 
-	        
-
-	        
-	      
-	        	//System.out.println(te.barrelContents[0].getUnlocalizedName());
-	        	//te.barrelContents[0].getItem().getUnlocalizedName();
-	        	ItemStack st = te.itemHandler.barrelContents[0];
-	        	//System.out.println(te.barrelContents[0].getUnlocalizedName());
-	        	//System.out.println(te.barrelContents[0].stackSize);
-	        	//ItemStack st = new ItemStack(Blocks.DIRT,1);
-	        	//PropertyDirection f = (PropertyDirection) mc.theWorld.getBlockState(new BlockPos(te.getPos().getX(),te.getPos().getY(),te.getPos().getZ()));
-	        	//System.out.println(te.getBlockMetadata());
-	        	int f = te.getBlockMetadata();
-	        	//PropertyDirection f = mc.theWorld.block(new BlockPos(te.getPos().getX(),te.getPos().getY(),te.getPos().getZ()))
-	        	this.renderItem(te.getWorld(),te,st,f, partialTicks);
+				// Translate to the location of our tile entity
+				GlStateManager.translate(x,y, z);
+				GlStateManager.disableRescaleNormal();
+				ItemStack st = te.itemHandler.barrelContents;
 	        	
-	        
-	        GlStateManager.popMatrix();
+	        	this.renderItem(te.getWorld(),te,st,f, partialTicks);
+	        	this.renderUpgrades(te,f);
+		        
+		        GlStateManager.popMatrix();
+			} else
+			{
+				GlStateManager.pushMatrix();
+				this.renderUpgrades(te,f);
+		        
+		        GlStateManager.popMatrix();
 			}
-	        
+			
 		
 	}
 	
@@ -68,7 +61,70 @@ public class TESRBlockBarrel extends TileEntitySpecialRenderer<TileEntityBarrel>
 		//countBoard.addBox((float)(x-0.3),(float) y,(float)(z-0.3) , 6, 3, 6)
 		
 	}
-	
+	private void renderUpgrades(TileEntityBarrel te,int f)
+	{
+		
+        	
+    	float f1 = 0.6666667F;
+    	float f3 = 0.015625F * f1;
+    	GlStateManager.pushMatrix();
+    	FontRenderer fontrenderer = this.getFontRenderer();
+    	
+    	String s = ""+(te.itemHandler.size%4096);
+    	
+    	if (f==2)
+    	{ 
+    		
+    		GlStateManager.translate(-0.23, (0.5F * f1)-0.4, 0.00+(0.01f * f1));//0.5, 0.5, 0.0 NORTH
+    		//System.out.println("north");
+    	} else if (f==3)//south
+    	{
+    		GlStateManager.rotate(180, 0.0F, 1.0F, 0);
+    		GlStateManager.translate(-0.24, 0.36+(0.5F * f1)-0.8, (0.01f * f1));//south
+    		//System.out.println("south"+te.itemHandler.size);
+    	} else if (f==4)
+    	{
+    		
+    		GlStateManager.translate(-0.22, -0.4+(0.5F * f1), 0.04+(0.01f * f1));
+    		
+    		//System.out.println("west");
+    	} else if (f==5) //east
+    	{
+    		
+    		GlStateManager.rotate(-180, 0.0F, 1.0F, 0);
+    		GlStateManager.translate(-0.25, (0.2 * f1)-0.2, -0.04+(0.01f * f1));
+    		//System.out.println("east");
+    	} 
+    	
+    	
+    
+    	
+        GlStateManager.scale(f3, -f3, f3);
+       
+    	if (te.itemHandler.size==8192)
+    	{
+    		
+    		fontrenderer.drawString("1", 0, 0, 0xFFFFFF00);
+    		
+    	} else if (te.itemHandler.size==16384)
+    	{
+    		fontrenderer.drawString("2", 0, 0, 0xFFFFFF00);
+    		
+    	} else if (te.itemHandler.size==32768)
+    	{
+    		fontrenderer.drawString("3", 0, 0, 0xFFFFFF00);
+    		
+    	} else if (te.itemHandler.size==65536)
+    	{
+    		fontrenderer.drawString("4", 0, 0, 0xFFFFFF00);
+    	} else
+    	{
+    		
+    		fontrenderer.drawString(s, 0, 0, 0xFFFFFF00);
+    		
+    	}
+    	GlStateManager.popMatrix();
+	}
 	private void renderItem(World world,TileEntityBarrel te,ItemStack stack,int f, float partialTicks)
     {
         RenderItem itemRenderer = mc.getRenderItem();
@@ -101,7 +157,7 @@ public class TESRBlockBarrel extends TileEntitySpecialRenderer<TileEntityBarrel>
         	} 
         	
         	
-        	//GlStateManager.translate(0.0F, 0.5F * f1, 0.01f * f1);
+        
         	
             GlStateManager.scale(f3, -f3, f3);
             GlStateManager.glNormal3f(0.0F, 0.0F, -1.0F * f3);
