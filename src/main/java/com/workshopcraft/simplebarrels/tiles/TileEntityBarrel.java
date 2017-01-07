@@ -1,10 +1,11 @@
 package com.workshopcraft.simplebarrels.tiles;
 
+import java.util.HashMap;
+
 import javax.annotation.Nullable;
 
 import com.workshopcraft.simplebarrels.handlers.BarrelItemHandler;
 
-import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -15,11 +16,8 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.items.CapabilityItemHandler;
 
 public class TileEntityBarrel extends TileEntity //implements ITickable
@@ -39,6 +37,7 @@ public class TileEntityBarrel extends TileEntity //implements ITickable
     //public int maxsize = 4096;
     public int ticks = 0;
     public Boolean comp,frame;
+    public HashMap playerClicks;
     public TileEntityBarrel()
     {
     	itemHandler = new BarrelItemHandler();
@@ -46,7 +45,7 @@ public class TileEntityBarrel extends TileEntity //implements ITickable
     	itemHandler.t = this;
     	comp=false;//this is inverted
     	frame=false;//this is inverted
-    	
+    	playerClicks = new HashMap();
     }
     
     public TileEntityBarrel(Boolean c, Boolean f)
@@ -56,6 +55,7 @@ public class TileEntityBarrel extends TileEntity //implements ITickable
     	itemHandler.t = this;
     	comp=c;//this is inverted
     	frame=f;//this is inverted
+    	playerClicks = new HashMap();
     	
     }
     public void init(Boolean c, Boolean f)
@@ -114,23 +114,15 @@ public class TileEntityBarrel extends TileEntity //implements ITickable
         }
         if (itemHandler.count>0)
         {
-        	//itemHandler.barrelContents = new ItemStack[1];
-        	//this.tags = compound.getCompoundTag("tags");
-        	
-        
-
-        
             NBTTagList nbttaglist = compound.getTagList("Items", 10);
-
-            
             NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(0);
             int j = nbttagcompound.getByte("Slot") & 255;
-
-                
             itemHandler.barrelContents = ItemStack.loadItemStackFromNBT(nbttagcompound);
             //this.itemIsBlock = compound.getBoolean("isblock");        
             itemHandler.barrelContents.setItemDamage(compound.getInteger("state"));
         }
+        NBTTagList playerList = compound.getTagList("players", 10);
+        //HASHMAPPED
         
     }
 
@@ -177,6 +169,13 @@ public class TileEntityBarrel extends TileEntity //implements ITickable
         if (this.hasCustomName())
         {
             compound.setString("CustomName", this.customName);
+        }
+        if (this.playerClicks.size()>0)
+        {
+        	//HASHMAPPED
+        	//time to write playerClicks to the NBT
+        	//NBTTagList playerList = new NBTTagList();
+        	//playerList.appendTag(new NBT);
         }
         return compound;
     }
@@ -357,7 +356,7 @@ public class TileEntityBarrel extends TileEntity //implements ITickable
         {
         	compound.setString("CustomName", this.customName);
         }
-       
+       //HASHMAPPED
         
     
 	}
@@ -383,57 +382,53 @@ public class TileEntityBarrel extends TileEntity //implements ITickable
 	private void readTileClientData(NBTTagCompound compound) {
 		if (compound!=null)
     	{
-    		
-    	
-			//itemHandler.barrelContents = new ItemStack();
+    		if (compound.hasKey("CustomName", 8))
+	        {
+	            this.customName = compound.getString("CustomName");
+	        }
+	        comp = compound.getBoolean("comp");
+	        frame = compound.getBoolean("frame");
+	        itemHandler.size = compound.getInteger("size");
+	        if (itemHandler.size == 0)
+	        {
+	        	itemHandler.size = 4096;
+	        }
+	        NBTTagList nbttaglist = compound.getTagList("Items", 10);
+	        
+	        
+            NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(0);
+            int j = nbttagcompound.getByte("Slot") & 255;
 
-        if (compound.hasKey("CustomName", 8))
-        {
-            this.customName = compound.getString("CustomName");
-        }
-        comp = compound.getBoolean("comp");
-        frame = compound.getBoolean("frame");
-        itemHandler.size = compound.getInteger("size");
-        if (itemHandler.size == 0)
-        {
-        	itemHandler.size = 4096;
-        }
-            NBTTagList nbttaglist = compound.getTagList("Items", 10);
             
-            
-                NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(0);
-                int j = nbttagcompound.getByte("Slot") & 255;
-
-                
-                	itemHandler.barrelContents = ItemStack.loadItemStackFromNBT(nbttagcompound);
-                	itemHandler.count = compound.getInteger("count");
-                    //this.itemIsBlock = compound.getBoolean("isblock");      
-                    int st = compound.getInteger("state");
-                    /*
-                    if (this.barrelContents[0]!=null)
-                    {
-                    	this.tags = compound.getCompoundTag("tags");
-                    	this.barrelContents[0].setItemDamage(st);
-                    	if (this.barrelContents[0].getItem() instanceof ItemBlock)
-                        {
-                        	//restore 
-                        }
-                    }*/
-                    int s = 0;
-                    boolean err = false;
-                    try {
-                    s = compound.getInteger("state");
-                    }
-                    catch (NullPointerException e) {
-                    	 err = true;
-                    } 
-                    if (!err)
-                    {
-                    	if (itemHandler.barrelContents!=null)
-                    	{
-                    		itemHandler.barrelContents.getItem().setDamage(itemHandler.barrelContents, s);
-                    	}
-                    }
+        	itemHandler.barrelContents = ItemStack.loadItemStackFromNBT(nbttagcompound);
+        	itemHandler.count = compound.getInteger("count");
+            //this.itemIsBlock = compound.getBoolean("isblock");      
+            int st = compound.getInteger("state");
+            /*
+            if (this.barrelContents[0]!=null)
+            {
+            	this.tags = compound.getCompoundTag("tags");
+            	this.barrelContents[0].setItemDamage(st);
+            	if (this.barrelContents[0].getItem() instanceof ItemBlock)
+                {
+                	//restore 
+                }
+            }*/
+            int s = 0;
+            boolean err = false;
+            try {
+            s = compound.getInteger("state");
+            }
+            catch (NullPointerException e) {
+            	 err = true;
+            } 
+            if (!err)
+            {
+            	if (itemHandler.barrelContents!=null)
+            	{
+            		itemHandler.barrelContents.getItem().setDamage(itemHandler.barrelContents, s);
+            	}
+            }
     	} 
     		
                     

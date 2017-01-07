@@ -274,14 +274,15 @@ public class BlockBarrel extends BlockContainer{
 				if (te instanceof TileEntityBarrel)
 				{
 					TileEntityBarrel te2 = (TileEntityBarrel) te;
-					//System.out.println("ATTEMPTED");
+					//System.out.println("size:"+te2.itemHandler.size);
+					//System.out.println("stored:"+te2.itemHandler.count);
 					
 					if (!(te2.itemHandler.extractItem(0, 1, true) instanceof ItemStack)) //If barrel is holding nothing
-					//if (te2.itemHandler.barrelContents[0] == null)
 					{
-						//System.out.println("BARREL EMPTY");
+						// BARREL EMPTY
 						if (heldItem != null) //place whatever is in hand in barrel
 						{
+							//HAND EMPTY
 							NBTTagCompound n = new NBTTagCompound();
 							
 							ItemStack insertStack = new ItemStack(heldItem.getItem(),heldItem.stackSize,heldItem.getMetadata());
@@ -298,43 +299,56 @@ public class BlockBarrel extends BlockContainer{
 							
 						}
 					} else { 
-						
+						//CHECK FOR AND ATTEMPT HASHMAPPED HERE
 						
 						if (heldItem!=null) {
-							
-	    						if (te2.itemHandler.extractItem(0, 1, true).isItemEqual(heldItem)) {
-	    							
-	    							NBTTagCompound t1 = te2.itemHandler.extractItem(0, 1, true).getTagCompound();
-	    							Boolean match = false;
-	    							if (heldItem.getTagCompound()!=null) { //make sure we dont pass null
-										if (t1.equals(heldItem.getTagCompound())) { //compare t1 tags with held item tags
-	    									match = true; //match!
-	    									
-	    								}
-										
-									}
-	    							
-	    							
-	    							if ((t1.toString().equals("{}"))  &&  (heldItem.getTagCompound()==null)) { //also match if netiher have tags
+							//HAND NOT EMPTY
+    						if (te2.itemHandler.extractItem(0, 1, true).isItemEqual(heldItem)) {
+    							//ITEM IN HAND MATCHES BARREL CONTENTS
+    							
+    							NBTTagCompound t1 = te2.itemHandler.extractItem(0, 1, true).getTagCompound();
+    							Boolean match = false;
+    							if (heldItem.getTagCompound()!=null) { //make sure we dont pass null
+    								if (t1!=null){
+    									
+    									if (t1.equals(heldItem.getTagCompound())) { //compare t1 tags with held item tags
+    										match = true; //match!
+    									}
+    								}
+									
+								}
+    							if (t1==null)
+    							{
+    								System.out.println("null on T1");
+    							} else
+    							{
+    								System.out.println(t1.toString());
+    							}
+    							
+    							if (((t1==null)|| (t1.toString().equals("{}")))  &&  (heldItem.getTagCompound()==null)) { //also match if netiher have tags
+    								
+	    								match = true;
 	    								
-		    								match = true;
-		    						}
-	    							if (match) {
-	    								if (te2.itemHandler.count < te2.itemHandler.size) {
-	    									
-	    									int incResult = te2.itemHandler.incItems(heldItem.stackSize);
-    										//heldItem.stackSize = incResult;
-    										
-    										
-    										playerIn.inventory.mainInventory[playerIn.inventory.currentItem].stackSize=incResult;
-    										playerIn.inventory.inventoryChanged=true;
-    										this.updateBarrel(te2);
-    										return true;
-	    									
-	    									
-	    								}
-	    							}
-	    						} else { return true; }
+	    						}
+    							
+    							if (match) {
+    								
+    								if (te2.itemHandler.count < te2.itemHandler.size) {
+    									//before we insert. update HASHMAPED
+    									//attempts to insert held item into barrel.
+    									int incResult = te2.itemHandler.incItems(heldItem.stackSize);
+										
+										
+										
+										playerIn.inventory.mainInventory[playerIn.inventory.currentItem].stackSize=incResult;
+										playerIn.inventory.inventoryChanged=true;
+										this.updateBarrel(te2);
+										return true;
+    									
+    									
+    								}
+    							}
+    						} else { return true; }
 							
 						} else { return true; }
 					} 
