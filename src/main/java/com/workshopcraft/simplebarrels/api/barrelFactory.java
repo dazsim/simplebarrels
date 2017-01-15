@@ -188,6 +188,23 @@ public class barrelFactory {
 			}));
         }
     }
+	
+	public BlockBarrel getBarrelFromUnlocalizedName(String name)
+	{
+		int i = 0;
+		BlockBarrel bBtmp;
+		while( i<SimpleBarrels.barrels.size())
+		{
+			//bBtmp = new BlockBarrel(barrelList.get(i).unlocalizedName);
+			bBtmp = SimpleBarrels.barrels.get(i);
+			if (bBtmp.getUnlocalizedName().equals(name))
+			{
+				return bBtmp;
+			}
+		}
+		return null;
+	}
+	
 	public void init()
 	{
 		int i = 0;

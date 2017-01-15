@@ -1,6 +1,7 @@
 package com.workshopcraft.simplebarrels.proxy;
 
 import com.workshopcraft.simplebarrels.SimpleBarrels;
+import com.workshopcraft.simplebarrels.items.ItemDolly;
 import com.workshopcraft.simplebarrels.items.ItemUpgradeComparator;
 import com.workshopcraft.simplebarrels.items.ItemUpgradeItemFrame;
 import com.workshopcraft.simplebarrels.items.ItemUpgradeMark1Compressor;
@@ -41,6 +42,8 @@ public class clientbarrel extends barrelcommonproxy {
         renderItem.getItemModelMesher().register((Item)SimpleBarrels.upgradeMark2Compressor, 0,new ModelResourceLocation(SimpleBarrels.MODID+ ":"+((ItemUpgradeMark2Compressor) SimpleBarrels.upgradeMark2Compressor).getName(),"inventory"));
         renderItem.getItemModelMesher().register((Item)SimpleBarrels.upgradeMark3Compressor, 0,new ModelResourceLocation(SimpleBarrels.MODID+ ":"+((ItemUpgradeMark3Compressor) SimpleBarrels.upgradeMark3Compressor).getName(),"inventory"));
         renderItem.getItemModelMesher().register((Item)SimpleBarrels.upgradeMark4Compressor, 0,new ModelResourceLocation(SimpleBarrels.MODID+ ":"+((ItemUpgradeMark4Compressor) SimpleBarrels.upgradeMark4Compressor).getName(),"inventory"));
+        
+        renderItem.getItemModelMesher().register((Item)SimpleBarrels.itemDolly, 0,new ModelResourceLocation(SimpleBarrels.MODID+ ":"+((ItemDolly) SimpleBarrels.itemDolly).getName(),"inventory"));
         
 	}
 	

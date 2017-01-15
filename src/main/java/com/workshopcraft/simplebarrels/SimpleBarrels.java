@@ -5,6 +5,7 @@ import java.util.List;
 import com.workshopcraft.simplebarrels.api.barrelFactory;
 import com.workshopcraft.simplebarrels.blocks.BlockBarrel;
 import com.workshopcraft.simplebarrels.handlers.BarrelHandler;
+import com.workshopcraft.simplebarrels.items.ItemDolly;
 import com.workshopcraft.simplebarrels.items.ItemUpgradeComparator;
 import com.workshopcraft.simplebarrels.items.ItemUpgradeItemFrame;
 import com.workshopcraft.simplebarrels.items.ItemUpgradeMark1Compressor;
@@ -34,7 +35,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 public class SimpleBarrels
 {
     public static final String MODID = "simplebarrels";
-    public static final String VERSION = "1.26b";
+    public static final String VERSION = "1.26e";
     
     public static ItemUpgradeComparator upgradeComparator;
     public static ItemUpgradeItemFrame upgradeItemFrame;
@@ -42,6 +43,7 @@ public class SimpleBarrels
     public static ItemUpgradeMark2Compressor upgradeMark2Compressor;
     public static ItemUpgradeMark3Compressor upgradeMark3Compressor;
     public static ItemUpgradeMark4Compressor upgradeMark4Compressor;
+    public static ItemDolly itemDolly;
     
     
     
@@ -67,15 +69,15 @@ public class SimpleBarrels
     @EventHandler
     public void preinit(FMLPreInitializationEvent event)
     {
-    		tabSimpleBarrels = new SimpleBarrelsTab("tabSimpleBarrelsTab");
+    	tabSimpleBarrels = new SimpleBarrelsTab("tabSimpleBarrelsTab");
     	upgradeComparator = new ItemUpgradeComparator("upgradecomparator");
     	upgradeItemFrame = new ItemUpgradeItemFrame("upgradeitemframe");
     	upgradeMark1Compressor = new ItemUpgradeMark1Compressor("upgrademark1compressor");
     	upgradeMark2Compressor = new ItemUpgradeMark2Compressor("upgrademark2compressor");
     	upgradeMark3Compressor = new ItemUpgradeMark3Compressor("upgrademark3compressor");
     	upgradeMark4Compressor = new ItemUpgradeMark4Compressor("upgrademark4compressor");
-    	
-    	  bFactory = new barrelFactory();
+    	itemDolly = new ItemDolly("dolly");
+    	bFactory = new barrelFactory();
         proxy.preInit(event);
         
     }
@@ -86,6 +88,7 @@ public class SimpleBarrels
         
         n.setBoolean("frame", f);
         n.setBoolean("comp", c);
+        n.setInteger("size", 4096);
         i.setTagCompound(n);
         
         
@@ -145,25 +148,25 @@ public class SimpleBarrels
         });
         GameRegistry.addRecipe(new ItemStack(this.upgradeMark1Compressor,1),new Object[] {
         		" S ",
-        		"SPS",
+        		"SBS",
         		" S ",
         		'S',Items.STICK,'B',Blocks.PISTON
         });
         GameRegistry.addRecipe(new ItemStack(this.upgradeMark2Compressor,1),new Object[] {
         		" S ",
-        		"SPS",
+        		"SBS",
         		" S ",
         		'S',this.upgradeMark1Compressor,'B',Items.IRON_INGOT
         });
         GameRegistry.addRecipe(new ItemStack(this.upgradeMark3Compressor,1),new Object[] {
         		" S ",
-        		"SPS",
+        		"SBS",
         		" S ",
         		'S',this.upgradeMark2Compressor,'B',Items.GOLD_INGOT
         });
         GameRegistry.addRecipe(new ItemStack(this.upgradeMark4Compressor,1),new Object[] {
         		" S ",
-        		"SPS",
+        		"SBS",
         		" S ",
         		'S',this.upgradeMark3Compressor,'B',Items.DIAMOND
         });

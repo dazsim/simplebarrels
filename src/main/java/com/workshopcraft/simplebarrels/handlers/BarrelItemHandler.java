@@ -11,8 +11,18 @@ public class BarrelItemHandler implements IItemHandler{
 	
 	public ItemStack barrelContents; // = new ItemStack[1]
 	public TileEntityBarrel t;
-	public int count = 0;
-	public int size = 4096;
+	public int count;
+	public int size;
+	
+	
+	public BarrelItemHandler()
+	{
+		count = 0;
+		size = 4096;
+		barrelContents = null;
+		t = null;
+	}
+	
 	@Override
 	public int getSlots() 
 	{
@@ -56,8 +66,19 @@ public class BarrelItemHandler implements IItemHandler{
 		
 		
 	}
+	
+	public void msgCon(String s)
+	{
+		System.out.println(s);
+	}
+	
 	public int incItems(int count)
 	{
+		if (this.size == 0)
+		{
+			this.size = 4096;
+			BlockBarrel.updateBarrel(t);
+		}
 		int a = 0;
 		a = this.size - ( count+this.count); 
 		if (a>0) {
@@ -69,10 +90,15 @@ public class BarrelItemHandler implements IItemHandler{
 		} 
 		return 0;
 	}
+	
 	@Override
 	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) 
 	{
-		
+		if (this.size == 0)
+		{
+			this.size = 4096;
+			BlockBarrel.updateBarrel(t);
+		}
 		
 		if (count == 0)
 		{
@@ -88,6 +114,7 @@ public class BarrelItemHandler implements IItemHandler{
 		if (count == size)
 		{
 			//barrel is full
+			
 			return stack;
 		}
 		if (this.barrelContents.isItemEqual(stack))
@@ -112,7 +139,12 @@ public class BarrelItemHandler implements IItemHandler{
 			if ((t1==null) && (stack.getTagCompound()==null))
 			{
 				match = true;
-			}
+			} else if ( t1.toString().equals(stack.getTagCompound().toString())) { //also match if netiher have tags
+				
+				match = true;
+				
+				
+		}
 			if (match)
 			{
 				if (stack.stackSize+count<=size)

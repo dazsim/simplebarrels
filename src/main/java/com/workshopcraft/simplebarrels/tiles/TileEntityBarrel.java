@@ -8,6 +8,7 @@ import com.workshopcraft.simplebarrels.handlers.BarrelItemHandler;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -58,11 +59,19 @@ public class TileEntityBarrel extends TileEntity //implements ITickable
     	playerClicks = new HashMap();
     	
     }
+   
     public void init(Boolean c, Boolean f)
     {
     	comp = c;
     	frame = f;
     }
+    public void init(Boolean c, Boolean f, int s)
+    {
+    	comp = c;
+    	frame = f;
+    	itemHandler.size = s;
+    }
+   
        /**
      * Get the name of this object. For players this returns their username
      */
@@ -460,6 +469,20 @@ public class TileEntityBarrel extends TileEntity //implements ITickable
 		}
 		return super.getCapability(capability, facing);
 		}
+	
+	public void onBreakBlock() {
+		
+		//drop everythere here?
+		ItemStack istack = new ItemStack(this.getBlockType(),1);
+    	NBTTagCompound n = new NBTTagCompound();
+    	n.setBoolean("comp", this.comp);
+    	n.setBoolean("frame", this.frame);
+    	n.setInteger("size", this.itemHandler.size);
+    	//istack.setTagCompound(n);
+    	istack.setTagCompound(this.getTileData());
+    		//InventoryHelper.spawnItemStack(this.getWorld(), pos.getX(), pos.getY()+1.0, pos.getZ(),istack);
+    	
+	}
 	}
 
 

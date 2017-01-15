@@ -3,7 +3,7 @@
   "modid": "simplebarrels",
   "name": "Simple Barrels",
   "description": "This mod adds Simple Barrels to Minecraft.",
-  "version": "${version}",
+  "version": "1.26e",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
