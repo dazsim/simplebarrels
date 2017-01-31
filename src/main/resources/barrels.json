@@ -245,12 +245,41 @@
             "sourcemeta": "12",
             "dependancy": "forestry"
         },
+
         {
             "name": "forestryzebrawoodbarrel",
             "unlocalizedname": "forestryzebrawoodbarrel",
             "sourceblock": "forestry:planks.1",
             "sourcemeta": "12",
             "dependancy": "forestry"
+        },
+        {
+            "name": "naturamaplebarkbarrel",
+            "unlocalizedname": "naturamaplebarkbarrel",
+            "sourceblock": "natura:overworld_logs",
+            "sourcemeta": 0,
+            "dependancy": "natura"
+        },
+        {
+            "name": "naturamaplebarrel",
+            "unlocalizedname": "naturamaplebarrel",
+            "sourceblock": "natura:overworld_planks",
+            "sourcemeta": 0,
+            "dependancy": "natura"
+        },
+        {
+            "name": "naturaredwoodbarrel",
+            "unlocalizedname": "naturaredwoodbarrel",
+            "sourceblock": "natura:redwood_logs",
+            "sourcemeta": "0",
+            "dependancy": "natura"
+        },
+        {
+            "name": "naturatigerwoodbarrel",
+            "unlocalizedname": "naturatigerwoodbarrel",
+            "sourceblock": "natura:overworld_planks",
+            "sourcemeta": 3,
+            "dependancy": "natura"
         }
     ]
 }

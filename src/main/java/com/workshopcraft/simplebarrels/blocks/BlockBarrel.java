@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 import com.workshopcraft.simplebarrels.SimpleBarrels;
 import com.workshopcraft.simplebarrels.tesr.TESRBlockBarrel;
 import com.workshopcraft.simplebarrels.tiles.TileEntityBarrel;
+import com.workshopcraft.simplebarrels.api.barrelData;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockHorizontal;
@@ -36,9 +37,13 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockBarrel extends BlockContainer{
+public class BlockBarrel extends BlockContainer {
 
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
+
+	public String dependency = "";
+	public String sourceBlock = "";
+	public int sourceMeta = 0;
 	
 	public BlockBarrel() {
 		
@@ -50,18 +55,34 @@ public class BlockBarrel extends BlockContainer{
         setHarvestLevel("Axe", 0);
         
 	}
-	
+
 	public BlockBarrel(String uname)
 	{
 		super(Material.WOOD);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-        setCreativeTab(SimpleBarrels.tabSimpleBarrels);
-        setHardness(2.0f);
-        setResistance(6.0f);
-        setHarvestLevel("Axe", 0);
-        setUnlocalizedName(uname);
-        setRegistryName(uname);
-       
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		setCreativeTab(SimpleBarrels.tabSimpleBarrels);
+		setHardness(2.0f);
+		setResistance(6.0f);
+		setHarvestLevel("Axe", 0);
+		setUnlocalizedName(uname);
+		setRegistryName(uname);
+
+	}
+
+	public BlockBarrel(barrelData data)
+	{
+		super(Material.WOOD);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		setCreativeTab(SimpleBarrels.tabSimpleBarrels);
+		setHardness(2.0f);
+		setResistance(6.0f);
+		setHarvestLevel("Axe", 0);
+		setUnlocalizedName(data.unlocalizedName);
+		setRegistryName(data.unlocalizedName);
+
+		dependency = data.dependancy;
+		sourceBlock = data.sourceBlock;
+		sourceMeta = data.sourceMeta;
 	}
 	
 	

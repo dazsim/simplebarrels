@@ -12,7 +12,7 @@ tile.forestrybalsabarrel.name=Forestry Balsa Barrel
 tile.forestrybaobabbarrel.name=Forestry Baobab Barrel
 tile.forestrycherrybarrel.name=Forestry Cherry Barrel
 tile.forestrychestnutbarrel.name=Forestry Chestnut Barrel
-tile.forestrycitrusbarrel.name=Forestry Citurs Barrel
+tile.forestrycitrusbarrel.name=Forestry Citrus Barrel
 tile.forestrycocobolobarrel.name=Forestry Cocobolo Barrel
 tile.forestryebonybarrel.name=Forestry Ebony Barrel
 tile.forestrygiganteumbarrel.name=Forestry Giganteum Barrel
@@ -36,6 +36,12 @@ tile.forestrywalnutbarrel.name=Forestry Walnut Barrel
 tile.forestrywengebarrel.name=Forestry Wenge Barrel
 tile.forestrywillowbarrel.name=Forestry Willow Barrel
 tile.forestryzebrawoodbarrel.name=Forestry Zebrawood Barrel
+
+tile.naturaredwoodbarrel.name=Natura Redwood Barrel
+tile.naturamaplebarkbarrel.name=Natura Maple Log Barrel
+tile.naturamaplebarrel.name=Natura Maple Barrel
+tile.naturatigerwoodbarrel.name=Natura Tigerwood Barrel
+
 item.upgrademark1compressor.name=Mark 1 Compressor Upgrade
 item.upgrademark2compressor.name=Mark 2 Compressor Upgrade
 item.upgrademark3compressor.name=Mark 3 Compressor Upgrade
