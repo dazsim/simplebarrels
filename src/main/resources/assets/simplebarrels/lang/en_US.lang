@@ -36,6 +36,12 @@ tile.forestrywalnutbarrel.name=Forestry Walnut Barrel
 tile.forestrywengebarrel.name=Forestry Wenge Barrel
 tile.forestrywillowbarrel.name=Forestry Willow Barrel
 tile.forestryzebrawoodbarrel.name=Forestry Zebrawood Barrel
+
+tile.naturaredwoodbarrel.name=Natura Redwood Barrel
+tile.naturamaplebarkbarrel.name=Natura Maple Log Barrel
+tile.naturamaplebarrel.name=Natura Maple Barrel
+tile.naturatigerwoodbarrel.name=Natura Tigerwood Barrel
+
 item.upgrademark1compressor.name=Mark 1 Compressor Upgrade
 item.upgrademark2compressor.name=Mark 2 Compressor Upgrade
 item.upgrademark3compressor.name=Mark 3 Compressor Upgrade

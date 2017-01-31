@@ -1,0 +1,9 @@
+
+{
+    "parent" : "simplebarrels:block/oakbarrel",
+
+    "textures": {
+                    "particle": "natura:blocks/planks/overworld/maple_planks",
+                    "texture": "natura:blocks/planks/overworld/maple_planks"
+                }
+}
