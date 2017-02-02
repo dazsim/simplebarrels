@@ -1,0 +1,16 @@
+{
+  "mod_id": "abyssalcraft",
+  "resource_domain": "abyssalcraft",
+  "barrels": [
+    {
+      "wood_name": "darklandsoak",
+      "resource_path": "dltplank",
+      "resource_index": 0
+    },
+    {
+      "wood_name": "dreadlands",
+      "resource_path": "dreadplanks",
+      "resource_index": 0
+    }
+  ]
+}

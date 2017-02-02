@@ -53,6 +53,24 @@ tile.naturadarkwoodbarrel.name=Natura Darkwood Barrel
 tile.naturafusewoodbarrel.name=Natura Fusewood Barrel
 tile.naturaghostwoodbarrel.name=Natura Ghostwood Barrel
 
+tile.rootswildwoodbarrel.name=Roots Wildwood Barrel
+
+tile.randomthingsspectrewoodbarrel.name=Random Things Spectre Wood Barrel
+
+tile.calculatorpearwoodbarrel.name=Calculator Pear Wood Barrel
+tile.calculatordiamondwoodbarrel.name=Calculator Diamond Wood Barrel
+tile.calculatortanzanitewoodbarrel.name=Calculator Tanzanite Wood Barrel
+tile.calculatoramethystwoodbarrel.name=Calculator Amethyst Wood Barrel
+
+tile.abyssalcraftdarklandsoakbarrel.name=AbyssalCraft Darklands Oak Barrel
+tile.abyssalcraftdreadlandsbarrel.name=AbyssalCraft Dreadlands Wood Barrel
+
+tile.botaniashimmerwoodbarrel.name=Botania Shimmerwood Barrel
+tile.botanialivingwoodbarrel.name=Botania Livingwood Barrel
+tile.botaniamossylivingwoodbarrel.name=Botania Mossy Livingwood Barrel
+tile.botaniadreamwoodbarrel.name=Botania Dreamwood Barrel
+tile.botaniamossydreamwoodbarrel.name=Botania Mossy Dreamwood Barrel
+
 tile.biomesoplentysacred_oakbarrel.name=Biomes O' Plenty Sacred Oak Barrel
 tile.biomesoplentycherrybarrel.name=Biomes O' Plenty Cherry Wood Barrel
 tile.biomesoplentyumbranbarrel.name=Biomes O' Plenty Umbran Barrel
@@ -75,6 +93,7 @@ item.upgrademark2compressor.name=Mark 2 Compressor Upgrade
 item.upgrademark3compressor.name=Mark 3 Compressor Upgrade
 item.upgrademark4compressor.name=Mark 4 Compressor Upgrade
 item.upgrademark5compressor.name=Mark 5 Compressor Upgrade
+
 item.upgradevoid.name=Void Upgrade
 item.upgradeender.name=Ender Upgrade
 item.upgradefilter.name=Filter Upgrade

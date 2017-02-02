@@ -1,0 +1,11 @@
+{
+    "variants": {
+        "normal": { "model": "simplebarrels:abyssalcraftdarklandsoakbarrel" },
+        "facing=east": { "model": "simplebarrels:abyssalcraftdarklandsoakbarrel" },
+        "facing=south": { "model": "simplebarrels:abyssalcraftdarklandsoakbarrel", "y": 90 },
+        "facing=west": { "model": "simplebarrels:abyssalcraftdarklandsoakbarrel", "y": 180 },
+        "facing=north": { "model": "simplebarrels:abyssalcraftdarklandsoakbarrel", "y": 270 },
+        "inventory": { "model": "simplebarrels:abyssalcraftdarklandsoakbarrel" }
+    }
+}
+

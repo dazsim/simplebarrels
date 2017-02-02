@@ -1,0 +1,26 @@
+{
+  "mod_id": "calculator",
+  "resource_domain": "calculator",
+  "barrels": [
+    {
+      "wood_name": "pearwood",
+      "resource_path": "PearPlanks",
+      "resource_index": 0
+    },
+    {
+      "wood_name": "amethystwood",
+      "resource_path": "AmethystPlanks",
+      "resource_index": 0
+    },
+    {
+      "wood_name": "diamondwood",
+      "resource_path": "DiamondPlanks",
+      "resource_index": 0
+    },
+    {
+      "wood_name": "tanzanitewood",
+      "resource_path": "TanzanitePlanks",
+      "resource_index": 0
+    }
+  ]
+}

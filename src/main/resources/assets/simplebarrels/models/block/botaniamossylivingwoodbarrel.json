@@ -1,0 +1,9 @@
+
+{
+    "parent" : "simplebarrels:block/oakbarrel",
+
+    "textures": {
+        "particle": "botania:blocks/livingwood2",
+        "texture": "botania:blocks/livingwood2"
+    }
+}

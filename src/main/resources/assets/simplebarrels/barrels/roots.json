@@ -1,0 +1,11 @@
+{
+  "mod_id": "roots",
+  "resource_domain": "roots",
+  "barrels": [
+    {
+      "wood_name": "wildwood",
+      "resource_path": "plankWildwood",
+      "resource_index": 0
+    }
+  ]
+}
