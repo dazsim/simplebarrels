@@ -32,7 +32,6 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 public class BarrelFactory {
 
     private List<BarrelData> barrelList = new ArrayList<BarrelData>();
-    private BarrelJsonLoader loader = new BarrelJsonLoader();
 
     public BarrelFactory() {
         // initialize the barrels list
@@ -136,8 +135,6 @@ public class BarrelFactory {
 
     /***/
     public void init() {
-
-
         for (BarrelData barrelData : barrelList) {
 
             BlockBarrel barrelBlock = getBarrelFromUnlocalizedName("tile." + barrelData.getUnlocalizedName());
