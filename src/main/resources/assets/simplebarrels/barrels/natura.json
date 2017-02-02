@@ -51,6 +51,26 @@
       "wood_name": "redwood",
       "resource_path": "overworld_planks",
       "resource_index": 8
+    },
+    {
+      "wood_name": "ghostwood",
+      "resource_path": "nether_planks",
+      "resource_index": 0
+    },
+    {
+      "wood_name": "bloodwood",
+      "resource_path": "nether_planks",
+      "resource_index": 1
+    },
+    {
+      "wood_name": "darkwood",
+      "resource_path": "nether_planks",
+      "resource_index": 2
+    },
+    {
+      "wood_name": "fusewood",
+      "resource_path": "nether_planks",
+      "resource_index": 3
     }
   ]
 }
