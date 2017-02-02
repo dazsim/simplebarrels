@@ -280,6 +280,118 @@
             "sourceblock": "natura:overworld_planks",
             "sourcemeta": 3,
             "dependancy": "natura"
+        },
+        {
+            "name": "bopsacredoakbarrel",
+            "unlocalizedname": "bopsacredoakbarrel",
+            "sourceblock": "biomesoplenty:planks_0",
+            "sourcemeta": 0,
+            "dependancy": "BiomesOPlenty"
+        },
+        {
+            "name": "bopcherrybarrel",
+            "unlocalizedname": "bopcherrybarrel",
+            "sourceblock": "biomesoplenty:planks_0",
+            "sourcemeta": 1,
+            "dependancy": "BiomesOPlenty"
+        },
+        {
+            "name": "bopumbranbarrel",
+            "unlocalizedname": "bopumbranbarrel",
+            "sourceblock": "biomesoplenty:planks_0",
+            "sourcemeta": 2,
+            "dependancy": "BiomesOPlenty"
+        },
+        {
+            "name": "bopfirbarrel",
+            "unlocalizedname": "bopfirbarrel",
+            "sourceblock": "biomesoplenty:planks_0",
+            "sourcemeta": 3,
+            "dependancy": "BiomesOPlenty"
+        },
+        {
+            "name": "bopetherealbarrel",
+            "unlocalizedname": "bopetherealbarrel",
+            "sourceblock": "biomesoplenty:planks_0",
+            "sourcemeta": 4,
+            "dependancy": "BiomesOPlenty"
+        },
+        {
+            "name": "bopmagicbarrel",
+            "unlocalizedname": "bopmagicbarrel",
+            "sourceblock": "biomesoplenty:planks_0",
+            "sourcemeta": 5,
+            "dependancy": "BiomesOPlenty"
+        },
+        {
+            "name": "bopmangrovebarrel",
+            "unlocalizedname": "bopmangrovebarrel",
+            "sourceblock": "biomesoplenty:planks_0",
+            "sourcemeta": 6,
+            "dependancy": "BiomesOPlenty"
+        },
+        {
+            "name": "boppalmbarrel",
+            "unlocalizedname": "boppalmbarrel",
+            "sourceblock": "biomesoplenty:planks_0",
+            "sourcemeta": 7,
+            "dependancy": "BiomesOPlenty"
+        },
+        {
+            "name": "bopredwoodbarrel",
+            "unlocalizedname": "bopredwoodbarrel",
+            "sourceblock": "biomesoplenty:planks_0",
+            "sourcemeta": 8,
+            "dependancy": "BiomesOPlenty"
+        },
+        {
+            "name": "bopwillowbarrel",
+            "unlocalizedname": "bopwillowbarrel",
+            "sourceblock": "biomesoplenty:planks_0",
+            "sourcemeta": 9,
+            "dependancy": "BiomesOPlenty"
+        },
+        {
+            "name": "boppinebarrel",
+            "unlocalizedname": "boppinebarrel",
+            "sourceblock": "biomesoplenty:planks_0",
+            "sourcemeta": 10,
+            "dependancy": "BiomesOPlenty"
+        },
+        {
+            "name": "bophellbarkbarrel",
+            "unlocalizedname": "bophellbarkbarrel",
+            "sourceblock": "biomesoplenty:planks_0",
+            "sourcemeta": 11,
+            "dependancy": "BiomesOPlenty"
+        },
+        {
+            "name": "bopjacarandabarrel",
+            "unlocalizedname": "bopjacarandabarrel",
+            "sourceblock": "biomesoplenty:planks_0",
+            "sourcemeta": 12,
+            "dependancy": "BiomesOPlenty"
+        },
+        {
+            "name": "bopmahoganybarrel",
+            "unlocalizedname": "bopmahoganybarrel",
+            "sourceblock": "biomesoplenty:planks_0",
+            "sourcemeta": 13,
+            "dependancy": "BiomesOPlenty"
+        },
+        {
+            "name": "bopebonybarrel",
+            "unlocalizedname": "bopebonybarrel",
+            "sourceblock": "biomesoplenty:planks_0",
+            "sourcemeta": 14,
+            "dependancy": "BiomesOPlenty"
+        },
+        {
+            "name": "bopeucalyptusbarrel",
+            "unlocalizedname": "bopeucalyptusbarrel",
+            "sourceblock": "biomesoplenty:planks_0",
+            "sourcemeta": 15,
+            "dependancy": "BiomesOPlenty"
         }
     ]
 }
