@@ -36,6 +36,29 @@ tile.forestrywalnutbarrel.name=Forestry Walnut Barrel
 tile.forestrywengebarrel.name=Forestry Wenge Barrel
 tile.forestrywillowbarrel.name=Forestry Willow Barrel
 tile.forestryzebrawoodbarrel.name=Forestry Zebrawood Barrel
+
+tile.naturaredwoodbarrel.name=Natura Redwood Barrel
+tile.naturamaplebarkbarrel.name=Natura Maple Log Barrel
+tile.naturamaplebarrel.name=Natura Maple Barrel
+tile.naturatigerwoodbarrel.name=Natura Tigerwood Barrel
+
+tile.biomesoplentysacred_oakbarrel.name=Biomes O' Plenty Sacred Oak Barrel
+tile.biomesoplentycherrybarrel.name=Biomes O' Plenty Cherry Wood Barrel
+tile.biomesoplentyumbranbarrel.name=Biomes O' Plenty Umbran Barrel
+tile.biomesoplentyfirbarrel.name=Biomes O' Plenty Fir Barrel
+tile.biomesoplentyetherealbarrel.name=Biomes O' Plenty Ethereal Barrel
+tile.biomesoplentymagicbarrel.name=Biomes O' Plenty Magicwood Barrel
+tile.biomesoplentymangrovebarrel.name=Biomes O' Plenty Mangrove Barrel
+tile.biomesoplentypalmbarrel.name=Biomes O' Plenty Palm Barrel
+tile.biomesoplentyredwoodbarrel.name=Biomes O' Plenty Redwood Barrel
+tile.biomesoplentywillowbarrel.name=Biomes O' Plenty Willow Barrel
+tile.biomesoplentypinebarrel.name=Biomes O' Plenty Pine Barrel
+tile.biomesoplentyhellbarkbarrel.name=Biomes O' Plenty Hellbark Barrel
+tile.biomesoplentyjacarandabarrel.name=Biomes O' Plenty Jacaranda Barrel
+tile.biomesoplentymahoganybarrel.name=Biomes O' Plenty Mahogany Barrel
+tile.biomesoplentyebonybarrel.name=Biomes O' Plenty Ebony Barrel
+tile.biomesoplentyeucalyptusbarrel.name=Biomes O' Plenty Eucalyptus Barrel
+
 item.upgrademark1compressor.name=Mark 1 Compressor Upgrade
 item.upgrademark2compressor.name=Mark 2 Compressor Upgrade
 item.upgrademark3compressor.name=Mark 3 Compressor Upgrade
