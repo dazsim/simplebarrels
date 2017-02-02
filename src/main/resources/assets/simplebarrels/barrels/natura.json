@@ -1,0 +1,26 @@
+{
+  "mod_id": "natura",
+  "resource_domain": "natura",
+  "barrels": [
+    {
+      "wood_name": "maplebark",
+      "resource_path": "overworld_logs",
+      "resource_index": 0
+    },
+    {
+      "wood_name": "maple",
+      "resource_path": "overworld_planks",
+      "resource_index": 0
+    },
+    {
+      "wood_name": "redwood",
+      "resource_path": "redwood_logs",
+      "resource_index": 0
+    },
+    {
+      "wood_name": "tigerwood",
+      "resource_path": "overworld_planks",
+      "resource_index": 3
+    }
+  ]
+}
