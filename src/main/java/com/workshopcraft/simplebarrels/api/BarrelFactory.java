@@ -37,9 +37,13 @@ public class BarrelFactory {
         // initialize the barrels list
         SimpleBarrels.barrels = new ArrayList<BlockBarrel>();
 
+        // load() method returns a List of JsonObjects.
+        // Each JsonObject is a reference to a different JSON file,
+        // which are each associated with a different mod
         List<JsonObject> configEntries = BarrelJsonLoader.load();
 
         for (JsonObject configJson : configEntries) {
+            // Loop through our JSON objects and add the barrels from each one.
             generateBarrelsFromJsonObject(configJson);
         }
     }
@@ -58,32 +62,33 @@ public class BarrelFactory {
 
         if (!checkDependency(modId)) {
             // The required mod defined in the configuration file IS NOT loaded.
-            // Skip this group of barrels
+            // Skip this group of barrels.
             return;
         }
 
         if (!configJson.has("barrels") || !configJson.get("barrels").isJsonArray()) {
             // Config doesn't have a "barrels" entry, or that entry is not a JsonArray
+            // Skip this group of barrels.
             return;
         }
 
         JsonArray barrels = configJson.get("barrels").getAsJsonArray();
 
-        for (JsonElement barrel : barrels) {
-            BarrelData barrelData = new BarrelData(modId, resourceDomain, barrel.getAsJsonObject());
+        for (JsonElement barrelJson : barrels) {
+            BarrelData barrelData = new BarrelData(modId, resourceDomain, barrelJson.getAsJsonObject());
 
             if (!blockStateModelExists(barrelData.getUnlocalizedName())) {
                 // The block state model file for this barrel does not exist. Do not register it.
-                // Probably caused by a barrel imported from our barrels JSON files that doesn't have
-                // an associated model file.
+                //   Probably caused by a barrel imported from a barrels JSON files that is missing its
+                //   associated blockstate model file.
                 continue;
             }
 
             barrelList.add(barrelData);
 
             // Create BlockBarrels and add to SimpleBarrels.barrels
-            BlockBarrel blockBarrel = new BlockBarrel(barrelData.getUnlocalizedName());
-            SimpleBarrels.barrels.add(blockBarrel);
+            BlockBarrel barrelBlock = new BlockBarrel(barrelData.getUnlocalizedName());
+            SimpleBarrels.barrels.add(barrelBlock);
         }
     }
 
