@@ -5,6 +5,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.Logger;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -32,6 +35,8 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 public class BarrelFactory {
 
     private List<BarrelData> barrelList = new ArrayList<BarrelData>();
+    private List<String> skippedMods = new ArrayList<String>();
+    private Logger logger = SimpleBarrels.logger;
 
     public BarrelFactory() {
         // initialize the barrels list
@@ -45,6 +50,11 @@ public class BarrelFactory {
         for (JsonObject configJson : configEntries) {
             // Loop through our JSON objects and add the barrels from each one.
             generateBarrelsFromJsonObject(configJson);
+        }
+
+        if (skippedMods.size() > 0) {
+            String modsList = StringUtils.join(skippedMods, ", ");
+            logger.info(String.format("Barrels for missing mods [%s] IGNORED.", modsList));
         }
     }
 
@@ -60,15 +70,11 @@ public class BarrelFactory {
             resourceDomain = configJson.get("resource_domain").getAsString();
         }
 
-        if (!checkDependency(modId)) {
-            // The required mod defined in the configuration file IS NOT loaded.
-            // Skip this group of barrels.
-            return;
-        }
-
-        if (!configJson.has("barrels") || !configJson.get("barrels").isJsonArray()) {
-            // Config doesn't have a "barrels" entry, or that entry is not a JsonArray
-            // Skip this group of barrels.
+        // Skip invalid groups of barrels.
+        if (!checkDependency(modId)) return; // The required mod defined in the configuration file IS NOT loaded.
+        if (!configJson.has("barrels") || configJson.get("barrels").isJsonArray()) {
+            // Config doesn't have a "barrels" entry or entry is invalid
+            logger.error(String.format("Invalid json for barrels property in %s configuration", modId));
             return;
         }
 
@@ -76,24 +82,27 @@ public class BarrelFactory {
 
         for (JsonElement barrelJson : barrels) {
             BarrelData barrelData = new BarrelData(modId, resourceDomain, barrelJson.getAsJsonObject());
+            String uname = barrelData.getUnlocalizedName();
 
-            if (!blockStateModelExists(barrelData.getUnlocalizedName())) {
-                // The block state model file for this barrel does not exist. Do not register it.
-                //   Probably caused by a barrel imported from a barrels JSON files that is missing its
-                //   associated blockstate model file.
-                continue;
-            }
+            // If the blockstate model file for this barrel does not exist, skip on to the next barrel.
+            if (!blockStateModelExists(uname)) continue;
 
             barrelList.add(barrelData);
 
             // Create BlockBarrels and add to SimpleBarrels.barrels
-            BlockBarrel barrelBlock = new BlockBarrel(barrelData.getUnlocalizedName());
+            BlockBarrel barrelBlock = new BlockBarrel(uname);
             SimpleBarrels.barrels.add(barrelBlock);
         }
+
+        logger.info(String.format("Registered barrels for %s", resourceDomain));
     }
 
     private Boolean checkDependency(String mod_dependency) {
-        return mod_dependency.equals("") || Loader.isModLoaded(mod_dependency); // if it's empty we don't call isModLoaded()
+        if (mod_dependency.equals("") || Loader.isModLoaded(mod_dependency)) { // if it's empty we don't call isModLoaded()
+            return true;
+        }
+        skippedMods.add(mod_dependency);
+        return false;
     }
 
     private void addBarrelRecipe(BlockBarrel barrel, Boolean withItemFrame, Boolean withComparator, ItemStack plank) {
@@ -120,10 +129,14 @@ public class BarrelFactory {
     }
 
     private Boolean blockStateModelExists(String uname) {
-        if (uname.substring(0, 5).equals("tile.")) {
+        if (uname.startsWith("tile.")) {
             uname = uname.substring(5);
         }
         InputStream resource = JsonElement.class.getResourceAsStream("/assets/simplebarrels/blockstates/" + uname + ".json");
+
+        if (resource == null) {
+            logger.error(String.format("Could not find blockstate configuration file for %s.", uname));
+        }
 
         return resource != null;
     }
@@ -135,6 +148,7 @@ public class BarrelFactory {
                 return barrel;
             }
         }
+        logger.error(String.format("Could not find BlockBarrel instance for %s.", name));
         return null;
     }
 
@@ -144,10 +158,7 @@ public class BarrelFactory {
 
             BlockBarrel barrelBlock = getBarrelFromUnlocalizedName("tile." + barrelData.getUnlocalizedName());
 
-            if (barrelBlock == null) {
-                // No BlockBarrel found for the given BarrelData
-                continue;
-            }
+            if (barrelBlock == null) continue; // No BlockBarrel found for the given BarrelData
 
             // Register BlockBarrels
             GameRegistry.register(barrelBlock);
@@ -169,7 +180,8 @@ public class BarrelFactory {
 
         for (BlockBarrel barrel : SimpleBarrels.barrels) {
             Item blockItem = Item.getItemFromBlock(barrel);
-            String resourceDomain = SimpleBarrels.MODID + ":" + blockItem.getUnlocalizedName().substring(5);
+
+            String resourceDomain = SimpleBarrels.MODID + ":" + barrel.getUnlocalizedName().substring(5); // remove "tile."
 
             ModelResourceLocation loc = new ModelResourceLocation(resourceDomain, "inventory");
 

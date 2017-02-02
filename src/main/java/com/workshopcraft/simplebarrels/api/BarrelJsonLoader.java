@@ -20,6 +20,8 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.JsonObject;
 
+import com.workshopcraft.simplebarrels.SimpleBarrels;
+
 class BarrelJsonLoader {
     private static String[] directoryListing;
     private static final String MOD_ASSETS_PATH = "assets/simplebarrels/";
@@ -28,40 +30,41 @@ class BarrelJsonLoader {
     BarrelJsonLoader() {}
 
     static List<JsonObject> load() {
+
+        // Load a list of all files in our barrels configuration folder.
         try {
-            directoryListing = getResourceListing(BarrelJsonLoader.class, BARRELS_JSON_PATH);
+            directoryListing = getDirectoryListing(BarrelJsonLoader.class, BARRELS_JSON_PATH);
         } catch (Exception e) {
-            System.out.println("Unable to read directory");
+            SimpleBarrels.logger.error("Unable to read directory: " + e.getMessage());
         }
+
+        // Create a list to hold the JSON loaded from each file in the folder.
         List<JsonObject> barrelGroups = new ArrayList<JsonObject>();
-        JsonElement json;
-        int i = 0;
 
+        // Iterate through our directory listing and load their JSON into our List.
         try {
-            for (i = 0; i < directoryListing.length; i++) {
-                if (directoryListing[i].isEmpty()) {
-                    continue;
-                }
-                json = importJsonFile(directoryListing[i]);
+            for (String fileName : directoryListing) {
+                if (!fileName.endsWith(".json")) continue; // Only load json files. Skip to next file.
 
-                if (json == null || !json.isJsonObject()) {
-                    continue;
-                }
+                JsonElement json = importJsonFile(fileName);
+
+                if (json == null) continue; // Import failed. Skip to next file.
+                if (!json.isJsonObject()) continue; // contents of the file are invalid. Skip to next file.
 
                 barrelGroups.add(json.getAsJsonObject());
             }
         } catch (JsonSyntaxException e) {
-            System.out.println("Invalid JSON Syntax");
+            SimpleBarrels.logger.error("Invalid JSON Syntax: " + e.getMessage());
         } catch (JsonIOException e) {
-            System.out.println("Error loading JSON");
+            SimpleBarrels.logger.error("Error loading JSON: " + e.getMessage());
         }
 
         return barrelGroups;
     }
 
-    private static JsonElement importJsonFile(String path) {
+    private static JsonElement importJsonFile(String fileName) {
         Gson gson = new Gson();
-        InputStream stream = JsonElement.class.getResourceAsStream("/" + BARRELS_JSON_PATH + path);
+        InputStream stream = JsonElement.class.getResourceAsStream("/" + BARRELS_JSON_PATH + fileName);
         Reader streamReader  = new InputStreamReader(stream);
         return gson.fromJson(streamReader, JsonElement.class);
     }
@@ -78,7 +81,7 @@ class BarrelJsonLoader {
      * @throws URISyntaxException
      * @throws IOException
      */
-    private static String[] getResourceListing (Class clazz, String path) throws URISyntaxException, IOException {
+    private static String[] getDirectoryListing(Class clazz, String path) throws URISyntaxException, IOException {
         URL dirURL = clazz.getClassLoader().getResource(path);
         if (dirURL != null && dirURL.getProtocol().equals("file")) {
             /* A file path: easy enough */
@@ -109,7 +112,9 @@ class BarrelJsonLoader {
                         // if it is a subdirectory, we just return the directory name
                         entry = entry.substring(0, checkSubdir);
                     }
-                    result.add(entry);
+                    if (!entry.isEmpty()) {
+                        result.add(entry);
+                    }
                 }
             }
             return result.toArray(new String[result.size()]);
