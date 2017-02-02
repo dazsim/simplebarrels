@@ -57,7 +57,7 @@ public class BarrelFactory {
             resourceDomain = configJson.get("resource_domain").getAsString();
         }
 
-        if (!checkDependancy(modId)) {
+        if (!checkDependency(modId)) {
             // The required mod defined in the configuration file IS NOT loaded.
             // Skip this group of barrels
             return;
@@ -88,8 +88,8 @@ public class BarrelFactory {
         }
     }
 
-    private Boolean checkDependancy(String dependancy) {
-        return dependancy.equals("") || Loader.isModLoaded(dependancy); // if its empty we dont call isModLoaded()
+    private Boolean checkDependency(String mod_dependency) {
+        return mod_dependency.equals("") || Loader.isModLoaded(mod_dependency); // if it's empty we don't call isModLoaded()
     }
 
     private void addBarrelRecipe(BlockBarrel barrel, Boolean withItemFrame, Boolean withComparator, ItemStack plank) {
