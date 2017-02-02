@@ -69,7 +69,7 @@ public class barrelFactory {
 								String tmpBarrelName = "";
 								String tmpBarrelSourceBlock = "";
 								int tmpBarrelSourceMeta = 0;
-								String tmpBarrelDependancy = "";
+								String tmpBarrelDependency = "";
 								barrelList = new ArrayList<barrelData>();
 								while (j<jarrSize)
 								{
@@ -78,8 +78,8 @@ public class barrelFactory {
 								 
 								 tmpBarrelSourceBlock = bData.getAsJsonObject().get("sourceblock").getAsString();
 								 tmpBarrelSourceMeta = Integer.parseInt(bData.getAsJsonObject().get("sourcemeta").getAsString());
-								 tmpBarrelDependancy = bData.getAsJsonObject().get("dependancy").getAsString();
-								 barrelList.add(new barrelData(tmpBarrelName,tmpBarrelSourceBlock,tmpBarrelSourceMeta,tmpBarrelDependancy));
+								 tmpBarrelDependency = bData.getAsJsonObject().get("dependency").getAsString();
+								 barrelList.add(new barrelData(tmpBarrelName,tmpBarrelSourceBlock,tmpBarrelSourceMeta,tmpBarrelDependency));
 								 j++;
 								}
 								//we have loaded our data into an array of barrelData.
@@ -92,7 +92,7 @@ public class barrelFactory {
 								{
 									
 									bBtmp = new BlockBarrel(barrelList.get(i).unlocalizedName);
-									if (checkDependancy(barrelList.get(i).dependancy))
+									if (checkDependency(barrelList.get(i).dependency))
 									{
 										SimpleBarrels.barrels.add(bBtmp);
 									}
@@ -126,10 +126,10 @@ public class barrelFactory {
 		
 		
 	}
-	public Boolean checkDependancy(String dependancy)
+	public Boolean checkDependency(String dependency)
 	{
-		if (dependancy.equals("")) return true; //if its empty we dont call isModLoaded()
-		if (Loader.isModLoaded(dependancy))  
+		if (dependency.equals("")) return true; //if its empty we dont call isModLoaded()
+		if (Loader.isModLoaded(dependency))
 		{
 			return true;
 		} else
@@ -213,7 +213,7 @@ public class barrelFactory {
 		{
 			//bBtmp = new BlockBarrel(barrelList.get(i).unlocalizedName);
 			bBtmp = SimpleBarrels.barrels.get(i);
-			if (checkDependancy(barrelList.get(i).dependancy))
+			if (checkDependency(barrelList.get(i).dependency))
 			{
 				GameRegistry.register(bBtmp);
 		        GameRegistry.register(new ItemBlock(bBtmp), bBtmp.getRegistryName());
@@ -238,7 +238,7 @@ public class barrelFactory {
 		{
 			//bBtmp = new BlockBarrel(barrelList.get(i).unlocalizedName);
 			bBtmp = SimpleBarrels.barrels.get(i);
-			if (checkDependancy(barrelList.get(i).dependancy))
+			if (checkDependency(barrelList.get(i).dependency))
 			{
 		        //System.out.println(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(bBtmp).getUnlocalizedName().substring(5));
 		        renderItem.getItemModelMesher().register(Item.getItemFromBlock(bBtmp), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(bBtmp).getUnlocalizedName().substring(5),"inventory"));

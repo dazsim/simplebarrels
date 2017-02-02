@@ -7,7 +7,7 @@
             "unlocalizedname": "oakbarrel",
             "sourceblock": "minecraft:planks",
             "sourcemeta": "0",
-            "dependancy": ""
+            "dependency": ""
         },
 
         {
@@ -15,7 +15,7 @@
             "unlocalizedname": "sprucebarrel",
             "sourceblock": "minecraft:planks",
             "sourcemeta": "1",
-            "dependancy": ""
+            "dependency": ""
         },
 
         {
@@ -23,7 +23,7 @@
             "unlocalizedname": "birchbarrel",
             "sourceblock": "minecraft:planks",
             "sourcemeta": "2",
-            "dependancy": ""
+            "dependency": ""
         },
 
         {
@@ -31,7 +31,7 @@
             "unlocalizedname": "junglebarrel",
             "sourceblock": "minecraft:planks",
             "sourcemeta": "3",
-            "dependancy": ""
+            "dependency": ""
         },
 
         {
@@ -39,7 +39,7 @@
             "unlocalizedname": "acaciabarrel",
             "sourceblock": "minecraft:planks",
             "sourcemeta": "4",
-            "dependancy": ""
+            "dependency": ""
         },
 
         {
@@ -47,210 +47,210 @@
             "unlocalizedname": "darkoakbarrel",
             "sourceblock": "minecraft:planks",
             "sourcemeta": "5",
-            "dependancy": ""
+            "dependency": ""
         },
         {
             "name": "forestryacaciabarrel",
             "unlocalizedname": "forestryacaciabarrel",
             "sourceblock": "forestry:planks.0",
             "sourcemeta": "2",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrybalsabarrel",
             "unlocalizedname": "forestrybalsabarrel",
             "sourceblock": "forestry:planks.0",
             "sourcemeta": "11",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrybaobabbarrel",
             "unlocalizedname": "forestrybaobabbarrel",
             "sourceblock": "forestry:planks.0",
             "sourcemeta": "6",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrycherrybarrel",
             "unlocalizedname": "forestrycherrybarrel",
             "sourceblock": "forestry:planks.0",
             "sourcemeta": "15",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrychestnutbarrel",
             "unlocalizedname": "forestrychestnutbarrel",
             "sourceblock": "forestry:planks.0",
             "sourcemeta": "4",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrycitrusbarrel",
             "unlocalizedname": "forestrycitrusbarrel",
             "sourceblock": "forestry:planks.1",
             "sourcemeta": "7",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrycocobolobarrel",
             "unlocalizedname": "forestrycocobolobarrel",
             "sourceblock": "forestry:planks.1",
             "sourcemeta": "11",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestryebonybarrel",
             "unlocalizedname": "forestryebonybarrel",
             "sourceblock": "forestry:planks.0",
             "sourcemeta": "9",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrygiganteumbarrel",
             "unlocalizedname": "forestrygiganteumbarrel",
             "sourceblock": "forestry:planks.1",
             "sourcemeta": "8",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrygreenheartbarrel",
             "unlocalizedname": "forestrygreenheartbarrel",
             "sourceblock": "forestry:planks.0",
             "sourcemeta": "14",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestryipebarrel",
             "unlocalizedname": "forestryipebarrel",
             "sourceblock": "forestry:planks.1",
             "sourcemeta": "9",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrykapokbarrel",
             "unlocalizedname": "forestrykapokbarrel",
             "sourceblock": "forestry:planks.0",
             "sourcemeta": "8",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrylarchbarrel",
             "unlocalizedname": "forestrylarchbarrel",
             "sourceblock": "forestry:planks.0",
             "sourcemeta": "0",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrylimebarrel",
             "unlocalizedname": "forestrylimebarrel",
             "sourceblock": "forestry:planks.0",
             "sourcemeta": "3",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrymahoebarrel",
             "unlocalizedname": "forestrymahoebarrel",
             "sourceblock": "forestry:planks.1",
             "sourcemeta": "0",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrymahoganybarrel",
             "unlocalizedname": "forestrymahoganybarrel",
             "sourceblock": "forestry:planks.0",
             "sourcemeta": "10",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrymaplebarrel",
             "unlocalizedname": "forestrymaplebarrel",
             "sourceblock": "forestry:planks.1",
             "sourcemeta": "6",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrypadaukbarrel",
             "unlocalizedname": "forestrypadaukbarrel",
             "sourceblock": "forestry:planks.1",
             "sourcemeta": "10",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrypalmbarrel",
             "unlocalizedname": "forestrypalmbarrel",
             "sourceblock": "forestry:planks.1",
             "sourcemeta": "2",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrypapayabarrel",
             "unlocalizedname": "forestrypapayabarrel",
             "sourceblock": "forestry:planks.1",
             "sourcemeta": "3",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrypinebarrel",
             "unlocalizedname": "forestrypinebarrel",
             "sourceblock": "forestry:planks.1",
             "sourcemeta": "4",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestryplumbarrel",
             "unlocalizedname": "forestryplumbarrel",
             "sourceblock": "forestry:planks.1",
             "sourcemeta": "5",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrypoplarbarrel",
             "unlocalizedname": "forestrypoplarbarrel",
             "sourceblock": "forestry:planks.1",
             "sourcemeta": "1",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrysequoiabarrel",
             "unlocalizedname": "forestrysequoiabarrel",
             "sourceblock": "forestry:planks.0",
             "sourcemeta": "7",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestryteakbarrel",
             "unlocalizedname": "forestryteakbarrel",
             "sourceblock": "forestry:planks.0",
             "sourcemeta": "1",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrywalnutbarrel",
             "unlocalizedname": "forestrywalnutbarrel",
             "sourceblock": "forestry:planks.0",
             "sourcemeta": "5",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrywengebarrel",
             "unlocalizedname": "forestrywengebarrel",
             "sourceblock": "forestry:planks.0",
             "sourcemeta": "13",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestrywillowbarrel",
             "unlocalizedname": "forestrywillowbarrel",
             "sourceblock": "forestry:planks.0",
             "sourcemeta": "12",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         },
         {
             "name": "forestryzebrawoodbarrel",
             "unlocalizedname": "forestryzebrawoodbarrel",
             "sourceblock": "forestry:planks.1",
             "sourcemeta": "12",
-            "dependancy": "forestry"
+            "dependency": "forestry"
         }
     ]
 }
