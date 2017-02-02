@@ -79,27 +79,29 @@ public class barrelFactory {
 								 tmpBarrelSourceBlock = bData.getAsJsonObject().get("sourceblock").getAsString();
 								 tmpBarrelSourceMeta = Integer.parseInt(bData.getAsJsonObject().get("sourcemeta").getAsString());
 								 tmpBarrelDependancy = bData.getAsJsonObject().get("dependancy").getAsString();
+
 								 barrelList.add(new barrelData(tmpBarrelName,tmpBarrelSourceBlock,tmpBarrelSourceMeta,tmpBarrelDependancy));
 								 j++;
 								}
 								//we have loaded our data into an array of barrelData.
-								barrelData tmp;
+								barrelData currentBarrelData;
+
 								int i = 0;
-								System.out.println(barrelList.size());
+
 								SimpleBarrels.barrels = new ArrayList<BlockBarrel>();
-								BlockBarrel bBtmp;
+								BlockBarrel blockBarrel;
+
 								while( i<barrelList.size())
 								{
-									
-									bBtmp = new BlockBarrel(barrelList.get(i).unlocalizedName);
-									if (checkDependancy(barrelList.get(i).dependancy))
+                                    currentBarrelData = barrelList.get(i);
+
+									blockBarrel = new BlockBarrel(currentBarrelData);
+
+									if (checkDependancy(blockBarrel.dependency))
 									{
-										SimpleBarrels.barrels.add(bBtmp);
+										SimpleBarrels.barrels.add(blockBarrel);
 									}
-									//System.out.println("name: "+barrelList.get(i).unlocalizedName);
-									//System.out.println("sourceBlock: "+barrelList.get(i).sourceBlock);
-									//System.out.println("sourceMeta: "+barrelList.get(i).sourceMeta);
-									//System.out.println("-------------------------------");
+
 									i++;
 									
 								}
@@ -192,39 +194,46 @@ public class barrelFactory {
 	public BlockBarrel getBarrelFromUnlocalizedName(String name)
 	{
 		int i = 0;
-		BlockBarrel bBtmp;
+		BlockBarrel barrel;
 		while( i<SimpleBarrels.barrels.size())
 		{
 			//bBtmp = new BlockBarrel(barrelList.get(i).unlocalizedName);
-			bBtmp = SimpleBarrels.barrels.get(i);
-			if (bBtmp.getUnlocalizedName().equals(name))
+			barrel = SimpleBarrels.barrels.get(i);
+			if (barrel.getUnlocalizedName().equals(name))
 			{
-				return bBtmp;
+				return barrel;
 			}
 		}
 		return null;
 	}
-	
+
 	public void init()
 	{
 		int i = 0;
-		BlockBarrel bBtmp;
-		while( i<SimpleBarrels.barrels.size())
+		BlockBarrel barrel;
+
+		while(i < SimpleBarrels.barrels.size())
 		{
-			//bBtmp = new BlockBarrel(barrelList.get(i).unlocalizedName);
-			bBtmp = SimpleBarrels.barrels.get(i);
-			if (checkDependancy(barrelList.get(i).dependancy))
+			//barrel = new BlockBarrel(barrelList.get(i).unlocalizedName);
+			barrel = SimpleBarrels.barrels.get(i);
+
+			if (checkDependancy(barrel.dependency))
 			{
-				GameRegistry.register(bBtmp);
-		        GameRegistry.register(new ItemBlock(bBtmp), bBtmp.getRegistryName());
-		        Item mcPlank= Item.REGISTRY.getObject(new ResourceLocation(barrelList.get(i).sourceBlock));
-		        
-		        addBarrel(bBtmp,false, false, new ItemStack(mcPlank,1,barrelList.get(i).sourceMeta));
-		        addBarrel(bBtmp,true, false,new ItemStack(mcPlank,1,barrelList.get(i).sourceMeta));
-		        addBarrel(bBtmp,false, true,new ItemStack(mcPlank,1,barrelList.get(i).sourceMeta));
-		        addBarrel(bBtmp,true, true,new ItemStack(mcPlank,1,barrelList.get(i).sourceMeta));
-				i++;
+				// register block/item
+				GameRegistry.register(barrel);
+		        GameRegistry.register(new ItemBlock(barrel), barrel.getRegistryName());
+
+		        // get source item
+		        Item mcPlank = Item.REGISTRY.getObject(new ResourceLocation(barrel.sourceBlock));
+
+		        // implement recipes
+		        addBarrel(barrel,false, false, new ItemStack(mcPlank, 1, barrel.sourceMeta));
+		        addBarrel(barrel,true, false, new ItemStack(mcPlank, 1, barrel.sourceMeta));
+		        addBarrel(barrel,false, true, new ItemStack(mcPlank, 1, barrel.sourceMeta));
+		        addBarrel(barrel,true, true, new ItemStack(mcPlank, 1, barrel.sourceMeta));
 			}
+			// increment OUTSIDE of `if` block!
+			i++;
 		}
 	}
 	
@@ -232,18 +241,20 @@ public class barrelFactory {
 	{
 		
 		int i = 0;
-		BlockBarrel bBtmp;
+		BlockBarrel barrel;
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-		while( i<SimpleBarrels.barrels.size())
+
+		while(i < SimpleBarrels.barrels.size())
 		{
 			//bBtmp = new BlockBarrel(barrelList.get(i).unlocalizedName);
-			bBtmp = SimpleBarrels.barrels.get(i);
-			if (checkDependancy(barrelList.get(i).dependancy))
+			barrel = SimpleBarrels.barrels.get(i);
+			if (checkDependancy(barrel.dependency))
 			{
-		        //System.out.println(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(bBtmp).getUnlocalizedName().substring(5));
-		        renderItem.getItemModelMesher().register(Item.getItemFromBlock(bBtmp), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(bBtmp).getUnlocalizedName().substring(5),"inventory"));
-				i++;
+		        //System.out.println(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(barrel).getUnlocalizedName().substring(5));
+		        renderItem.getItemModelMesher().register(Item.getItemFromBlock(barrel), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(barrel).getUnlocalizedName().substring(5),"inventory"));
 			}
+			// increment OUTSIDE of if block!
+			i++;
 		}
 	}
 	

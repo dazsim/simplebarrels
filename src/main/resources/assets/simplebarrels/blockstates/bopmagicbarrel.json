@@ -1,0 +1,11 @@
+{
+    "variants": {
+        "normal": { "model": "simplebarrels:bopmagicbarrel" },
+        "facing=east": { "model": "simplebarrels:bopmagicbarrel" },
+        "facing=south": { "model": "simplebarrels:bopmagicbarrel", "y": 90 },
+        "facing=west": { "model": "simplebarrels:bopmagicbarrel", "y": 180 },
+        "facing=north": { "model": "simplebarrels:bopmagicbarrel", "y": 270 },
+        "inventory": { "model": "simplebarrels:bopmagicbarrel" }
+    }
+}
+
