@@ -15,16 +15,22 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public class clientbarrel extends barrelcommonproxy {
 	
 	@Override
 	public void init(FMLInitializationEvent e) {
 		//SimpleBarrels.oakBarrel.initModel();
-		SimpleBarrels.barrels.get(0).initModel();
-		
+		if (SimpleBarrels.barrels.size() > 0) {
+			// Don't try to load barrels if there are none (will crash the client/server otherwise)
+			SimpleBarrels.barrels.get(0).initModel();
+			SimpleBarrels.bFactory.clientInit();
+		}
+
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-		SimpleBarrels.bFactory.clientInit();
 		/*
         //renderItem.getItemModelMesher().register(Item.getItemFromBlock(blockBarrel), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(blockBarrel).getUnlocalizedName().substring(5),"inventory"));
         renderItem.getItemModelMesher().register(Item.getItemFromBlock(SimpleBarrels.oakBarrel), 0, new ModelResourceLocation(SimpleBarrels.MODID + ":" + Item.getItemFromBlock(SimpleBarrels.oakBarrel).getUnlocalizedName().substring(5),"inventory"));

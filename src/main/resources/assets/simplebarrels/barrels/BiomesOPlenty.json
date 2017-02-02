@@ -1,0 +1,102 @@
+{
+  "mod_id": "BiomesOPlenty",
+  "resource_domain": "biomesoplenty",
+  "barrels": [
+    {
+      "unlocalized_name" : "biomesoplentysacredoakbarrel",
+      "wood_name": "sacred_oak",
+      "resource_path": "planks_0",
+      "resource_index": 0
+    },
+    {
+      "unlocalized_name": "biomesoplentycherrybarrel",
+      "wood_name": "cherry",
+      "resource_path": "planks_0",
+      "resource_index": 1
+    },
+    {
+      "unlocalized_name": "biomesoplentyumbranbarrel",
+      "wood_name": "umbran",
+      "resource_path": "planks_0",
+      "resource_index": 2
+    },
+    {
+      "unlocalized_name": "biomesoplentyfirbarrel",
+      "wood_name": "fir",
+      "resource_path": "planks_0",
+      "resource_index": 3
+    },
+    {
+      "unlocalized_name": "biomesoplentyetherealbarrel",
+      "wood_name": "ethereal",
+      "resource_path": "planks_0",
+      "resource_index": 4
+    },
+    {
+      "unlocalized_name": "biomesoplentymagicbarrel",
+      "wood_name": "magic",
+      "resource_path": "planks_0",
+      "resource_index": 5
+    },
+    {
+      "unlocalized_name": "biomesoplentymangrovebarrel",
+      "wood_name": "mangrove",
+      "resource_path": "planks_0",
+      "resource_index": 6
+    },
+    {
+      "unlocalized_name": "biomesoplentypalmbarrel",
+      "wood_name": "palm",
+      "resource_path": "planks_0",
+      "resource_index": 7
+    },
+    {
+      "unlocalized_name": "biomesoplentyredwoodbarrel",
+      "wood_name": "redwood",
+      "resource_path": "planks_0",
+      "resource_index": 8
+    },
+    {
+      "unlocalized_name": "biomesoplentywillowbarrel",
+      "wood_name": "willow",
+      "resource_path": "planks_0",
+      "resource_index": 9
+    },
+    {
+      "unlocalized_name": "biomesoplentypinebarrel",
+      "wood_name": "pine",
+      "resource_path": "planks_0",
+      "resource_index": 10
+    },
+    {
+      "unlocalized_name": "biomesoplentyhellbarkbarrel",
+      "wood_name": "hellbark",
+      "resource_path": "planks_0",
+      "resource_index": 11
+    },
+    {
+      "unlocalized_name": "biomesoplentyjacarandabarrel",
+      "wood_name": "jacaranda",
+      "resource_path": "planks_0",
+      "resource_index": 12
+    },
+    {
+      "unlocalized_name": "biomesoplentymahoganybarrel",
+      "wood_name": "mahogany",
+      "resource_path": "planks_0",
+      "resource_index": 13
+    },
+    {
+      "unlocalized_name": "biomesoplentyebonybarrel",
+      "wood_name": "ebony",
+      "resource_path": "planks_0",
+      "resource_index": 14
+    },
+    {
+      "unlocalized_name": "biomesoplentyeucalyptusbarrel",
+      "wood_name": "eucalyptus",
+      "resource_path": "biomesoplenty:planks_0",
+      "resource_index": 15
+    }
+  ]
+}

@@ -2,7 +2,7 @@ package com.workshopcraft.simplebarrels;
 
 import java.util.List;
 
-import com.workshopcraft.simplebarrels.api.barrelFactory;
+import com.workshopcraft.simplebarrels.api.BarrelFactory;
 import com.workshopcraft.simplebarrels.blocks.BlockBarrel;
 import com.workshopcraft.simplebarrels.handlers.BarrelHandler;
 import com.workshopcraft.simplebarrels.items.ItemDolly;
@@ -55,7 +55,7 @@ public class SimpleBarrels
      * 1.3 BARRELS
      */
     public static List<BlockBarrel> barrels;
-    public static barrelFactory bFactory;
+    public static BarrelFactory bFactory;
     /*
      * VANILLA
      */
@@ -77,56 +77,9 @@ public class SimpleBarrels
     	upgradeMark3Compressor = new ItemUpgradeMark3Compressor("upgrademark3compressor");
     	upgradeMark4Compressor = new ItemUpgradeMark4Compressor("upgrademark4compressor");
     	itemDolly = new ItemDolly("dolly");
-    	bFactory = new barrelFactory();
+    	bFactory = new BarrelFactory();
         proxy.preInit(event);
         
-    }
-    public void addBarrel(BlockBarrel barrel,Boolean f, Boolean c,ItemStack plank)
-    {
-    	ItemStack i = new ItemStack(barrel,1);
-        NBTTagCompound n = new NBTTagCompound();
-        
-        n.setBoolean("frame", f);
-        n.setBoolean("comp", c);
-        n.setInteger("size", 4096);
-        i.setTagCompound(n);
-        
-        
-        if (!f && !c)
-        {
-        	
-        	
-        	GameRegistry.addRecipe(new ShapedOreRecipe(i, new Object[]{
-					"WIW",
-					"FCR",
-					"WIW",
-					'W',plank,'C',"chestWood",'R',Items.COMPARATOR,'F',Items.ITEM_FRAME, 'I',Items.IRON_INGOT
-			}));
-        } else if (f && !c)
-        {
-        	GameRegistry.addRecipe(new ShapedOreRecipe(i, new Object[]{
-					"WIW",
-					" CR",
-					"WIW",
-					'W',plank,'C',"chestWood",'R',Items.COMPARATOR, 'I',Items.IRON_INGOT
-			}));
-        } else if (!f && c)
-        {
-        	GameRegistry.addRecipe(new ShapedOreRecipe(i, new Object[]{
-					"WIW",
-					"FC ",
-					"WIW",
-					'W',plank,'C',"chestWood",'F',Items.ITEM_FRAME, 'I',Items.IRON_INGOT
-			}));
-        } else if (f && c)
-        {
-        	GameRegistry.addRecipe(new ShapedOreRecipe(i, new Object[]{
-					"WIW",
-					" C ",
-					"WIW",
-					'W',plank,'C',"chestWood", 'I',Items.IRON_INGOT
-			}));
-        }
     }
     
     @EventHandler
