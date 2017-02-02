@@ -72,7 +72,7 @@ public class BarrelFactory {
 
         // Skip invalid groups of barrels.
         if (!checkDependency(modId)) return; // The required mod defined in the configuration file IS NOT loaded.
-        if (!configJson.has("barrels") || configJson.get("barrels").isJsonArray()) {
+        if (!configJson.has("barrels") || !configJson.get("barrels").isJsonArray()) {
             // Config doesn't have a "barrels" entry or entry is invalid
             logger.error(String.format("Invalid json for barrels property in %s configuration", modId));
             return;
