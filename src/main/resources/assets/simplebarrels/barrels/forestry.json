@@ -1,0 +1,151 @@
+{
+  "mod_id": "forestry",
+  "resource_domain": "forestry",
+  "barrels": [
+    {
+      "wood_name": "acacia",
+      "resource_path": "planks.0",
+      "resource_index": 2
+    },
+    {
+      "wood_name": "balsa",
+      "resource_path": "planks.0",
+      "resource_index": 11
+    },
+    {
+      "wood_name": "baobab",
+      "resource_path": "planks.0",
+      "resource_index": 6
+    },
+    {
+      "wood_name": "cherry",
+      "resource_path": "planks.0",
+      "resource_index": 15
+    },
+    {
+      "wood_name": "chestnut",
+      "resource_path": "planks.0",
+      "resource_index": 4
+    },
+    {
+      "wood_name": "citrus",
+      "resource_path": "planks.1",
+      "resource_index": 7
+    },
+    {
+      "wood_name": "cocobolo",
+      "resource_path": "planks.1",
+      "resource_index": 11
+    },
+    {
+      "wood_name": "ebony",
+      "resource_path": "planks.0",
+      "resource_index": 9
+    },
+    {
+      "wood_name": "giganteum",
+      "resource_path": "planks.1",
+      "resource_index": 8
+    },
+    {
+      "wood_name": "greenheart",
+      "resource_path": "planks.0",
+      "resource_index": 14
+    },
+    {
+      "wood_name": "ipe",
+      "resource_path": "planks.1",
+      "resource_index": 9
+    },
+    {
+      "wood_name": "kapok",
+      "resource_path": "planks.0",
+      "resource_index": 8
+    },
+    {
+      "wood_name": "larch",
+      "resource_path": "planks.0",
+      "resource_index": 0
+    },
+    {
+      "wood_name": "lime",
+      "resource_path": "planks.0",
+      "resource_index": 3
+    },
+    {
+      "wood_name": "mahoe",
+      "resource_path": "planks.1",
+      "resource_index": 0
+    },
+    {
+      "wood_name": "mahogany",
+      "resource_path": "planks.0",
+      "resource_index": 10
+    },
+    {
+      "wood_name": "maple",
+      "resource_path": "planks.1",
+      "resource_index": 6
+    },
+    {
+      "wood_name": "padauk",
+      "resource_path": "planks.1",
+      "resource_index": 10
+    },
+    {
+      "wood_name": "palm",
+      "resource_path": "planks.1",
+      "resource_index": 2
+    },
+    {
+      "wood_name": "papaya",
+      "resource_path": "planks.1",
+      "resource_index": 3
+    },
+    {
+      "wood_name": "pine",
+      "resource_path": "planks.1",
+      "resource_index": 4
+    },
+    {
+      "wood_name": "plum",
+      "resource_path": "planks.1",
+      "resource_index": 5
+    },
+    {
+      "wood_name": "poplar",
+      "resource_path": "planks.1",
+      "resource_index": 1
+    },
+    {
+      "wood_name": "sequoia",
+      "resource_path": "planks.0",
+      "resource_index": 7
+    },
+    {
+      "wood_name": "teak",
+      "resource_path": "planks.0",
+      "resource_index": 1
+    },
+    {
+      "wood_name": "walnut",
+      "resource_path": "planks.0",
+      "resource_index": 5
+    },
+    {
+      "wood_name": "wenge",
+      "resource_path": "planks.0",
+      "resource_index": 13
+    },
+    {
+      "wood_name": "willow",
+      "resource_path": "planks.0",
+      "resource_index": 12
+    },
+    {
+      "wood_name": "zebrawood",
+      "resource_path": "planks.1",
+      "resource_index": 12
+    }
+  ]
+}

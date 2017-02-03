@@ -1,0 +1,36 @@
+{
+  "mod_id": "",
+  "resource_domain": "minecraft",
+  "barrels": [
+    {
+      "wood_name": "oak",
+      "resource_path": "planks",
+      "resource_index": 0
+    },
+    {
+      "wood_name": "spruce",
+      "resource_path": "planks",
+      "resource_index": 1
+    },
+    {
+      "wood_name": "birch",
+      "resource_path": "planks",
+      "resource_index": 2
+    },
+    {
+      "wood_name": "jungle",
+      "resource_path": "planks",
+      "resource_index": 3
+    },
+    {
+      "wood_name": "acacia",
+      "resource_path": "planks",
+      "resource_index": 4
+    },
+    {
+      "wood_name": "darkoak",
+      "resource_path": "planks",
+      "resource_index": 5
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+    "variants": {
+        "normal": { "model": "simplebarrels:biomesoplentyebonybarrel" },
+        "facing=east": { "model": "simplebarrels:biomesoplentyebonybarrel" },
+        "facing=south": { "model": "simplebarrels:biomesoplentyebonybarrel", "y": 90 },
+        "facing=west": { "model": "simplebarrels:biomesoplentyebonybarrel", "y": 180 },
+        "facing=north": { "model": "simplebarrels:biomesoplentyebonybarrel", "y": 270 },
+        "inventory": { "model": "simplebarrels:biomesoplentyebonybarrel" }
+    }
+}
+

@@ -1,0 +1,9 @@
+
+{
+    "parent" : "simplebarrels:block/oakbarrel",
+
+    "textures": {
+        "particle": "calculator:blocks/wood/planks_tanzanite",
+        "texture": "calculator:blocks/wood/planks_tanzanite"
+    }
+}

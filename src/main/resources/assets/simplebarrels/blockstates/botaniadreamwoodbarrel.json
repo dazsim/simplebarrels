@@ -1,0 +1,11 @@
+{
+    "variants": {
+        "normal": { "model": "simplebarrels:botaniadreamwoodbarrel" },
+        "facing=east": { "model": "simplebarrels:botaniadreamwoodbarrel" },
+        "facing=south": { "model": "simplebarrels:botaniadreamwoodbarrel", "y": 90 },
+        "facing=west": { "model": "simplebarrels:botaniadreamwoodbarrel", "y": 180 },
+        "facing=north": { "model": "simplebarrels:botaniadreamwoodbarrel", "y": 270 },
+        "inventory": { "model": "simplebarrels:botaniadreamwoodbarrel" }
+    }
+}
+

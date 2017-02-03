@@ -1,0 +1,11 @@
+{
+    "variants": {
+        "normal": { "model": "simplebarrels:calculatordiamondwoodbarrel" },
+        "facing=east": { "model": "simplebarrels:calculatordiamondwoodbarrel" },
+        "facing=south": { "model": "simplebarrels:calculatordiamondwoodbarrel", "y": 90 },
+        "facing=west": { "model": "simplebarrels:calculatordiamondwoodbarrel", "y": 180 },
+        "facing=north": { "model": "simplebarrels:calculatordiamondwoodbarrel", "y": 270 },
+        "inventory": { "model": "simplebarrels:calculatordiamondwoodbarrel" }
+    }
+}
+

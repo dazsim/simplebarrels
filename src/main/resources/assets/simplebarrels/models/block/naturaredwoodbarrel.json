@@ -3,7 +3,7 @@
     "parent" : "simplebarrels:block/oakbarrel",
 
     "textures": {
-                    "particle": "natura:blocks/logs/overworld/redwood_bark",
-                    "texture": "natura:blocks/logs/overworld/redwood_bark"
+                    "particle": "natura:blocks/planks/overworld/redwood_planks",
+                    "texture": "natura:blocks/planks/overworld/redwood_planks"
                 }
 }

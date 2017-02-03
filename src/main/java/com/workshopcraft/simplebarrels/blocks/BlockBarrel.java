@@ -25,6 +25,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -89,8 +90,18 @@ public class BlockBarrel extends BlockContainer{
     {
         return EnumBlockRenderType.MODEL;
     }
-    
-    public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+
+    @Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getBlockLayer()
+	{
+		if (this.getUnlocalizedName().contains("spectre")) {
+			return BlockRenderLayer.TRANSLUCENT;
+		}
+		return BlockRenderLayer.SOLID;
+	}
+
+	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
     	
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());

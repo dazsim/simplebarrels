@@ -1,0 +1,9 @@
+
+{
+    "parent" : "simplebarrels:block/oakbarrel",
+
+    "textures": {
+        "particle": "natura:blocks/planks/nether/ghostwood_planks",
+        "texture": "natura:blocks/planks/nether/ghostwood_planks"
+    }
+}
