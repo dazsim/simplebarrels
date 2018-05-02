@@ -5,17 +5,15 @@ import com.workshopcraft.simplebarrels.tiles.TileEntityBarrel;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
-import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.IModel;
 
 public class TESRBlockBarrel extends TileEntitySpecialRenderer<TileEntityBarrel>{
 
@@ -27,8 +25,8 @@ public class TESRBlockBarrel extends TileEntitySpecialRenderer<TileEntityBarrel>
 	    
 	
 	@Override
-	public void renderTileEntityAt(TileEntityBarrel te, double x, double y, double z, float partialTicks,
-			int destroyStage) {
+	public void render(TileEntityBarrel te, double x, double y, double z, float partialTicks, int destroyStage ,float alpha 
+			) {
 			//System.out.println("Foo");
 			int f = te.getBlockMetadata();
 			if (te.itemHandler.extractItem(0, 1, true)!=null)
@@ -193,7 +191,7 @@ public class TESRBlockBarrel extends TileEntitySpecialRenderer<TileEntityBarrel>
         	
         	
             EntityItem entityitem = new EntityItem(world, 0.0D, 0.0D, 0.0D, stack);
-            entityitem.getEntityItem().stackSize = 1;
+            //entityitem.getEntityItem().stackSize = 1;
             
             GlStateManager.pushMatrix();
             GlStateManager.disableLighting();
@@ -208,7 +206,7 @@ public class TESRBlockBarrel extends TileEntitySpecialRenderer<TileEntityBarrel>
             
             if (!te.frame)
             {
-            	itemRenderer.renderItem(entityitem.getEntityItem(), ItemCameraTransforms.TransformType.FIXED);
+            	itemRenderer.renderItem(entityitem.getItem(), ItemCameraTransforms.TransformType.FIXED);
             }
             RenderHelper.disableStandardItemLighting();
             GlStateManager.popAttrib();

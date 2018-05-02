@@ -126,7 +126,8 @@ public class TileEntityBarrel extends TileEntity //implements ITickable
             NBTTagList nbttaglist = compound.getTagList("Items", 10);
             NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(0);
             int j = nbttagcompound.getByte("Slot") & 255;
-            itemHandler.barrelContents = ItemStack.loadItemStackFromNBT(nbttagcompound);
+            //itemHandler.barrelContents = ItemStack.loadItemStackFromNBT(nbttagcompound);
+            itemHandler.barrelContents = new ItemStack(nbttagcompound);
             //this.itemIsBlock = compound.getBoolean("isblock");        
             itemHandler.barrelContents.setItemDamage(compound.getInteger("state"));
         }
@@ -202,7 +203,7 @@ public class TileEntityBarrel extends TileEntity //implements ITickable
      */
     public boolean isUseableByPlayer(EntityPlayer player)
     {
-        return this.worldObj.getTileEntity(this.pos) != this ? false : player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
+        return this.world.getTileEntity(this.pos) != this ? false : player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
     }
 
     public void updateContainingBlockInfo()
@@ -378,7 +379,7 @@ public class TileEntityBarrel extends TileEntity //implements ITickable
         	
         	
             IBlockState state = getBlockState();
-            worldObj.notifyBlockUpdate(pos, state, state, 3); //TODO: Check if this works
+            world.notifyBlockUpdate(pos, state, state, 3); //TODO: Check if this works
              
     }
 
@@ -409,7 +410,7 @@ public class TileEntityBarrel extends TileEntity //implements ITickable
             int j = nbttagcompound.getByte("Slot") & 255;
 
             
-        	itemHandler.barrelContents = ItemStack.loadItemStackFromNBT(nbttagcompound);
+        	itemHandler.barrelContents = new ItemStack(nbttagcompound);
         	itemHandler.count = compound.getInteger("count");
             //this.itemIsBlock = compound.getBoolean("isblock");      
             int st = compound.getInteger("state");

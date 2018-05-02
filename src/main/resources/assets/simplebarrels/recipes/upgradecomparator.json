@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+    " A ",
+    "ABA",
+    " A "
+   ],
+   "key": {
+        "A": {
+            "item": "minecraft:stick"
+        },
+        "B": {
+            "item": "minecraft:comparator"
+        }
+    },
+    "result": {
+        "item": "simplebarrels:upgradecomparator"
+    }
+}

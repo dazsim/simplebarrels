@@ -1,18 +1,24 @@
 package com.workshopcraft.simplebarrels;
 
+import com.workshopcraft.simplebarrels.libraries.BlockLibrary;
+
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class SimpleBarrelsTab extends CreativeTabs{
 
+	private ItemStack tabIcon = null;
 	
-	public SimpleBarrelsTab(String tabName)
+	SimpleBarrelsTab()
 	{
-		super(tabName);
+		super(Reference.TabLebel);
 	}
 	
 	@Override
-	public Item getTabIconItem() {
-		return Item.getItemFromBlock(SimpleBarrels.barrels.get(0));
+	public ItemStack getTabIconItem() {
+		if (tabIcon == null) {
+			tabIcon = new ItemStack(BlockLibrary.barrel);
+		}
+		return tabIcon;
 	}
 }

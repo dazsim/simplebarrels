@@ -106,7 +106,7 @@ public class BarrelItemHandler implements IItemHandler{
 			{
 			this.barrelContents=stack;
 			
-				count = stack.stackSize;
+				count = stack.getCount();
 				BlockBarrel.updateBarrel(t);
 			}
 			return null;
@@ -147,23 +147,24 @@ public class BarrelItemHandler implements IItemHandler{
 		}
 			if (match)
 			{
-				if (stack.stackSize+count<=size)
+				if (stack.getCount()+count<=size)
 				{
 					//input stack will not fill barrel
 					if (!simulate)
 					{
-						count+=stack.stackSize;
+						count+=stack.getCount();
 						BlockBarrel.updateBarrel(t);
 					}
 					return null;
-				} else if (stack.stackSize+count>size)
+				} else if (stack.getCount()+count>size)
 				{
 					//input stack will fill barrel
 					if (!simulate)
 					{
 						int a = size - count;
 						count = size;
-						stack.stackSize -= a;
+						stack.setCount(stack.getCount()-a);
+						
 						BlockBarrel.updateBarrel(t);
 					}
 					return stack;
@@ -218,6 +219,12 @@ public class BarrelItemHandler implements IItemHandler{
 			}
 		}
 		
+	}
+
+	@Override
+	public int getSlotLimit(int slot) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

@@ -72,7 +72,7 @@ public class SimpleBarrels {
 
     @EventHandler
     public void preinit(FMLPreInitializationEvent event) {
-        tabSimpleBarrels = new SimpleBarrelsTab("tabSimpleBarrelsTab");
+        tabSimpleBarrels = new SimpleBarrelsTab();
         upgradeComparator = new ItemUpgradeComparator("upgradecomparator");
         upgradeItemFrame = new ItemUpgradeItemFrame("upgradeitemframe");
         upgradeMark1Compressor = new ItemUpgradeMark1Compressor("upgrademark1compressor");
@@ -89,6 +89,7 @@ public class SimpleBarrels {
     public void init(FMLInitializationEvent event) {
         GameRegistry.registerTileEntity(TileEntityBarrel.class, "tile_entity_barrel");
         bFactory.init();
+        /*
         GameRegistry.addRecipe(new ItemStack(this.upgradeComparator, 1), new Object[]{
                 " A ",
                 "ABA",
@@ -124,7 +125,7 @@ public class SimpleBarrels {
                 "SBS",
                 " S ",
                 'S', this.upgradeMark3Compressor, 'B', Items.DIAMOND
-        });
+        });*/
         eventBus.register(new BarrelHandler());
 
         proxy.init(event);

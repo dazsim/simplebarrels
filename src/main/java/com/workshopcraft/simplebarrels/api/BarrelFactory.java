@@ -116,7 +116,8 @@ public class BarrelFactory {
 
         char itemFrameSlot = (withItemFrame ? 'F' : ' ');
         char comparatorSlot = (withComparator ? 'R' : ' ');
-
+        //TODO: Fix Recipe Generation for barrels
+        /*
         GameRegistry.addRecipe(new ShapedOreRecipe(
                 stack,
                 "WIW", (itemFrameSlot + "C" + comparatorSlot), "WIW",
@@ -125,7 +126,7 @@ public class BarrelFactory {
                 'R', Items.COMPARATOR,
                 'C', "chestWood",
                 'F', Items.ITEM_FRAME
-        ));
+        ));*/
     }
 
     private Boolean blockStateModelExists(String uname) {
@@ -161,8 +162,8 @@ public class BarrelFactory {
             if (barrelBlock == null) continue; // No BlockBarrel found for the given BarrelData
 
             // Register BlockBarrels
-            GameRegistry.register(barrelBlock);
-            GameRegistry.register(new ItemBlock(barrelBlock), barrelBlock.getRegistryName());
+            //GameRegistry.register(barrelBlock);
+            //GameRegistry.register(new ItemBlock(barrelBlock), barrelBlock.getRegistryName());
 
             Item barrelPlankItem = Item.REGISTRY.getObject(new ResourceLocation(barrelData.getFullResourcePath()));
             int resourceIndex = barrelData.getResourceIndex();

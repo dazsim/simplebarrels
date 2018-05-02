@@ -117,6 +117,7 @@ class BarrelJsonLoader {
                     }
                 }
             }
+            jar.close();
             return result.toArray(new String[result.size()]);
         }
 

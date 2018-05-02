@@ -3,7 +3,7 @@
 "textures": {
     "particle": "blocks/planks_oak",
     "texture": "blocks/planks_oak",
-    "barrelband": "blocks/barrelband"
+    "barrelband": "simplebarrels:blocks/barrelband"
 
 },
 "elements": [

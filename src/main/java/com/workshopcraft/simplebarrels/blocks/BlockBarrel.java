@@ -243,7 +243,7 @@ public class BlockBarrel extends BlockContainer{
 			item.motionX = (float)rand.nextGaussian() * f3;
 			item.motionY = (float)rand.nextGaussian() * f3 + 0.2F;
 			item.motionZ = (float)rand.nextGaussian() * f3;
-			worldIn.spawnEntityInWorld(item);
+			worldIn.spawnEntity(item);
     	}}
 	}
     
@@ -386,10 +386,10 @@ public class BlockBarrel extends BlockContainer{
     	}
     }
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-    		
-    		
+    		ItemStack heldItem = playerIn.getHeldItemMainhand();
+    		//this.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ)
     		if (!worldIn.isRemote)
     		{
     			
@@ -411,13 +411,17 @@ public class BlockBarrel extends BlockContainer{
 							//HAND NOT EMPTY
 							NBTTagCompound n = heldItem.getTagCompound();
 							
-							ItemStack insertStack = new ItemStack(heldItem.getItem(),heldItem.stackSize,heldItem.getMetadata());
+							ItemStack insertStack = new ItemStack(heldItem.getItem(),heldItem.getCount(),heldItem.getMetadata());
+							
 							insertStack.setTagCompound(n);
 							te2.itemHandler.insertItem(0, insertStack ,false);
 							
-							
-							playerIn.inventory.mainInventory[playerIn.inventory.currentItem].stackSize=0;
-							playerIn.inventory.inventoryChanged=true;
+							//playerIn.inventory.mainInventory.
+							//playerIn.inventory.mainInventory[playerIn.inventory.currentItem].;
+							playerIn.inventory.mainInventory.get(playerIn.inventory.currentItem).setCount(0);//does this even work?
+							//TODO: maybe wrong?
+							playerIn.inventory.markDirty();
+							//playerIn.inventory.inventoryChanged=true;
 							
 							this.updateBarrel(te2);
 							
@@ -470,12 +474,14 @@ public class BlockBarrel extends BlockContainer{
     								if (te2.itemHandler.count < te2.itemHandler.size) {
     									//before we insert. update HASHMAPED
     									//attempts to insert held item into barrel.
-    									int incResult = te2.itemHandler.incItems(heldItem.stackSize);
+    									int incResult = te2.itemHandler.incItems(heldItem.getCount());
 										
 										
 										
-										playerIn.inventory.mainInventory[playerIn.inventory.currentItem].stackSize=incResult;
-										playerIn.inventory.inventoryChanged=true;
+										//playerIn.inventory.mainInventory[playerIn.inventory.currentItem].stackSize=incResult;
+										playerIn.inventory.mainInventory.get(playerIn.inventory.currentItem).setCount(incResult);
+										playerIn.inventory.markDirty();
+										//playerIn.inventory.inventoryChanged=true;
 										this.updateBarrel(te2);
 										return true;
     									

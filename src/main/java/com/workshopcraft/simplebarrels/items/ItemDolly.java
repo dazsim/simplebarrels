@@ -35,11 +35,9 @@ public class ItemDolly extends Item{
 	public ItemDolly(String uname)
 	{
 		super();
-		GameRegistry.registerItem(this,uname);
-		name = uname;
-		this.setUnlocalizedName(name);
+		
 		setMaxStackSize(1);
-		setCreativeTab(SimpleBarrels.tabSimpleBarrels);
+		//this.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ)
 	}
 	
 	public String getName()
@@ -49,15 +47,23 @@ public class ItemDolly extends Item{
 	}
 	
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack,EntityPlayer playerIn,World worldIn,BlockPos pos,EnumHand hand,EnumFacing facing,float hitX,float hitY,float hitZ)
+	public EnumActionResult onItemUse(EntityPlayer playerIn,World worldIn,BlockPos pos,EnumHand hand,EnumFacing facing,float hitX,float hitY,float hitZ)
 	{
+		ItemStack stack = playerIn.getHeldItem(hand);
 		if (!worldIn.isRemote)
 		{
-			if (barrelNBT==null)
+			//if (barrelNBT==null)
+			
+			if (stack.hasTagCompound())
 			{
-				barrelNBT = new NBTTagCompound();
+				//stack.readFromNBT(barrelNBT);
+				barrelNBT = stack.getTagCompound();
+			} else
+			{
+				
+					barrelNBT = new NBTTagCompound();
+				
 			}
-			stack.readFromNBT(barrelNBT);
 			if (!barrelNBT.hasKey("hasbarrel"))
 			{
 				barrelNBT.setBoolean("hasbarrel", false);
@@ -170,7 +176,9 @@ public class ItemDolly extends Item{
 				            NBTTagList nbttaglist = barrelNBT.getTagList("Items", 10);
 				            NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(0);
 				            int j = nbttagcompound.getByte("Slot") & 255;
-				            tEB.itemHandler.barrelContents = ItemStack.loadItemStackFromNBT(nbttagcompound);
+				            
+				            //tEB.itemHandler.barrelContents = ItemStack.loadItemStackFromNBT(nbttagcompound);
+				            tEB.itemHandler.barrelContents = new ItemStack(nbttagcompound);
 				            //this.itemIsBlock = compound.getBoolean("isblock");        
 				            tEB.itemHandler.barrelContents.setItemDamage(barrelNBT.getInteger("state"));
 				        }

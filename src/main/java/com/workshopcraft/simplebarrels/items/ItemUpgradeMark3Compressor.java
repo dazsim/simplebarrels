@@ -23,26 +23,14 @@ public class ItemUpgradeMark3Compressor extends Item{
 	
 	public ItemUpgradeMark3Compressor()
 	{
-		if (name.equals(""))
-		{
-			// do nothing
-		} else
-		{
-			GameRegistry.registerItem(this, name);
-		}
-		setUnlocalizedName(name);
-		setMaxStackSize(64);
-		setCreativeTab(SimpleBarrels.tabSimpleBarrels);
-		
-		
+		super();
+		setMaxStackSize(64);	
 	}
-	public ItemUpgradeMark3Compressor(String uname)
+	
+	public ItemUpgradeMark3Compressor(String name)
 	{
 		super();
-		GameRegistry.registerItem(this,uname);
-		name = uname;
-		this.setUnlocalizedName(name);
-		setCreativeTab(SimpleBarrels.tabSimpleBarrels);
+		setMaxStackSize(64);	
 	}
 	
 	public String getName()
@@ -52,8 +40,9 @@ public class ItemUpgradeMark3Compressor extends Item{
 	}
 	
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack,EntityPlayer playerIn,World worldIn,BlockPos pos,EnumHand hand,EnumFacing facing,float hitX,float hitY,float hitZ)
+	public EnumActionResult onItemUse(EntityPlayer playerIn,World worldIn,BlockPos pos,EnumHand hand,EnumFacing facing,float hitX,float hitY,float hitZ)
 	{
+		ItemStack stack = playerIn.getHeldItem(hand);
 		if (!worldIn.isRemote)
 		{
 			if (playerIn.isSneaking())
@@ -67,7 +56,7 @@ public class ItemUpgradeMark3Compressor extends Item{
 						if (t2.itemHandler.size==16384)
 						{
 							t2.itemHandler.size = 32768;
-							stack.stackSize-=1;
+							stack.shrink(1);
 							Block b = (t2.getBlockType());
 							
 							((BlockBarrel) b).updateBarrel((TileEntityBarrel)worldIn.getTileEntity(pos));

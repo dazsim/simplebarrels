@@ -23,27 +23,22 @@ public class ItemUpgradeItemFrame extends Item{
 	public ItemUpgradeItemFrame()
 	{
 		if (name.equals(""))
-		{
-			// do nothing
-		} else
-		{
-			GameRegistry.registerItem(this, name);
-		}
-		setUnlocalizedName(name);
+		
 		setMaxStackSize(64);
-		setCreativeTab(SimpleBarrels.tabSimpleBarrels);
 		
 		
-	}
-	public ItemUpgradeItemFrame(String uname)
-	{
-		super();
-		GameRegistry.registerItem(this,uname);
-		name = uname;
-		this.setUnlocalizedName(name);
-		setCreativeTab(SimpleBarrels.tabSimpleBarrels);
+		
 	}
 	
+	public ItemUpgradeItemFrame(String name)
+	{
+		if (name.equals(""))
+		
+		setMaxStackSize(64);
+		
+		
+		
+	}
 	public String getName()
 	{
 		return name;
@@ -51,8 +46,9 @@ public class ItemUpgradeItemFrame extends Item{
 	}
 	
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack,EntityPlayer playerIn,World worldIn,BlockPos pos,EnumHand hand,EnumFacing facing,float hitX,float hitY,float hitZ)
+	public EnumActionResult onItemUse(EntityPlayer playerIn,World worldIn,BlockPos pos,EnumHand hand,EnumFacing facing,float hitX,float hitY,float hitZ)
 	{
+		ItemStack stack = playerIn.getHeldItem(hand);
 		if (!worldIn.isRemote)
 		{
 			if (playerIn.isSneaking())
@@ -66,7 +62,7 @@ public class ItemUpgradeItemFrame extends Item{
 						if (t2.frame)
 						{
 							t2.frame = false;
-							stack.stackSize-=1;
+							stack.shrink(1);
 							Block b = (t2.getBlockType());
 							
 							((BlockBarrel) b).updateBarrel((TileEntityBarrel)worldIn.getTileEntity(pos));
