@@ -4,9 +4,9 @@ tile.sprucebarrel.name=Spruce Barrel
 tile.acaciabarrel.name=Acacia Barrel
 tile.darkoakbarrel.name=Dark Oak Barrel
 tile.junglebarrel.name=Jungle Barrel
-item.upgradecomparator.name=Comparator Upgrade
-item.upgradeitemframe.name=Item Frame Upgrade
-itemGroup.tabSimpleBarrelsTab=Simple Barrels
+item.simplebarrels:itemupgradecomparator.name=Comparator Upgrade
+item.simplebarrels:itemupgradeitemframe.name=Item Frame Upgrade
+itemGroup.simplebarrels.tab_label=Simple Barrels
 tile.forestryacaciabarrel.name=Forestry Acacia Barrel
 tile.forestrybalsabarrel.name=Forestry Balsa Barrel
 tile.forestrybaobabbarrel.name=Forestry Baobab Barrel
@@ -88,11 +88,13 @@ tile.biomesoplentymahoganybarrel.name=Biomes O' Plenty Mahogany Barrel
 tile.biomesoplentyebonybarrel.name=Biomes O' Plenty Ebony Barrel
 tile.biomesoplentyeucalyptusbarrel.name=Biomes O' Plenty Eucalyptus Barrel
 
-item.upgrademark1compressor.name=Mark 1 Compressor Upgrade
-item.upgrademark2compressor.name=Mark 2 Compressor Upgrade
-item.upgrademark3compressor.name=Mark 3 Compressor Upgrade
-item.upgrademark4compressor.name=Mark 4 Compressor Upgrade
-item.upgrademark5compressor.name=Mark 5 Compressor Upgrade
+item.simplebarrels:itemdolly.name=Barrel Dolly
+
+item.simplebarrels:itemupgrademark1compressor.name=Mark 1 Compressor Upgrade
+item.simplebarrels:itemupgrademark2compressor.name=Mark 2 Compressor Upgrade
+item.simplebarrels:itemupgrademark3compressor.name=Mark 3 Compressor Upgrade
+item.simplebarrels:itemupgrademark4compressor.name=Mark 4 Compressor Upgrade
+item.simplebarrels:itemupgrademark5compressor.name=Mark 5 Compressor Upgrade
 
 item.upgradevoid.name=Void Upgrade
 item.upgradeender.name=Ender Upgrade

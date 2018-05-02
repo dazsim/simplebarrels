@@ -6,6 +6,11 @@ import com.workshopcraft.simplebarrels.Reference.Items;
 import com.workshopcraft.simplebarrels.blocks.BlockBarrel;
 import com.workshopcraft.simplebarrels.items.ItemDolly;
 import com.workshopcraft.simplebarrels.items.ItemUpgradeComparator;
+import com.workshopcraft.simplebarrels.items.ItemUpgradeItemFrame;
+import com.workshopcraft.simplebarrels.items.ItemUpgradeMark1Compressor;
+import com.workshopcraft.simplebarrels.items.ItemUpgradeMark2Compressor;
+import com.workshopcraft.simplebarrels.items.ItemUpgradeMark3Compressor;
+import com.workshopcraft.simplebarrels.items.ItemUpgradeMark4Compressor;
 import com.workshopcraft.simplebarrels.libraries.BlockLibrary;
 
 import net.minecraft.block.Block;
@@ -34,12 +39,16 @@ public class RegistrationHandler {
 		final IForgeRegistry<Item> registry = registryEvent.getRegistry();
 
 		registerItemFromBlock(registry, BlockLibrary.barrel);
-		//registerItemFromBlock(registry, BlockLibrary.controller);
+		
 
 		registerItem(registry,(Item)new ItemDolly(), Items.itemdolly,true);
 		registerItem(registry,(Item)new ItemUpgradeComparator(), Items.itemupgradecomparator,true);
-		//registerItem(registry, new ItemPunchCardBlank(), Items.punchcardblank, true);
-		//registerItem(registry, new ItemPunchCardWritten(), Items.punchcardwritten, false);
+		registerItem(registry,(Item)new ItemUpgradeItemFrame(), Items.itemupgradeitemframe,true);
+		registerItem(registry,(Item)new ItemUpgradeMark1Compressor(), Items.itemupgrademark1compressor,true);
+		registerItem(registry,(Item)new ItemUpgradeMark2Compressor(), Items.itemupgrademark2compressor,true);
+		registerItem(registry,(Item)new ItemUpgradeMark3Compressor(), Items.itemupgrademark3compressor,true);
+		registerItem(registry,(Item)new ItemUpgradeMark4Compressor(), Items.itemupgrademark4compressor,true);
+		
 		
 	}
 	
