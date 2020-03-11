@@ -135,10 +135,15 @@ public class ItemDolly extends Item{
 							worldIn.setBlockToAir(pos);
 							barrelNBT.setBoolean("hasbarrel", true);
 							stack.writeToNBT(barrelNBT);
-							
+							if (barrelNBT.getBoolean("hasbarrel"))
+							{
+								System.out.println("Ohaider");
+							}
 							System.out.println("Barrel Taken");
+							stack.markDirty();
 							return EnumActionResult.SUCCESS;
 						}
+						// TODO: add support for chests.
 					}
 				}
 			} else
@@ -157,15 +162,16 @@ public class ItemDolly extends Item{
 						{
 							
 						
-						//set blockstate to barrel.
-						if (SimpleBarrels.bFactory.getBarrelFromUnlocalizedName(barrelNBT.getString("barrelname")).getDefaultState()==null)
-						{
-							System.out.println("fuck");
-						}
-						worldIn.setBlockState(pos.offset(facing), SimpleBarrels.bFactory.getBarrelFromUnlocalizedName(barrelNBT.getString("name")).getDefaultState() );
+							//set blockstate to barrel.
+							if (SimpleBarrels.bFactory.getBarrelFromUnlocalizedName(barrelNBT.getString("barrelname")).getDefaultState()==null)
+							{
+								System.out.println("fuck");
+							}
+
+							worldIn.setBlockState(pos.offset(facing), SimpleBarrels.bFactory.getBarrelFromUnlocalizedName(barrelNBT.getString("name")).getDefaultState() );
 						
-						TileEntityBarrel tEB = (TileEntityBarrel)worldIn.getTileEntity(pos.offset(facing));
-						//worldIn.setTileEntity(pos.offset(facing),tEB );
+							TileEntityBarrel tEB = (TileEntityBarrel)worldIn.getTileEntity(pos.offset(facing));
+							//worldIn.setTileEntity(pos.offset(facing),tEB );
 						tEB.itemHandler.size = barrelNBT.getInteger("size");
 				        if (tEB.itemHandler.size == 0)
 				        {
@@ -196,6 +202,7 @@ public class ItemDolly extends Item{
 				} else
 				{
 					System.out.println("sorry, no data for you bro");
+					//missing barrel data for barrel
 				}
 			}
 		}
