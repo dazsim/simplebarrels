@@ -1,0 +1,9 @@
+
+{
+    "parent" : "simplebarrels:block/oakbarrel",
+
+    "textures": {
+        "particle": "abyssalcraft:blocks/dltplank",
+        "texture": "abyssalcraft:blocks/dltplank"
+    }
+}

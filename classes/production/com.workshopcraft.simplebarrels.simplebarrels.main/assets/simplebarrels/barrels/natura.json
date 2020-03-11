@@ -1,0 +1,76 @@
+{
+  "mod_id": "natura",
+  "resource_domain": "natura",
+  "barrels": [
+    {
+      "wood_name": "maplebark",
+      "resource_path": "overworld_logs",
+      "resource_index": 0
+    },
+    {
+      "wood_name": "maple",
+      "resource_path": "overworld_planks",
+      "resource_index": 0
+    },
+    {
+      "wood_name": "silverbell",
+      "resource_path": "overworld_planks",
+      "resource_index": 1
+    },
+    {
+      "wood_name": "amaranth",
+      "resource_path": "overworld_planks",
+      "resource_index": 2
+    },
+    {
+      "wood_name": "tigerwood",
+      "resource_path": "overworld_planks",
+      "resource_index": 3
+    },
+    {
+      "wood_name": "willow",
+      "resource_path": "overworld_planks",
+      "resource_index": 4
+    },
+    {
+      "wood_name": "eucalyptus",
+      "resource_path": "overworld_planks",
+      "resource_index": 5
+    },
+    {
+      "wood_name": "hopseed",
+      "resource_path": "overworld_planks",
+      "resource_index": 6
+    },
+    {
+      "wood_name": "sakura",
+      "resource_path": "overworld_planks",
+      "resource_index": 7
+    },
+    {
+      "wood_name": "redwood",
+      "resource_path": "overworld_planks",
+      "resource_index": 8
+    },
+    {
+      "wood_name": "ghostwood",
+      "resource_path": "nether_planks",
+      "resource_index": 0
+    },
+    {
+      "wood_name": "bloodwood",
+      "resource_path": "nether_planks",
+      "resource_index": 1
+    },
+    {
+      "wood_name": "darkwood",
+      "resource_path": "nether_planks",
+      "resource_index": 2
+    },
+    {
+      "wood_name": "fusewood",
+      "resource_path": "nether_planks",
+      "resource_index": 3
+    }
+  ]
+}

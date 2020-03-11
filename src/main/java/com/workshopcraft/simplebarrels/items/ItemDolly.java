@@ -117,19 +117,23 @@ public class ItemDolly extends Item{
 				                    //compound.setBoolean("isblock", this.itemIsBlock);
 				                    if (t2.itemHandler.barrelContents!=null)
 				                    {
+
 				                    	barrelNBT.setInteger("state", t2.itemHandler.barrelContents.getItem().getMetadata(t2.itemHandler.barrelContents));
 				                    }else
 				                    {
+
 				                    	barrelNBT.setInteger("state", 0);
 				                    }
 				            	}
 				            }
 							//Set block to air
 							System.out.println("set block to air");
-							worldIn.setBlockToAir(pos);
-							barrelNBT.setBoolean("hasbarrel", true);
-							stack.writeToNBT(barrelNBT);
-							
+							//worldIn.getBlockState(pos).getBlock().breakBlock(worldIn,pos,worldIn.getBlockState(pos));
+							//barrelNBT.setBoolean("hasbarrel", true);
+							//stack.writeToNBT(barrelNBT);
+
+							//worldIn.setBlockToAir(pos);
+
 							System.out.println("Barrel Taken");
 							return EnumActionResult.SUCCESS;
 						}

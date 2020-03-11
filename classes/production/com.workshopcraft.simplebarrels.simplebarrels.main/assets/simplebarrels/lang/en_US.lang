@@ -1,0 +1,100 @@
+tile.oakbarrel.name=Oak Barrel
+tile.birchbarrel.name=Birch Barrel
+tile.sprucebarrel.name=Spruce Barrel
+tile.acaciabarrel.name=Acacia Barrel
+tile.darkoakbarrel.name=Dark Oak Barrel
+tile.junglebarrel.name=Jungle Barrel
+item.upgradecomparator.name=Comparator Upgrade
+item.upgradeitemframe.name=Item Frame Upgrade
+itemGroup.tabSimpleBarrelsTab=Simple Barrels
+tile.forestryacaciabarrel.name=Forestry Acacia Barrel
+tile.forestrybalsabarrel.name=Forestry Balsa Barrel
+tile.forestrybaobabbarrel.name=Forestry Baobab Barrel
+tile.forestrycherrybarrel.name=Forestry Cherry Barrel
+tile.forestrychestnutbarrel.name=Forestry Chestnut Barrel
+tile.forestrycitrusbarrel.name=Forestry Citrus Barrel
+tile.forestrycocobolobarrel.name=Forestry Cocobolo Barrel
+tile.forestryebonybarrel.name=Forestry Ebony Barrel
+tile.forestrygiganteumbarrel.name=Forestry Giganteum Barrel
+tile.forestrygreenheartbarrel.name=Forestry Greenheart Barrel
+tile.forestryipebarrel.name=Forestry Ipe Barrel
+tile.forestrykapokbarrel.name=Forestry Kapok Barrel
+tile.forestrylarchbarrel.name=Forestry Larch Barrel
+tile.forestrylimebarrel.name=Forestry Lime Barrel
+tile.forestrymahoebarrel.name=Forestry Mahoe Barrel
+tile.forestrymahoganybarrel.name=Forestry Mahogany Barrel
+tile.forestrymaplebarrel.name=Forestry Maple Barrel
+tile.forestrypadaukbarrel.name=Forestry Padauk Barrel
+tile.forestrypalmbarrel.name=Forestry Palm Barrel
+tile.forestrypapayabarrel.name=Forestry Papaya Barrel
+tile.forestrypinebarrel.name=Forestry Pine Barrel
+tile.forestryplumbarrel.name=Forestry Plum Barrel
+tile.forestrypoplarbarrel.name=Forestry Poplar Barrel
+tile.forestrysequoiabarrel.name=Forestry Sequoia Barrel
+tile.forestryteakbarrel.name=Forestry Teak Barrel
+tile.forestrywalnutbarrel.name=Forestry Walnut Barrel
+tile.forestrywengebarrel.name=Forestry Wenge Barrel
+tile.forestrywillowbarrel.name=Forestry Willow Barrel
+tile.forestryzebrawoodbarrel.name=Forestry Zebrawood Barrel
+
+tile.naturaredwoodbarrel.name=Natura Redwood Barrel
+tile.naturamaplebarkbarrel.name=Natura Maple Log Barrel
+tile.naturamaplebarrel.name=Natura Maple Barrel
+tile.naturatigerwoodbarrel.name=Natura Tigerwood Barrel
+tile.naturaamaranthbarrel.name=Natura Amaranth Barrel
+tile.naturaeucalyptusbarrel.name=Natura Eucalyptus Barrel
+tile.naturahopseedbarrel.name=Natura Hopseed Barrel
+tile.naturasakurabarrel.name=Natura Sakura Barrel
+tile.naturasilverbellbarrel.name=Natura Silverbell Barrel
+tile.naturawillowbarrel.name=Natura Willow Barrel
+
+tile.naturabloodwoodbarrel.name=Natura Bloodwood Barrel
+tile.naturadarkwoodbarrel.name=Natura Darkwood Barrel
+tile.naturafusewoodbarrel.name=Natura Fusewood Barrel
+tile.naturaghostwoodbarrel.name=Natura Ghostwood Barrel
+
+tile.rootswildwoodbarrel.name=Roots Wildwood Barrel
+
+tile.randomthingsspectrewoodbarrel.name=Random Things Spectre Wood Barrel
+
+tile.calculatorpearwoodbarrel.name=Calculator Pear Wood Barrel
+tile.calculatordiamondwoodbarrel.name=Calculator Diamond Wood Barrel
+tile.calculatortanzanitewoodbarrel.name=Calculator Tanzanite Wood Barrel
+tile.calculatoramethystwoodbarrel.name=Calculator Amethyst Wood Barrel
+
+tile.abyssalcraftdarklandsoakbarrel.name=AbyssalCraft Darklands Oak Barrel
+tile.abyssalcraftdreadlandsbarrel.name=AbyssalCraft Dreadlands Wood Barrel
+
+tile.botaniashimmerwoodbarrel.name=Botania Shimmerwood Barrel
+tile.botanialivingwoodbarrel.name=Botania Livingwood Barrel
+tile.botaniamossylivingwoodbarrel.name=Botania Mossy Livingwood Barrel
+tile.botaniadreamwoodbarrel.name=Botania Dreamwood Barrel
+tile.botaniamossydreamwoodbarrel.name=Botania Mossy Dreamwood Barrel
+
+tile.biomesoplentysacred_oakbarrel.name=Biomes O' Plenty Sacred Oak Barrel
+tile.biomesoplentycherrybarrel.name=Biomes O' Plenty Cherry Wood Barrel
+tile.biomesoplentyumbranbarrel.name=Biomes O' Plenty Umbran Barrel
+tile.biomesoplentyfirbarrel.name=Biomes O' Plenty Fir Barrel
+tile.biomesoplentyetherealbarrel.name=Biomes O' Plenty Ethereal Barrel
+tile.biomesoplentymagicbarrel.name=Biomes O' Plenty Magicwood Barrel
+tile.biomesoplentymangrovebarrel.name=Biomes O' Plenty Mangrove Barrel
+tile.biomesoplentypalmbarrel.name=Biomes O' Plenty Palm Barrel
+tile.biomesoplentyredwoodbarrel.name=Biomes O' Plenty Redwood Barrel
+tile.biomesoplentywillowbarrel.name=Biomes O' Plenty Willow Barrel
+tile.biomesoplentypinebarrel.name=Biomes O' Plenty Pine Barrel
+tile.biomesoplentyhellbarkbarrel.name=Biomes O' Plenty Hellbark Barrel
+tile.biomesoplentyjacarandabarrel.name=Biomes O' Plenty Jacaranda Barrel
+tile.biomesoplentymahoganybarrel.name=Biomes O' Plenty Mahogany Barrel
+tile.biomesoplentyebonybarrel.name=Biomes O' Plenty Ebony Barrel
+tile.biomesoplentyeucalyptusbarrel.name=Biomes O' Plenty Eucalyptus Barrel
+
+item.upgrademark1compressor.name=Mark 1 Compressor Upgrade
+item.upgrademark2compressor.name=Mark 2 Compressor Upgrade
+item.upgrademark3compressor.name=Mark 3 Compressor Upgrade
+item.upgrademark4compressor.name=Mark 4 Compressor Upgrade
+item.upgrademark5compressor.name=Mark 5 Compressor Upgrade
+
+item.upgradevoid.name=Void Upgrade
+item.upgradeender.name=Ender Upgrade
+item.upgradefilter.name=Filter Upgrade
+item.upgradevacuum.name=Vacuum Upgrade

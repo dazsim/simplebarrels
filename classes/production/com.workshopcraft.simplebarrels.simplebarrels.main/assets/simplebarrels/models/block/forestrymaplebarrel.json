@@ -1,0 +1,9 @@
+
+{
+    "parent" : "simplebarrels:block/oakbarrel",
+
+    "textures": {
+                    "particle": "forestry:blocks/wood/planks.maple",
+                    "texture": "forestry:blocks/wood/planks.maple"
+                }
+}

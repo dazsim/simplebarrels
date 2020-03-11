@@ -1,0 +1,9 @@
+
+{
+    "parent" : "simplebarrels:block/oakbarrel",
+
+    "textures": {
+                    "particle": "biomesoplenty:blocks/mangrove_planks",
+                    "texture": "biomesoplenty:blocks/mangrove_planks"
+                }
+}

@@ -1,0 +1,9 @@
+
+{
+    "parent" : "simplebarrels:block/oakbarrel",
+
+    "textures": {
+        "particle": "randomthings:blocks/spectrePlank",
+        "texture": "randomthings:blocks/spectrePlank"
+    }
+}

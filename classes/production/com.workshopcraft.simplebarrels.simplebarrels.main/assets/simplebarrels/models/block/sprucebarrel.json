@@ -1,0 +1,9 @@
+
+{
+    "parent" : "simplebarrels:block/oakbarrel",
+
+    "textures": {
+                    "particle": "blocks/planks_spruce",
+                    "texture": "blocks/planks_spruce"
+                }
+}

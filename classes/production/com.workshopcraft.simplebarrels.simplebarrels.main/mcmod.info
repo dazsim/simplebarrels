@@ -1,0 +1,16 @@
+[
+{
+  "modid": "simplebarrels",
+  "name": "Simple Barrels",
+  "description": "This mod adds Simple Barrels to Minecraft.",
+  "version": "1.26e",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Workshopcraft", "Tage"],
+  "credits": "This one i blame on JP :P, Tage as always making the content look awesome!",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

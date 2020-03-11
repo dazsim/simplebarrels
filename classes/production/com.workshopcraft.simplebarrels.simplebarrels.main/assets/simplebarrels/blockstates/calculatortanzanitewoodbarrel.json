@@ -1,0 +1,11 @@
+{
+    "variants": {
+        "normal": { "model": "simplebarrels:calculatortanzanitewoodbarrel" },
+        "facing=east": { "model": "simplebarrels:calculatortanzanitewoodbarrel" },
+        "facing=south": { "model": "simplebarrels:calculatortanzanitewoodbarrel", "y": 90 },
+        "facing=west": { "model": "simplebarrels:calculatortanzanitewoodbarrel", "y": 180 },
+        "facing=north": { "model": "simplebarrels:calculatortanzanitewoodbarrel", "y": 270 },
+        "inventory": { "model": "simplebarrels:calculatortanzanitewoodbarrel" }
+    }
+}
+

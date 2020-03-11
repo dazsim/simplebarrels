@@ -1,0 +1,11 @@
+{
+  "mod_id": "randomthings",
+  "resource_domain": "randomthings",
+  "barrels": [
+    {
+      "wood_name": "spectrewood",
+      "resource_path": "spectrePlank",
+      "resource_index": 0
+    }
+  ]
+}
