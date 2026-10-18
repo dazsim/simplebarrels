@@ -1,26 +1,19 @@
 package com.workshopcraft.simplebarrels.item;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.workshopcraft.simplebarrels.block.BarrelBlockEntity;
-import io.netty.buffer.ByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.nbt.CompoundTag;
 
 public record BarrelUpgrades(boolean hideCount, boolean hideItem, int capacity) {
     public static final BarrelUpgrades NONE = new BarrelUpgrades(false, false, BarrelBlockEntity.BASE_CAPACITY);
 
-    public static final Codec<BarrelUpgrades> CODEC = RecordCodecBuilder.create(i -> i.group(
-            Codec.BOOL.optionalFieldOf("hide_count", false).forGetter(BarrelUpgrades::hideCount),
-            Codec.BOOL.optionalFieldOf("hide_item", false).forGetter(BarrelUpgrades::hideItem),
-            Codec.INT.optionalFieldOf("capacity", BarrelBlockEntity.BASE_CAPACITY).forGetter(BarrelUpgrades::capacity)
-    ).apply(i, BarrelUpgrades::new));
+    public void save(CompoundTag tag) {
+        if (hideCount) tag.putBoolean("HideCount", true);
+        if (hideItem) tag.putBoolean("HideItem", true);
+        if (capacity != BarrelBlockEntity.BASE_CAPACITY) tag.putInt("Capacity", capacity);
+    }
 
-    public static final StreamCodec<ByteBuf, BarrelUpgrades> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.BOOL, BarrelUpgrades::hideCount,
-            ByteBufCodecs.BOOL, BarrelUpgrades::hideItem,
-            ByteBufCodecs.VAR_INT, BarrelUpgrades::capacity,
-            BarrelUpgrades::new);
-
-    public boolean isNone() { return equals(NONE); }
+    public static BarrelUpgrades load(CompoundTag tag) {
+        int cap = tag.contains("Capacity") ? tag.getInt("Capacity") : BarrelBlockEntity.BASE_CAPACITY;
+        return new BarrelUpgrades(tag.getBoolean("HideCount"), tag.getBoolean("HideItem"), cap);
+    }
 }

@@ -3,9 +3,7 @@ package com.workshopcraft.simplebarrels.block;
 import com.workshopcraft.simplebarrels.item.BarrelUpgrades;
 import com.workshopcraft.simplebarrels.item.UpgradeItem;
 import com.workshopcraft.simplebarrels.registry.ModContent;
-import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -71,7 +69,7 @@ public class BarrelBlockEntity extends BlockEntity {
 
     public boolean canAccept(ItemStack stack) {
         if (stack.isEmpty()) return false;
-        return isEmpty() || ItemStack.isSameItemSameComponents(template, stack);
+        return isEmpty() || ItemStack.isSameItemSameTags(template, stack);
     }
 
     public int spaceFor(ItemStack stack) {
@@ -121,49 +119,26 @@ public class BarrelBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
+    protected void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
         if (!isEmpty()) {
-            tag.put("Item", template.save(registries));
+            tag.put("Item", template.save(new CompoundTag()));
             tag.putInt("Count", count);
         }
-        if (capacity != BASE_CAPACITY) tag.putInt("Capacity", capacity);
-        if (hideCount) tag.putBoolean("HideCount", true);
-        if (hideItem) tag.putBoolean("HideItem", true);
+        getUpgrades().save(tag);
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
-        capacity = tag.contains("Capacity") ? tag.getInt("Capacity") : BASE_CAPACITY;
-        hideCount = tag.getBoolean("HideCount");
-        hideItem = tag.getBoolean("HideItem");
-        ItemStack loaded = tag.contains("Item") ? ItemStack.parseOptional(registries, tag.getCompound("Item")) : ItemStack.EMPTY;
+    public void load(CompoundTag tag) {
+        super.load(tag);
+        setUpgrades(BarrelUpgrades.load(tag));
+        ItemStack loaded = tag.contains("Item") ? ItemStack.of(tag.getCompound("Item")) : ItemStack.EMPTY;
         setContentsRaw(loaded, loaded.isEmpty() ? 0 : tag.getInt("Count"));
     }
 
     @Override
-    protected void collectImplicitComponents(DataComponentMap.Builder b) {
-        super.collectImplicitComponents(b);
-        if (!getUpgrades().isNone()) b.set(ModContent.UPGRADES, getUpgrades());
-    }
-
-    @Override
-    protected void applyImplicitComponents(DataComponentInput in) {
-        super.applyImplicitComponents(in);
-        setUpgrades(in.getOrDefault(ModContent.UPGRADES, BarrelUpgrades.NONE));
-    }
-
-    @Override
-    public void removeComponentsFromTag(CompoundTag tag) {
-        tag.remove("Capacity");
-        tag.remove("HideCount");
-        tag.remove("HideItem");
-    }
-
-    @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
-        return saveCustomOnly(registries);
+    public CompoundTag getUpdateTag() {
+        return saveWithoutMetadata();
     }
 
     @Override

@@ -3,11 +3,8 @@ package com.workshopcraft.simplebarrels.registry;
 import com.workshopcraft.simplebarrels.SimpleBarrels;
 import com.workshopcraft.simplebarrels.block.BarrelBlock;
 import com.workshopcraft.simplebarrels.block.BarrelBlockEntity;
-import com.workshopcraft.simplebarrels.item.BarrelUpgrades;
-import com.workshopcraft.simplebarrels.item.CarriedBarrel;
 import com.workshopcraft.simplebarrels.item.DollyItem;
 import com.workshopcraft.simplebarrels.item.UpgradeItem;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -33,8 +30,6 @@ public final class ModContent {
     public static CreativeModeTab TAB;
     public static DollyItem DOLLY;
     public static final List<Item> UPGRADES_ITEMS = new ArrayList<>();
-    public static DataComponentType<BarrelUpgrades> UPGRADES;
-    public static DataComponentType<CarriedBarrel> CARRIED_BARREL;
 
     private ModContent() {}
 
@@ -64,13 +59,6 @@ public final class ModContent {
         }
     }
 
-    public static void registerDataComponents(BiConsumer<ResourceLocation, DataComponentType<?>> r) {
-        UPGRADES = DataComponentType.<BarrelUpgrades>builder().persistent(BarrelUpgrades.CODEC).networkSynchronized(BarrelUpgrades.STREAM_CODEC).build();
-        CARRIED_BARREL = DataComponentType.<CarriedBarrel>builder().persistent(CarriedBarrel.CODEC).networkSynchronized(CarriedBarrel.STREAM_CODEC).build();
-        r.accept(SimpleBarrels.id("upgrades"), UPGRADES);
-        r.accept(SimpleBarrels.id("carried_barrel"), CARRIED_BARREL);
-    }
-
     public static void registerBlockEntities(BiConsumer<ResourceLocation, BlockEntityType<?>> r) {
         BARREL_BE = BlockEntityType.Builder.of(BarrelBlockEntity::new, BARRELS.values().toArray(new Block[0])).build(null);
         r.accept(SimpleBarrels.id("barrel"), BARREL_BE);
@@ -94,7 +82,6 @@ public final class ModContent {
     }
 
     public static void registerAllDirect() {
-        registerDataComponents(direct(BuiltInRegistries.DATA_COMPONENT_TYPE));
         registerBlocks(direct(BuiltInRegistries.BLOCK));
         registerItems(direct(BuiltInRegistries.ITEM));
         registerBlockEntities(direct(BuiltInRegistries.BLOCK_ENTITY_TYPE));

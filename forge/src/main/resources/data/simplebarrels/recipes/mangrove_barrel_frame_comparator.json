@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "WIW",
+    "FCR",
+    "WIW"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:mangrove_planks"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "F": {
+      "item": "minecraft:item_frame"
+    },
+    "R": {
+      "item": "minecraft:comparator"
+    }
+  },
+  "result": {
+    "item": "simplebarrels:mangrove_barrel",
+    "count": 1,
+    "nbt": {
+      "BlockEntityTag": {
+        "HideCount": true,
+        "HideItem": true
+      }
+    }
+  }
+}

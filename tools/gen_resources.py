@@ -16,26 +16,28 @@ for wood in WOODS:
     w(f"{A}/blockstates/{bid}.json", {"variants": {f"facing={f}": ({"model": f"simplebarrels:block/{bid}", "y": y} if y else {"model": f"simplebarrels:block/{bid}"}) for f, y in rot.items()}})
     w(f"{A}/models/block/{bid}.json", {"parent": "simplebarrels:block/barrel_base", "textures": {"particle": planks, "texture": planks}})
     w(f"{A}/models/item/{bid}.json", {"parent": f"simplebarrels:block/{bid}"})
-    w(f"{D}/loot_table/blocks/{bid}.json", {"type": "minecraft:block", "pools": [{"rolls": 1, "bonus_rolls": 0,
+    w(f"{D}/loot_tables/blocks/{bid}.json", {"type": "minecraft:block", "pools": [{"rolls": 1, "bonus_rolls": 0,
         "entries": [{"type": "minecraft:item", "name": f"simplebarrels:{bid}",
-        "functions": [{"function": "minecraft:copy_components", "source": "block_entity", "include": ["simplebarrels:upgrades"]}]}], "conditions": [{"condition": "minecraft:survives_explosion"}]}],
-        "random_sequence": f"simplebarrels:blocks/{bid}"})
-    w(f"{D}/recipe/{bid}.json", {"type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["WIW", " C ", "WIW"],
-        "key": {"W": {"item": f"minecraft:{wood}_planks"}, "I": {"tag": "c:ingots/iron"}, "C": {"tag": "c:chests/wooden"}},
-        "result": {"id": f"simplebarrels:{bid}", "count": 1}})
+        "functions": [{"function": "minecraft:copy_nbt", "source": "block_entity", "ops": [
+            {"source": k, "target": f"BlockEntityTag.{k}", "op": "replace"} for k in ["HideCount", "HideItem", "Capacity"]]}]}], "conditions": [{"condition": "minecraft:survives_explosion"}]}],
+        })
+    w(f"{D}/recipes/{bid}.json", {"type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["WIW", " C ", "WIW"],
+        "key": {"W": {"item": f"minecraft:{wood}_planks"}, "I": {"item": "minecraft:iron_ingot"}, "C": {"item": "minecraft:chest"}},
+        "result": {"item": f"simplebarrels:{bid}", "count": 1}})
     for frame, comp in [(True, False), (False, True), (True, True)]:
         suffix = ("_frame" if frame else "") + ("_comparator" if comp else "")
-        key = {"W": {"item": f"minecraft:{wood}_planks"}, "I": {"tag": "c:ingots/iron"}, "C": {"tag": "c:chests/wooden"}}
+        key = {"W": {"item": f"minecraft:{wood}_planks"}, "I": {"item": "minecraft:iron_ingot"}, "C": {"item": "minecraft:chest"}}
         if frame: key["F"] = {"item": "minecraft:item_frame"}
         if comp: key["R"] = {"item": "minecraft:comparator"}
-        flags = {k: True for k, v in [("hide_count", comp), ("hide_item", frame)] if v}
-        w(f"{D}/recipe/{bid}{suffix}.json", {"type": "minecraft:crafting_shaped", "category": "misc",
+        flags = {k: True for k, v in [("HideCount", comp), ("HideItem", frame)] if v}
+        # result nbt only works on forge
+        w(f"forge/src/main/resources/data/simplebarrels/recipes/{bid}{suffix}.json", {"type": "minecraft:crafting_shaped", "category": "misc",
             "pattern": ["WIW", ("F" if frame else " ") + "C" + ("R" if comp else " "), "WIW"], "key": key,
-            "result": {"id": f"simplebarrels:{bid}", "count": 1, "components": {"simplebarrels:upgrades": flags}}})
+            "result": {"item": f"simplebarrels:{bid}", "count": 1, "nbt": {"BlockEntityTag": flags}}})
     lang[f"block.simplebarrels.{bid}"] = f"{title(wood)} Barrel"
 def shaped(name, pattern, key):
-    w(f"{D}/recipe/{name}.json", {"type": "minecraft:crafting_shaped", "category": "misc", "pattern": pattern, "key": key,
-        "result": {"id": f"simplebarrels:{name}", "count": 1}})
+    w(f"{D}/recipes/{name}.json", {"type": "minecraft:crafting_shaped", "category": "misc", "pattern": pattern, "key": key,
+        "result": {"item": f"simplebarrels:{name}", "count": 1}})
 items = {"dolly": "Dolly", "comparator_upgrade": "Comparator Upgrade", "item_frame_upgrade": "Item Frame Upgrade"}
 for i in range(1, 5): items[f"mark{i}_compressor"] = f"Mark {i} Compressor Upgrade"
 for name, label in items.items():
@@ -45,11 +47,11 @@ plus = [" A ", "ABA", " A "]
 shaped("comparator_upgrade", plus, {"A": {"item": "minecraft:stick"}, "B": {"item": "minecraft:comparator"}})
 shaped("item_frame_upgrade", plus, {"A": {"item": "minecraft:stick"}, "B": {"item": "minecraft:item_frame"}})
 shaped("mark1_compressor", plus, {"A": {"item": "minecraft:stick"}, "B": {"item": "minecraft:piston"}})
-for i, mid in [(2, "c:ingots/iron"), (3, "c:ingots/gold"), (4, "c:gems/diamond")]:
-    shaped(f"mark{i}_compressor", plus, {"A": {"item": f"simplebarrels:mark{i-1}_compressor"}, "B": {"tag": mid}})
-shaped("dolly", ["I  ", "IS ", "III"], {"I": {"tag": "c:ingots/iron"}, "S": {"item": "minecraft:stick"}})
+for i, mid in [(2, "minecraft:iron_ingot"), (3, "minecraft:gold_ingot"), (4, "minecraft:diamond")]:
+    shaped(f"mark{i}_compressor", plus, {"A": {"item": f"simplebarrels:mark{i-1}_compressor"}, "B": {"item": mid}})
+shaped("dolly", ["I  ", "IS ", "III"], {"I": {"item": "minecraft:iron_ingot"}, "S": {"item": "minecraft:stick"}})
 ids = [f"simplebarrels:{x}_barrel" for x in WOODS]
-w(f"{D}/tags/block/barrels.json", {"values": ids})
-w(f"{ROOT}/data/minecraft/tags/block/mineable/axe.json", {"values": ids})
-w(f"{D}/tags/item/barrels.json", {"values": ids})
+w(f"{D}/tags/blocks/barrels.json", {"values": ids})
+w(f"{ROOT}/data/minecraft/tags/blocks/mineable/axe.json", {"values": ids})
+w(f"{D}/tags/items/barrels.json", {"values": ids})
 w(f"{A}/lang/en_us.json", lang)
