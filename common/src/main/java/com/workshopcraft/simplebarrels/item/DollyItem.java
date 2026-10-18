@@ -84,8 +84,4 @@ public class DollyItem extends Item {
         }
     }
 
-    @Override
-    public boolean isFoil(ItemStack stack) {
-        return stack.has(ModContent.CARRIED_BLOCK);
-    }
 }
