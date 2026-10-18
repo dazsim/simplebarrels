@@ -2,10 +2,12 @@ package com.workshopcraft.simplebarrels.item;
 
 import com.workshopcraft.simplebarrels.block.BarrelBlock;
 import com.workshopcraft.simplebarrels.block.BarrelBlockEntity;
+import com.workshopcraft.simplebarrels.block.ModdedBarrelBlock;
 import com.workshopcraft.simplebarrels.registry.ModContent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
@@ -76,7 +78,7 @@ public class DollyItem extends Item {
     public void appendHoverText(ItemStack stack, TooltipContext ctx, List<Component> lines, TooltipFlag flag) {
         CarriedBlock c = stack.get(ModContent.CARRIED_BLOCK);
         if (c == null) return;
-        lines.add(c.block().getName());
+        lines.add(c.block() == ModContent.MODDED_BARREL ? ModdedBarrelBlock.name(ResourceLocation.tryParse(c.data().getString("Wood"))) : c.block().getName());
         CompoundTag d = c.data();
         if (d.contains("Item") && ctx.registries() != null) {
             ItemStack item = ItemStack.parseOptional(ctx.registries(), d.getCompound("Item"));

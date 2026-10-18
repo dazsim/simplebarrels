@@ -3,6 +3,7 @@ package com.workshopcraft.simplebarrels.neoforge;
 import com.workshopcraft.simplebarrels.client.BarrelRenderer;
 import com.workshopcraft.simplebarrels.client.DollyChestRenderer;
 import com.workshopcraft.simplebarrels.client.DollyProperty;
+import com.workshopcraft.simplebarrels.client.ModdedBarrelModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -20,8 +21,12 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 public final class SimpleBarrelsNeoForgeClient {
     private SimpleBarrelsNeoForgeClient() {}
 
-    static void init(IEventBus modBus) {
-        modBus.addListener((RegisterClientExtensionsEvent e) -> e.registerItem(new IClientItemExtensions() {
+    interface ItemDraw {
+        void render(ItemStack stack, PoseStack pose, MultiBufferSource buffers, int light, int overlay);
+    }
+
+    private static IClientItemExtensions extension(ItemDraw draw) {
+        return new IClientItemExtensions() {
             private BlockEntityWithoutLevelRenderer renderer;
 
             @Override
@@ -31,13 +36,20 @@ public final class SimpleBarrelsNeoForgeClient {
                     renderer = new BlockEntityWithoutLevelRenderer(mc.getBlockEntityRenderDispatcher(), mc.getEntityModels()) {
                         @Override
                         public void renderByItem(ItemStack stack, ItemDisplayContext ctx, PoseStack pose, MultiBufferSource buffers, int light, int overlay) {
-                            DollyChestRenderer.render(stack, pose, buffers, light, overlay);
+                            draw.render(stack, pose, buffers, light, overlay);
                         }
                     };
                 }
                 return renderer;
             }
-        }, ModContent.DOLLY));
+        };
+    }
+
+    static void init(IEventBus modBus) {
+        modBus.addListener((RegisterClientExtensionsEvent e) -> {
+            e.registerItem(extension(DollyChestRenderer::render), ModContent.DOLLY);
+            e.registerItem(extension(ModdedBarrelModel::renderItem), ModContent.MODDED_BARREL_ITEM);
+        });
         modBus.addListener((EntityRenderersEvent.RegisterRenderers e) -> e.registerBlockEntityRenderer(ModContent.BARREL_BE, BarrelRenderer::new));
         modBus.addListener((FMLClientSetupEvent e) -> e.enqueueWork(() ->
                 ItemProperties.register(ModContent.DOLLY, DollyProperty.ID, (stack, level, entity, seed) -> DollyProperty.get(stack))));

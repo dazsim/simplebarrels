@@ -1,0 +1,145 @@
+{
+  "parent": "builtin/entity",
+  "gui_light": "front",
+  "textures": {
+    "particle": "simplebarrels:item/dolly"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        120,
+        180,
+        0
+      ],
+      "translation": [
+        -2.83,
+        10,
+        -4
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        120,
+        180,
+        0
+      ],
+      "translation": [
+        -2.83,
+        10,
+        -4
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "head": {
+      "rotation": [
+        100,
+        0,
+        180
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        3.4,
+        0
+      ],
+      "scale": [
+        0.2,
+        0.2,
+        0.2
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        -7,
+        180,
+        0
+      ],
+      "translation": [
+        0,
+        -2.65,
+        -5.67
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        100,
+        180,
+        0
+      ],
+      "translation": [
+        -2.46,
+        7.75,
+        -10.2
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        100,
+        180,
+        0
+      ],
+      "translation": [
+        -2.46,
+        7.75,
+        -10.2
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "gui": {
+      "rotation": [
+        28,
+        21,
+        0
+      ],
+      "translation": [
+        0.76,
+        -3.78,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    }
+  }
+}

@@ -12,6 +12,8 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -19,7 +21,7 @@ import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.entity.EnderChestBlockEntity;
 import net.minecraft.world.level.block.entity.TrappedChestBlockEntity;
 
-// loaded dolly with a chest: dolly frame model plus the real chest renderer on the plate
+// loaded dolly with a chest or modded barrel: dolly frame model plus the block on the plate
 public final class DollyChestRenderer {
     private static ChestBlockEntity chest, trapped;
     private static EnderChestBlockEntity ender;
@@ -32,7 +34,16 @@ public final class DollyChestRenderer {
         mc.getBlockRenderer().getModelRenderer().renderModel(pose.last(), buffers.getBuffer(Sheets.cutoutBlockSheet()),
                 null, frame, 1, 1, 1, light, OverlayTexture.NO_OVERLAY);
 
-        BlockEntity be = chestFor(stack.get(ModContent.CARRIED_BLOCK));
+        CarriedBlock carried = stack.get(ModContent.CARRIED_BLOCK);
+        if (carried != null && carried.block() == ModContent.MODDED_BARREL) {
+            pose.pushPose();
+            pose.translate(3.2 / 16, 1.6 / 16, 1.4 / 16);
+            pose.scale(0.6F, 0.6F, 0.6F);
+            ModdedBarrelModel.render(ResourceLocation.tryParse(carried.data().getString("Wood")), Direction.EAST, pose, buffers, light, overlay);
+            pose.popPose();
+            return;
+        }
+        BlockEntity be = chestFor(carried);
         if (be == null) return;
         pose.pushPose();
         pose.translate(3.2 / 16, 1.6 / 16, 1.4 / 16);
