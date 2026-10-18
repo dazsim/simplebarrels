@@ -10,5 +10,12 @@
   "block.simplebarrels.cherry_barrel": "Cherry Barrel",
   "block.simplebarrels.bamboo_barrel": "Bamboo Barrel",
   "block.simplebarrels.crimson_barrel": "Crimson Barrel",
-  "block.simplebarrels.warped_barrel": "Warped Barrel"
+  "block.simplebarrels.warped_barrel": "Warped Barrel",
+  "item.simplebarrels.dolly": "Dolly",
+  "item.simplebarrels.comparator_upgrade": "Comparator Upgrade",
+  "item.simplebarrels.item_frame_upgrade": "Item Frame Upgrade",
+  "item.simplebarrels.mark1_compressor": "Mark 1 Compressor Upgrade",
+  "item.simplebarrels.mark2_compressor": "Mark 2 Compressor Upgrade",
+  "item.simplebarrels.mark3_compressor": "Mark 3 Compressor Upgrade",
+  "item.simplebarrels.mark4_compressor": "Mark 4 Compressor Upgrade"
 }

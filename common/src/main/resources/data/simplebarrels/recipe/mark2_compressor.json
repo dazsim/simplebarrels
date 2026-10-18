@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " A ",
+    "ABA",
+    " A "
+  ],
+  "key": {
+    "A": {
+      "item": "simplebarrels:mark1_compressor"
+    },
+    "B": {
+      "tag": "c:ingots/iron"
+    }
+  },
+  "result": {
+    "id": "simplebarrels:mark2_compressor",
+    "count": 1
+  }
+}

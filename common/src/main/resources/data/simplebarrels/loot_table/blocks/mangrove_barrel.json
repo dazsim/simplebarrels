@@ -7,7 +7,16 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "simplebarrels:mangrove_barrel"
+          "name": "simplebarrels:mangrove_barrel",
+          "functions": [
+            {
+              "function": "minecraft:copy_components",
+              "source": "block_entity",
+              "include": [
+                "simplebarrels:upgrades"
+              ]
+            }
+          ]
         }
       ],
       "conditions": [

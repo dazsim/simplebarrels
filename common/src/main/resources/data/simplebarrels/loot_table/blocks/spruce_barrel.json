@@ -7,7 +7,16 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "simplebarrels:spruce_barrel"
+          "name": "simplebarrels:spruce_barrel",
+          "functions": [
+            {
+              "function": "minecraft:copy_components",
+              "source": "block_entity",
+              "include": [
+                "simplebarrels:upgrades"
+              ]
+            }
+          ]
         }
       ],
       "conditions": [

@@ -1,6 +1,9 @@
 package com.workshopcraft.simplebarrels.block;
 
+import com.workshopcraft.simplebarrels.item.BarrelUpgrades;
+import com.workshopcraft.simplebarrels.item.UpgradeItem;
 import com.workshopcraft.simplebarrels.registry.ModContent;
+import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -18,6 +21,8 @@ public class BarrelBlockEntity extends BlockEntity {
     private ItemStack template = ItemStack.EMPTY;
     private int count = 0;
     private int capacity = BASE_CAPACITY;
+    private boolean comparator = false;
+    private boolean frame = false;
 
     public Object platformStorage;
 
@@ -28,6 +33,44 @@ public class BarrelBlockEntity extends BlockEntity {
     public ItemStack getTemplate() { return template; }
     public int getCount() { return count; }
     public int getCapacity() { return capacity; }
+    public boolean hasComparator() { return comparator; }
+    public boolean hasFrame() { return frame; }
+
+    // 0 for none, 1 to 4 for compressor marks
+    public int compressorTier() {
+        int t = 0;
+        for (int c = capacity; c > BASE_CAPACITY; c >>= 1) t++;
+        return t;
+    }
+
+    public BarrelUpgrades getUpgrades() { return new BarrelUpgrades(comparator, frame, capacity); }
+
+    public void setUpgrades(BarrelUpgrades u) {
+        comparator = u.comparator();
+        frame = u.frame();
+        capacity = Math.max(BASE_CAPACITY, u.capacity());
+    }
+
+    // same rules as the old upgrade items, compressors must go in order
+    public boolean applyUpgrade(UpgradeItem.Kind kind) {
+        switch (kind) {
+            case COMPARATOR -> { if (comparator) return false; comparator = true; }
+            case FRAME -> { if (frame) return false; frame = true; }
+            default -> {
+                int from = BASE_CAPACITY << (kind.ordinal() - UpgradeItem.Kind.MK1.ordinal());
+                if (capacity != from) return false;
+                capacity = from * 2;
+            }
+        }
+        changed();
+        return true;
+    }
+
+    public int comparatorSignal() {
+        if (!comparator || isEmpty()) return 0;
+        return 1 + (int) ((long) count * 14 / capacity);
+    }
+
     public boolean isEmpty() { return count <= 0 || template.isEmpty(); }
 
     public boolean canAccept(ItemStack stack) {
@@ -78,6 +121,7 @@ public class BarrelBlockEntity extends BlockEntity {
         if (level != null && !level.isClientSide) {
             BlockState s = getBlockState();
             level.sendBlockUpdated(worldPosition, s, s, Block.UPDATE_CLIENTS);
+            level.updateNeighbourForOutputSignal(worldPosition, s.getBlock());
         }
     }
 
@@ -89,14 +133,37 @@ public class BarrelBlockEntity extends BlockEntity {
             tag.putInt("Count", count);
         }
         if (capacity != BASE_CAPACITY) tag.putInt("Capacity", capacity);
+        if (comparator) tag.putBoolean("Comparator", true);
+        if (frame) tag.putBoolean("Frame", true);
     }
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
         capacity = tag.contains("Capacity") ? tag.getInt("Capacity") : BASE_CAPACITY;
+        comparator = tag.getBoolean("Comparator");
+        frame = tag.getBoolean("Frame");
         ItemStack loaded = tag.contains("Item") ? ItemStack.parseOptional(registries, tag.getCompound("Item")) : ItemStack.EMPTY;
         setContentsRaw(loaded, loaded.isEmpty() ? 0 : tag.getInt("Count"));
+    }
+
+    @Override
+    protected void collectImplicitComponents(DataComponentMap.Builder b) {
+        super.collectImplicitComponents(b);
+        if (!getUpgrades().isNone()) b.set(ModContent.UPGRADES, getUpgrades());
+    }
+
+    @Override
+    protected void applyImplicitComponents(DataComponentInput in) {
+        super.applyImplicitComponents(in);
+        setUpgrades(in.getOrDefault(ModContent.UPGRADES, BarrelUpgrades.NONE));
+    }
+
+    @Override
+    public void removeComponentsFromTag(CompoundTag tag) {
+        tag.remove("Capacity");
+        tag.remove("Comparator");
+        tag.remove("Frame");
     }
 
     @Override

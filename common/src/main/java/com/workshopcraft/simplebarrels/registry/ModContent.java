@@ -3,6 +3,11 @@ package com.workshopcraft.simplebarrels.registry;
 import com.workshopcraft.simplebarrels.SimpleBarrels;
 import com.workshopcraft.simplebarrels.block.BarrelBlock;
 import com.workshopcraft.simplebarrels.block.BarrelBlockEntity;
+import com.workshopcraft.simplebarrels.item.BarrelUpgrades;
+import com.workshopcraft.simplebarrels.item.CarriedBarrel;
+import com.workshopcraft.simplebarrels.item.DollyItem;
+import com.workshopcraft.simplebarrels.item.UpgradeItem;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -16,7 +21,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
@@ -24,6 +31,10 @@ public final class ModContent {
     public static final Map<BarrelWood, BarrelBlock> BARRELS = new EnumMap<>(BarrelWood.class);
     public static BlockEntityType<BarrelBlockEntity> BARREL_BE;
     public static CreativeModeTab TAB;
+    public static DollyItem DOLLY;
+    public static final List<Item> UPGRADES_ITEMS = new ArrayList<>();
+    public static DataComponentType<BarrelUpgrades> UPGRADES;
+    public static DataComponentType<CarriedBarrel> CARRIED_BARREL;
 
     private ModContent() {}
 
@@ -43,6 +54,21 @@ public final class ModContent {
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> r) {
         BARRELS.forEach((wood, block) -> r.accept(SimpleBarrels.id(wood.blockId()), new BlockItem(block, new Item.Properties())));
+        DOLLY = new DollyItem(new Item.Properties().stacksTo(1));
+        r.accept(SimpleBarrels.id("dolly"), DOLLY);
+        String[] names = {"comparator_upgrade", "item_frame_upgrade", "mark1_compressor", "mark2_compressor", "mark3_compressor", "mark4_compressor"};
+        for (UpgradeItem.Kind k : UpgradeItem.Kind.values()) {
+            UpgradeItem item = new UpgradeItem(k, new Item.Properties());
+            UPGRADES_ITEMS.add(item);
+            r.accept(SimpleBarrels.id(names[k.ordinal()]), item);
+        }
+    }
+
+    public static void registerDataComponents(BiConsumer<ResourceLocation, DataComponentType<?>> r) {
+        UPGRADES = DataComponentType.<BarrelUpgrades>builder().persistent(BarrelUpgrades.CODEC).networkSynchronized(BarrelUpgrades.STREAM_CODEC).build();
+        CARRIED_BARREL = DataComponentType.<CarriedBarrel>builder().persistent(CarriedBarrel.CODEC).networkSynchronized(CarriedBarrel.STREAM_CODEC).build();
+        r.accept(SimpleBarrels.id("upgrades"), UPGRADES);
+        r.accept(SimpleBarrels.id("carried_barrel"), CARRIED_BARREL);
     }
 
     public static void registerBlockEntities(BiConsumer<ResourceLocation, BlockEntityType<?>> r) {
@@ -54,7 +80,11 @@ public final class ModContent {
         TAB = CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
                 .title(Component.translatable("itemGroup." + SimpleBarrels.MOD_ID))
                 .icon(() -> new ItemStack(BARRELS.get(BarrelWood.OAK)))
-                .displayItems((params, out) -> BARRELS.values().forEach(out::accept))
+                .displayItems((params, out) -> {
+                    BARRELS.values().forEach(out::accept);
+                    out.accept(DOLLY);
+                    UPGRADES_ITEMS.forEach(out::accept);
+                })
                 .build();
         r.accept(SimpleBarrels.id("main"), TAB);
     }
@@ -64,6 +94,7 @@ public final class ModContent {
     }
 
     public static void registerAllDirect() {
+        registerDataComponents(direct(BuiltInRegistries.DATA_COMPONENT_TYPE));
         registerBlocks(direct(BuiltInRegistries.BLOCK));
         registerItems(direct(BuiltInRegistries.ITEM));
         registerBlockEntities(direct(BuiltInRegistries.BLOCK_ENTITY_TYPE));
