@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "simplebarrels:acacia_barrel",
+  "pattern": [
+    "WIW",
+    " C ",
+    "WIW"
+  ],
+  "key": {
+    "W": "minecraft:acacia_planks",
+    "I": "#c:ingots/iron",
+    "C": "#c:chests/wooden"
+  },
+  "result": {
+    "id": "simplebarrels:acacia_barrel",
+    "count": 1
+  }
+}

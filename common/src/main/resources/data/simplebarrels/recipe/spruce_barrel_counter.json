@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "simplebarrels:spruce_barrel",
+  "pattern": [
+    "WIW",
+    " CN",
+    "WIW"
+  ],
+  "key": {
+    "W": "minecraft:spruce_planks",
+    "I": "#c:ingots/iron",
+    "C": "#c:chests/wooden",
+    "N": "simplebarrels:counter"
+  },
+  "result": {
+    "id": "simplebarrels:spruce_barrel",
+    "count": 1,
+    "components": {
+      "simplebarrels:upgrades": {
+        "show_count": true
+      }
+    }
+  }
+}

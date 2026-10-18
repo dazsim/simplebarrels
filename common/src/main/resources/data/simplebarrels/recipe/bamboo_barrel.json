@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "simplebarrels:bamboo_barrel",
+  "pattern": [
+    "WIW",
+    " C ",
+    "WIW"
+  ],
+  "key": {
+    "W": "minecraft:bamboo_planks",
+    "I": "#c:ingots/iron",
+    "C": "#c:chests/wooden"
+  },
+  "result": {
+    "id": "simplebarrels:bamboo_barrel",
+    "count": 1
+  }
+}

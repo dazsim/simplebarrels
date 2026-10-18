@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "simplebarrels:compressor",
+  "pattern": [
+    " A ",
+    "ABA",
+    " A "
+  ],
+  "key": {
+    "A": "simplebarrels:mark3_compressor",
+    "B": "#c:gems/diamond"
+  },
+  "result": {
+    "id": "simplebarrels:mark4_compressor",
+    "count": 1
+  }
+}

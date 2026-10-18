@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "simplebarrels:mangrove_barrel",
+  "pattern": [
+    "WIW",
+    " CN",
+    "WIW"
+  ],
+  "key": {
+    "W": "minecraft:mangrove_planks",
+    "I": "#c:ingots/iron",
+    "C": "#c:chests/wooden",
+    "N": "simplebarrels:counter"
+  },
+  "result": {
+    "id": "simplebarrels:mangrove_barrel",
+    "count": 1,
+    "components": {
+      "simplebarrels:upgrades": {
+        "show_count": true
+      }
+    }
+  }
+}

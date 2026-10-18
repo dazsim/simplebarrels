@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "simplebarrels:warped_barrel",
+  "pattern": [
+    "WIW",
+    " CN",
+    "WIW"
+  ],
+  "key": {
+    "W": "minecraft:warped_planks",
+    "I": "#c:ingots/iron",
+    "C": "#c:chests/wooden",
+    "N": "simplebarrels:counter"
+  },
+  "result": {
+    "id": "simplebarrels:warped_barrel",
+    "count": 1,
+    "components": {
+      "simplebarrels:upgrades": {
+        "show_count": true
+      }
+    }
+  }
+}

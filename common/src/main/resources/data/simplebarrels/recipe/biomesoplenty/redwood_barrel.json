@@ -1,0 +1,36 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "biomesoplenty"
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "simplebarrels:biomesoplenty/redwood_barrel",
+  "pattern": [
+    "WIW",
+    " C ",
+    "WIW"
+  ],
+  "key": {
+    "W": "biomesoplenty:redwood_planks",
+    "I": "#c:ingots/iron",
+    "C": "#c:chests/wooden"
+  },
+  "result": {
+    "id": "simplebarrels:modded_barrel",
+    "count": 1,
+    "components": {
+      "simplebarrels:wood": "biomesoplenty:redwood_planks"
+    }
+  }
+}

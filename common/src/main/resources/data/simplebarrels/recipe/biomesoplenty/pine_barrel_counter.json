@@ -1,0 +1,40 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "biomesoplenty"
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "simplebarrels:biomesoplenty/pine_barrel",
+  "pattern": [
+    "WIW",
+    " CN",
+    "WIW"
+  ],
+  "key": {
+    "W": "biomesoplenty:pine_planks",
+    "I": "#c:ingots/iron",
+    "C": "#c:chests/wooden",
+    "N": "simplebarrels:counter"
+  },
+  "result": {
+    "id": "simplebarrels:modded_barrel",
+    "count": 1,
+    "components": {
+      "simplebarrels:wood": "biomesoplenty:pine_planks",
+      "simplebarrels:upgrades": {
+        "show_count": true
+      }
+    }
+  }
+}

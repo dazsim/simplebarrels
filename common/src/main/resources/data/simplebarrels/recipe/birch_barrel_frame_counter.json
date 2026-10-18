@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "simplebarrels:birch_barrel",
+  "pattern": [
+    "WIW",
+    "FCN",
+    "WIW"
+  ],
+  "key": {
+    "W": "minecraft:birch_planks",
+    "I": "#c:ingots/iron",
+    "C": "#c:chests/wooden",
+    "F": "minecraft:item_frame",
+    "N": "simplebarrels:counter"
+  },
+  "result": {
+    "id": "simplebarrels:birch_barrel",
+    "count": 1,
+    "components": {
+      "simplebarrels:upgrades": {
+        "show_count": true,
+        "show_item": true
+      }
+    }
+  }
+}

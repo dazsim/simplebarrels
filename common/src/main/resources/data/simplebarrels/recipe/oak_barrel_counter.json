@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "simplebarrels:oak_barrel",
+  "pattern": [
+    "WIW",
+    " CN",
+    "WIW"
+  ],
+  "key": {
+    "W": "minecraft:oak_planks",
+    "I": "#c:ingots/iron",
+    "C": "#c:chests/wooden",
+    "N": "simplebarrels:counter"
+  },
+  "result": {
+    "id": "simplebarrels:oak_barrel",
+    "count": 1,
+    "components": {
+      "simplebarrels:upgrades": {
+        "show_count": true
+      }
+    }
+  }
+}

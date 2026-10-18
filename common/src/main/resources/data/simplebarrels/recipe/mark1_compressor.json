@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "simplebarrels:compressor",
+  "pattern": [
+    " A ",
+    "ABA",
+    " A "
+  ],
+  "key": {
+    "A": "minecraft:stick",
+    "B": "minecraft:piston"
+  },
+  "result": {
+    "id": "simplebarrels:mark1_compressor",
+    "count": 1
+  }
+}

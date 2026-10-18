@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "simplebarrels:item/modded_barrel",
+    "model": {
+      "type": "simplebarrels:modded_barrel"
+    }
+  }
+}

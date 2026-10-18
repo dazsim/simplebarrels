@@ -1,0 +1,113 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "property": "simplebarrels:carried",
+    "cases": [
+      {
+        "when": "oak",
+        "model": {
+          "type": "minecraft:model",
+          "model": "simplebarrels:item/dolly_oak"
+        }
+      },
+      {
+        "when": "spruce",
+        "model": {
+          "type": "minecraft:model",
+          "model": "simplebarrels:item/dolly_spruce"
+        }
+      },
+      {
+        "when": "birch",
+        "model": {
+          "type": "minecraft:model",
+          "model": "simplebarrels:item/dolly_birch"
+        }
+      },
+      {
+        "when": "jungle",
+        "model": {
+          "type": "minecraft:model",
+          "model": "simplebarrels:item/dolly_jungle"
+        }
+      },
+      {
+        "when": "acacia",
+        "model": {
+          "type": "minecraft:model",
+          "model": "simplebarrels:item/dolly_acacia"
+        }
+      },
+      {
+        "when": "dark_oak",
+        "model": {
+          "type": "minecraft:model",
+          "model": "simplebarrels:item/dolly_dark_oak"
+        }
+      },
+      {
+        "when": "mangrove",
+        "model": {
+          "type": "minecraft:model",
+          "model": "simplebarrels:item/dolly_mangrove"
+        }
+      },
+      {
+        "when": "cherry",
+        "model": {
+          "type": "minecraft:model",
+          "model": "simplebarrels:item/dolly_cherry"
+        }
+      },
+      {
+        "when": "bamboo",
+        "model": {
+          "type": "minecraft:model",
+          "model": "simplebarrels:item/dolly_bamboo"
+        }
+      },
+      {
+        "when": "crimson",
+        "model": {
+          "type": "minecraft:model",
+          "model": "simplebarrels:item/dolly_crimson"
+        }
+      },
+      {
+        "when": "warped",
+        "model": {
+          "type": "minecraft:model",
+          "model": "simplebarrels:item/dolly_warped"
+        }
+      },
+      {
+        "when": [
+          "chest",
+          "trapped_chest",
+          "ender_chest",
+          "modded"
+        ],
+        "model": {
+          "type": "minecraft:composite",
+          "models": [
+            {
+              "type": "minecraft:model",
+              "model": "simplebarrels:item/dolly"
+            },
+            {
+              "type": "minecraft:special",
+              "base": "simplebarrels:item/dolly",
+              "model": {
+                "type": "simplebarrels:dolly_load"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "simplebarrels:item/dolly"
+    }
+  }
+}

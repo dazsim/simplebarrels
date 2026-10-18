@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "simplebarrels:compressor",
+  "pattern": [
+    " A ",
+    "ABA",
+    " A "
+  ],
+  "key": {
+    "A": "simplebarrels:mark2_compressor",
+    "B": "#c:ingots/gold"
+  },
+  "result": {
+    "id": "simplebarrels:mark3_compressor",
+    "count": 1
+  }
+}

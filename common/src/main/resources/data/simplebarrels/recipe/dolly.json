@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "I  ",
+    "IS ",
+    "III"
+  ],
+  "key": {
+    "I": "#c:ingots/iron",
+    "S": "minecraft:stick"
+  },
+  "result": {
+    "id": "simplebarrels:dolly",
+    "count": 1
+  }
+}

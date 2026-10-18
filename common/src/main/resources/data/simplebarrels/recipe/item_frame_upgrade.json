@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " A ",
+    "ABA",
+    " A "
+  ],
+  "key": {
+    "A": "minecraft:stick",
+    "B": "minecraft:item_frame"
+  },
+  "result": {
+    "id": "simplebarrels:item_frame_upgrade",
+    "count": 1
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "simplebarrels:block/dark_oak_barrel"
+    },
+    "facing=south": {
+      "model": "simplebarrels:block/dark_oak_barrel",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "simplebarrels:block/dark_oak_barrel",
+      "y": 180
+    },
+    "facing=north": {
+      "model": "simplebarrels:block/dark_oak_barrel",
+      "y": 270
+    }
+  }
+}

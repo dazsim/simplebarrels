@@ -1,0 +1,40 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "regions_unexplored"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "regions_unexplored"
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "simplebarrels:regions_unexplored/larch_barrel",
+  "pattern": [
+    "WIW",
+    "FC ",
+    "WIW"
+  ],
+  "key": {
+    "W": "regions_unexplored:larch_planks",
+    "I": "#c:ingots/iron",
+    "C": "#c:chests/wooden",
+    "F": "minecraft:item_frame"
+  },
+  "result": {
+    "id": "simplebarrels:modded_barrel",
+    "count": 1,
+    "components": {
+      "simplebarrels:wood": "regions_unexplored:larch_planks",
+      "simplebarrels:upgrades": {
+        "show_item": true
+      }
+    }
+  }
+}
