@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "simplebarrels:block/birch_barrel"
+    },
+    "facing=south": {
+      "model": "simplebarrels:block/birch_barrel",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "simplebarrels:block/birch_barrel",
+      "y": 180
+    },
+    "facing=north": {
+      "model": "simplebarrels:block/birch_barrel",
+      "y": 270
+    }
+  }
+}

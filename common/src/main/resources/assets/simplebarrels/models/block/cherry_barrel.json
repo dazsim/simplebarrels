@@ -1,0 +1,7 @@
+{
+  "parent": "simplebarrels:block/barrel_base",
+  "textures": {
+    "particle": "minecraft:block/cherry_planks",
+    "texture": "minecraft:block/cherry_planks"
+  }
+}

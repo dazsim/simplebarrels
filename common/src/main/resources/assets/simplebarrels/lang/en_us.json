@@ -1,0 +1,14 @@
+{
+  "itemGroup.simplebarrels": "Simple Barrels",
+  "block.simplebarrels.oak_barrel": "Oak Barrel",
+  "block.simplebarrels.spruce_barrel": "Spruce Barrel",
+  "block.simplebarrels.birch_barrel": "Birch Barrel",
+  "block.simplebarrels.jungle_barrel": "Jungle Barrel",
+  "block.simplebarrels.acacia_barrel": "Acacia Barrel",
+  "block.simplebarrels.dark_oak_barrel": "Dark Oak Barrel",
+  "block.simplebarrels.mangrove_barrel": "Mangrove Barrel",
+  "block.simplebarrels.cherry_barrel": "Cherry Barrel",
+  "block.simplebarrels.bamboo_barrel": "Bamboo Barrel",
+  "block.simplebarrels.crimson_barrel": "Crimson Barrel",
+  "block.simplebarrels.warped_barrel": "Warped Barrel"
+}

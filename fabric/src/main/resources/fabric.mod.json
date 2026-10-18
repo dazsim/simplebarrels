@@ -1,0 +1,28 @@
+{
+    "schemaVersion": 1,
+    "id": "${mod_id}",
+    "version": "${version}",
+    "name": "${mod_name}",
+    "description": "${description}",
+    "authors": [
+        "${mod_author}"
+    ],
+    "contact": {
+        "sources": "https://github.com/dazsim/simplebarrels"
+    },
+    "license": "${license}",
+    "environment": "*",
+    "accessWidener": "simplebarrels.accesswidener",
+    "entrypoints": {
+        "main": [
+            "com.workshopcraft.simplebarrels.fabric.SimpleBarrelsFabric"
+        ]
+    },
+    "depends": {
+        "fabricloader": ">=${fabric_loader_version}",
+        "fabric-api": "*",
+        "minecraft": "${minecraft_version}",
+        "java": ">=${java_version}"
+    }
+}
+  
