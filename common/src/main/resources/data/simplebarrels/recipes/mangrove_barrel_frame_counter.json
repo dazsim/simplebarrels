@@ -1,0 +1,37 @@
+{
+  "type": "simplebarrels:shaped_nbt",
+  "category": "misc",
+  "group": "simplebarrels:mangrove_barrel",
+  "pattern": [
+    "WIW",
+    "FCN",
+    "WIW"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:mangrove_planks"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "F": {
+      "item": "minecraft:item_frame"
+    },
+    "N": {
+      "item": "simplebarrels:counter"
+    }
+  },
+  "result": {
+    "item": "simplebarrels:mangrove_barrel",
+    "count": 1,
+    "nbt": {
+      "BlockEntityTag": {
+        "ShowCount": true,
+        "ShowItem": true
+      }
+    }
+  }
+}

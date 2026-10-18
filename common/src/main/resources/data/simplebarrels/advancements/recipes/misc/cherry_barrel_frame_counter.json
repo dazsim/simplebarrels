@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "simplebarrels:cherry_barrel_frame_counter"
+      }
+    },
+    "has_chest": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:chest"
+            ]
+          }
+        ]
+      }
+    },
+    "has_cherry_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:cherry_planks"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_chest",
+      "has_cherry_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "simplebarrels:cherry_barrel_frame_counter"
+    ]
+  }
+}

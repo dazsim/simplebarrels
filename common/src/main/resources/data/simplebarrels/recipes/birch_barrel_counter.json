@@ -1,0 +1,33 @@
+{
+  "type": "simplebarrels:shaped_nbt",
+  "category": "misc",
+  "group": "simplebarrels:birch_barrel",
+  "pattern": [
+    "WIW",
+    " CN",
+    "WIW"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:birch_planks"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "N": {
+      "item": "simplebarrels:counter"
+    }
+  },
+  "result": {
+    "item": "simplebarrels:birch_barrel",
+    "count": 1,
+    "nbt": {
+      "BlockEntityTag": {
+        "ShowCount": true
+      }
+    }
+  }
+}

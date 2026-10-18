@@ -69,7 +69,7 @@ public final class ModContent {
         r.accept(SimpleBarrels.id("modded_barrel"), MODDED_BARREL_ITEM);
         DOLLY = dollyFactory.apply(new Item.Properties().stacksTo(1));
         r.accept(SimpleBarrels.id("dolly"), DOLLY);
-        String[] names = {"comparator_upgrade", "item_frame_upgrade", "mark1_compressor", "mark2_compressor", "mark3_compressor", "mark4_compressor"};
+        String[] names = {"counter", "item_frame_upgrade", "mark1_compressor", "mark2_compressor", "mark3_compressor", "mark4_compressor"};
         for (UpgradeItem.Kind k : UpgradeItem.Kind.values()) {
             UpgradeItem item = new UpgradeItem(k, new Item.Properties());
             UPGRADES_ITEMS.add(item);

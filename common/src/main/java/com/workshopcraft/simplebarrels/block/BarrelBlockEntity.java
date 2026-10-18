@@ -57,7 +57,7 @@ public class BarrelBlockEntity extends BlockEntity {
     // same rules as the old upgrade items, compressors must go in order
     public boolean applyUpgrade(UpgradeItem.Kind kind) {
         switch (kind) {
-            case COMPARATOR -> { if (showCount) return false; showCount = true; }
+            case COUNTER -> { if (showCount) return false; showCount = true; }
             case FRAME -> { if (showItem) return false; showItem = true; }
             default -> {
                 int from = BASE_CAPACITY << (kind.ordinal() - UpgradeItem.Kind.MK1.ordinal());

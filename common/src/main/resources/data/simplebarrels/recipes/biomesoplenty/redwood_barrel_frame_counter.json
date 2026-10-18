@@ -1,0 +1,52 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "biomesoplenty"
+      ]
+    }
+  ],
+  "type": "simplebarrels:shaped_nbt",
+  "category": "misc",
+  "group": "simplebarrels:biomesoplenty/redwood_barrel",
+  "pattern": [
+    "WIW",
+    "FCN",
+    "WIW"
+  ],
+  "key": {
+    "W": {
+      "item": "biomesoplenty:redwood_planks"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "F": {
+      "item": "minecraft:item_frame"
+    },
+    "N": {
+      "item": "simplebarrels:counter"
+    }
+  },
+  "result": {
+    "item": "simplebarrels:modded_barrel",
+    "count": 1,
+    "nbt": {
+      "BlockEntityTag": {
+        "Wood": "biomesoplenty:redwood_planks",
+        "ShowCount": true,
+        "ShowItem": true
+      }
+    }
+  }
+}

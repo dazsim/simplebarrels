@@ -1,0 +1,37 @@
+{
+  "type": "simplebarrels:shaped_nbt",
+  "category": "misc",
+  "group": "simplebarrels:bamboo_barrel",
+  "pattern": [
+    "WIW",
+    "FCN",
+    "WIW"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:bamboo_planks"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "F": {
+      "item": "minecraft:item_frame"
+    },
+    "N": {
+      "item": "simplebarrels:counter"
+    }
+  },
+  "result": {
+    "item": "simplebarrels:bamboo_barrel",
+    "count": 1,
+    "nbt": {
+      "BlockEntityTag": {
+        "ShowCount": true,
+        "ShowItem": true
+      }
+    }
+  }
+}

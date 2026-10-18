@@ -1,0 +1,52 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "regions_unexplored"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "regions_unexplored"
+      ]
+    }
+  ],
+  "type": "simplebarrels:shaped_nbt",
+  "category": "misc",
+  "group": "simplebarrels:regions_unexplored/blue_bioshroom_barrel",
+  "pattern": [
+    "WIW",
+    "FCN",
+    "WIW"
+  ],
+  "key": {
+    "W": {
+      "item": "regions_unexplored:blue_bioshroom_planks"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "F": {
+      "item": "minecraft:item_frame"
+    },
+    "N": {
+      "item": "simplebarrels:counter"
+    }
+  },
+  "result": {
+    "item": "simplebarrels:modded_barrel",
+    "count": 1,
+    "nbt": {
+      "BlockEntityTag": {
+        "Wood": "regions_unexplored:blue_bioshroom_planks",
+        "ShowCount": true,
+        "ShowItem": true
+      }
+    }
+  }
+}
