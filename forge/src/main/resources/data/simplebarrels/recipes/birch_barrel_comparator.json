@@ -25,7 +25,7 @@
     "count": 1,
     "nbt": {
       "BlockEntityTag": {
-        "HideCount": true
+        "ShowCount": true
       }
     }
   }

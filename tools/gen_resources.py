@@ -19,7 +19,7 @@ for wood in WOODS:
     w(f"{D}/loot_tables/blocks/{bid}.json", {"type": "minecraft:block", "pools": [{"rolls": 1, "bonus_rolls": 0,
         "entries": [{"type": "minecraft:item", "name": f"simplebarrels:{bid}",
         "functions": [{"function": "minecraft:copy_nbt", "source": "block_entity", "ops": [
-            {"source": k, "target": f"BlockEntityTag.{k}", "op": "replace"} for k in ["HideCount", "HideItem", "Capacity"]]}]}], "conditions": [{"condition": "minecraft:survives_explosion"}]}],
+            {"source": k, "target": f"BlockEntityTag.{k}", "op": "replace"} for k in ["ShowCount", "ShowItem", "Capacity"]]}]}], "conditions": [{"condition": "minecraft:survives_explosion"}]}],
         })
     w(f"{D}/recipes/{bid}.json", {"type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["WIW", " C ", "WIW"],
         "key": {"W": {"item": f"minecraft:{wood}_planks"}, "I": {"item": "minecraft:iron_ingot"}, "C": {"item": "minecraft:chest"}},
@@ -29,7 +29,7 @@ for wood in WOODS:
         key = {"W": {"item": f"minecraft:{wood}_planks"}, "I": {"item": "minecraft:iron_ingot"}, "C": {"item": "minecraft:chest"}}
         if frame: key["F"] = {"item": "minecraft:item_frame"}
         if comp: key["R"] = {"item": "minecraft:comparator"}
-        flags = {k: True for k, v in [("HideCount", comp), ("HideItem", frame)] if v}
+        flags = {k: True for k, v in [("ShowCount", comp), ("ShowItem", frame)] if v}
         # result nbt only works on forge
         w(f"forge/src/main/resources/data/simplebarrels/recipes/{bid}{suffix}.json", {"type": "minecraft:crafting_shaped", "category": "misc",
             "pattern": ["WIW", ("F" if frame else " ") + "C" + ("R" if comp else " "), "WIW"], "key": key,
@@ -41,7 +41,8 @@ def shaped(name, pattern, key):
 items = {"dolly": "Dolly", "comparator_upgrade": "Comparator Upgrade", "item_frame_upgrade": "Item Frame Upgrade"}
 for i in range(1, 5): items[f"mark{i}_compressor"] = f"Mark {i} Compressor Upgrade"
 for name, label in items.items():
-    w(f"{A}/models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"simplebarrels:item/{name}"}})
+    if name != "dolly":  # dolly has a hand made 3d model
+        w(f"{A}/models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"simplebarrels:item/{name}"}})
     lang[f"item.simplebarrels.{name}"] = label
 plus = [" A ", "ABA", " A "]
 shaped("comparator_upgrade", plus, {"A": {"item": "minecraft:stick"}, "B": {"item": "minecraft:comparator"}})

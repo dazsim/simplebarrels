@@ -14,13 +14,13 @@
               "source": "block_entity",
               "ops": [
                 {
-                  "source": "HideCount",
-                  "target": "BlockEntityTag.HideCount",
+                  "source": "ShowCount",
+                  "target": "BlockEntityTag.ShowCount",
                   "op": "replace"
                 },
                 {
-                  "source": "HideItem",
-                  "target": "BlockEntityTag.HideItem",
+                  "source": "ShowItem",
+                  "target": "BlockEntityTag.ShowItem",
                   "op": "replace"
                 },
                 {

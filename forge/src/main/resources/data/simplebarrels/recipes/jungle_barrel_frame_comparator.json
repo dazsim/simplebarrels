@@ -28,8 +28,8 @@
     "count": 1,
     "nbt": {
       "BlockEntityTag": {
-        "HideCount": true,
-        "HideItem": true
+        "ShowCount": true,
+        "ShowItem": true
       }
     }
   }
