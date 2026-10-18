@@ -1,7 +1,8 @@
 package com.workshopcraft.simplebarrels.client;
 
 import com.workshopcraft.simplebarrels.SimpleBarrels;
-import com.workshopcraft.simplebarrels.item.CarriedBarrel;
+import com.workshopcraft.simplebarrels.item.CarriedBlock;
+import net.minecraft.world.level.block.Blocks;
 import com.workshopcraft.simplebarrels.registry.BarrelWood;
 import com.workshopcraft.simplebarrels.registry.ModContent;
 import net.minecraft.resources.ResourceLocation;
@@ -15,7 +16,7 @@ public final class DollyProperty {
     private DollyProperty() {}
 
     public static float get(ItemStack stack) {
-        CarriedBarrel c = stack.get(ModContent.CARRIED_BARREL);
+        CarriedBlock c = stack.get(ModContent.CARRIED_BLOCK);
         return c == null ? 0 : value(c.block());
     }
 
@@ -23,6 +24,9 @@ public final class DollyProperty {
         for (BarrelWood wood : BarrelWood.values()) {
             if (ModContent.BARRELS.get(wood) == block) return (wood.ordinal() + 1) / 16F;
         }
+        if (block == Blocks.CHEST) return 12 / 16F;
+        if (block == Blocks.TRAPPED_CHEST) return 13 / 16F;
+        if (block == Blocks.ENDER_CHEST) return 14 / 16F;
         return 0;
     }
 }

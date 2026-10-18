@@ -771,6 +771,24 @@
         "simplebarrels:carried": 0.6875
       },
       "model": "simplebarrels:item/dolly_warped"
+    },
+    {
+      "predicate": {
+        "simplebarrels:carried": 0.75
+      },
+      "model": "simplebarrels:item/dolly_chest"
+    },
+    {
+      "predicate": {
+        "simplebarrels:carried": 0.8125
+      },
+      "model": "simplebarrels:item/dolly_trapped_chest"
+    },
+    {
+      "predicate": {
+        "simplebarrels:carried": 0.875
+      },
+      "model": "simplebarrels:item/dolly_ender_chest"
     }
   ]
 }

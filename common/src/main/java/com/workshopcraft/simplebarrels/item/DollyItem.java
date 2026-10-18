@@ -1,9 +1,12 @@
 package com.workshopcraft.simplebarrels.item;
 
+import com.workshopcraft.simplebarrels.block.BarrelBlock;
 import com.workshopcraft.simplebarrels.block.BarrelBlockEntity;
 import com.workshopcraft.simplebarrels.registry.ModContent;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.Container;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -12,6 +15,8 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 
@@ -22,19 +27,31 @@ public class DollyItem extends Item {
         super(props);
     }
 
+    public static boolean canCarry(Block b) {
+        return b instanceof BarrelBlock || b == Blocks.CHEST || b == Blocks.TRAPPED_CHEST || b == Blocks.ENDER_CHEST;
+    }
+
     @Override
     public InteractionResult useOn(UseOnContext ctx) {
         Level level = ctx.getLevel();
         ItemStack dolly = ctx.getItemInHand();
-        CarriedBarrel carried = dolly.get(ModContent.CARRIED_BARREL);
+        CarriedBlock carried = dolly.get(ModContent.CARRIED_BLOCK);
         if (carried == null) {
             if (ctx.getPlayer() == null || !ctx.getPlayer().isShiftKeyDown()) return InteractionResult.PASS;
-            if (!(level.getBlockEntity(ctx.getClickedPos()) instanceof BarrelBlockEntity barrel)) return InteractionResult.PASS;
+            BlockPos pos = ctx.getClickedPos();
+            BlockState state = level.getBlockState(pos);
+            if (!canCarry(state.getBlock())) return InteractionResult.PASS;
             if (level.isClientSide) return InteractionResult.SUCCESS;
-            dolly.set(ModContent.CARRIED_BARREL, new CarriedBarrel(barrel.getBlockState().getBlock(),
-                    barrel.getTemplate().copy(), barrel.getCount(), barrel.getUpgrades()));
-            barrel.setContentsRaw(ItemStack.EMPTY, 0);
-            level.removeBlock(ctx.getClickedPos(), false);
+            BlockEntity be = level.getBlockEntity(pos);
+            CompoundTag data = new CompoundTag();
+            if (be != null && state.getBlock() != Blocks.ENDER_CHEST) {
+                data = be.saveWithoutMetadata(level.registryAccess());
+                // empty it first so nothing spills when the block goes
+                if (be instanceof BarrelBlockEntity barrel) barrel.setContentsRaw(ItemStack.EMPTY, 0);
+                else if (be instanceof Container c) c.clearContent();
+            }
+            dolly.set(ModContent.CARRIED_BLOCK, new CarriedBlock(state.getBlock(), data));
+            level.removeBlock(pos, false);
             return InteractionResult.CONSUME;
         }
         BlockPlaceContext place = new BlockPlaceContext(ctx);
@@ -44,27 +61,31 @@ public class DollyItem extends Item {
         if (state == null || !state.canSurvive(level, pos)) return InteractionResult.FAIL;
         if (level.isClientSide) return InteractionResult.SUCCESS;
         if (!level.setBlock(pos, state, Block.UPDATE_ALL)) return InteractionResult.FAIL;
-        if (level.getBlockEntity(pos) instanceof BarrelBlockEntity barrel) {
-            barrel.setUpgrades(carried.upgrades());
-            barrel.setContentsRaw(carried.item(), carried.count());
-            barrel.changed();
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be != null && !carried.data().isEmpty()) {
+            be.loadWithComponents(carried.data(), level.registryAccess());
+            be.setChanged();
+            if (be instanceof BarrelBlockEntity barrel) barrel.changed();
         }
         level.gameEvent(ctx.getPlayer(), GameEvent.BLOCK_PLACE, pos);
-        dolly.remove(ModContent.CARRIED_BARREL);
+        dolly.remove(ModContent.CARRIED_BLOCK);
         return InteractionResult.CONSUME;
     }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext ctx, List<Component> lines, TooltipFlag flag) {
-        CarriedBarrel c = stack.get(ModContent.CARRIED_BARREL);
+        CarriedBlock c = stack.get(ModContent.CARRIED_BLOCK);
         if (c == null) return;
         lines.add(c.block().getName());
-        if (!c.item().isEmpty()) lines.add(Component.literal(c.count() + " x ").append(c.item().getHoverName()));
+        CompoundTag d = c.data();
+        if (d.contains("Item") && ctx.registries() != null) {
+            ItemStack item = ItemStack.parseOptional(ctx.registries(), d.getCompound("Item"));
+            if (!item.isEmpty()) lines.add(Component.literal(d.getInt("Count") + " x ").append(item.getHoverName()));
+        }
     }
 
     @Override
     public boolean isFoil(ItemStack stack) {
-        return stack.has(ModContent.CARRIED_BARREL);
+        return stack.has(ModContent.CARRIED_BLOCK);
     }
-
 }

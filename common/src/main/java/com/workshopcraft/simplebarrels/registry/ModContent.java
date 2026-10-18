@@ -4,7 +4,7 @@ import com.workshopcraft.simplebarrels.SimpleBarrels;
 import com.workshopcraft.simplebarrels.block.BarrelBlock;
 import com.workshopcraft.simplebarrels.block.BarrelBlockEntity;
 import com.workshopcraft.simplebarrels.item.BarrelUpgrades;
-import com.workshopcraft.simplebarrels.item.CarriedBarrel;
+import com.workshopcraft.simplebarrels.item.CarriedBlock;
 import com.workshopcraft.simplebarrels.item.DollyItem;
 import com.workshopcraft.simplebarrels.item.UpgradeItem;
 import net.minecraft.core.component.DataComponentType;
@@ -34,7 +34,7 @@ public final class ModContent {
     public static DollyItem DOLLY;
     public static final List<Item> UPGRADES_ITEMS = new ArrayList<>();
     public static DataComponentType<BarrelUpgrades> UPGRADES;
-    public static DataComponentType<CarriedBarrel> CARRIED_BARREL;
+    public static DataComponentType<CarriedBlock> CARRIED_BLOCK;
 
     private ModContent() {}
 
@@ -66,9 +66,9 @@ public final class ModContent {
 
     public static void registerDataComponents(BiConsumer<ResourceLocation, DataComponentType<?>> r) {
         UPGRADES = DataComponentType.<BarrelUpgrades>builder().persistent(BarrelUpgrades.CODEC).networkSynchronized(BarrelUpgrades.STREAM_CODEC).build();
-        CARRIED_BARREL = DataComponentType.<CarriedBarrel>builder().persistent(CarriedBarrel.CODEC).networkSynchronized(CarriedBarrel.STREAM_CODEC).build();
+        CARRIED_BLOCK = DataComponentType.<CarriedBlock>builder().persistent(CarriedBlock.CODEC).networkSynchronized(CarriedBlock.STREAM_CODEC).build();
         r.accept(SimpleBarrels.id("upgrades"), UPGRADES);
-        r.accept(SimpleBarrels.id("carried_barrel"), CARRIED_BARREL);
+        r.accept(SimpleBarrels.id("carried_block"), CARRIED_BLOCK);
     }
 
     public static void registerBlockEntities(BiConsumer<ResourceLocation, BlockEntityType<?>> r) {
