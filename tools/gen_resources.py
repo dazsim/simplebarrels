@@ -56,3 +56,26 @@ w(f"{D}/tags/blocks/barrels.json", {"values": ids})
 w(f"{ROOT}/data/minecraft/tags/blocks/mineable/axe.json", {"values": ids})
 w(f"{D}/tags/items/barrels.json", {"values": ids})
 w(f"{A}/lang/en_us.json", lang)
+
+# loaded dolly: dolly model plus a scaled barrel on the plate, picked by the simplebarrels:carried predicate
+dolly = json.load(open("tools/models/dolly_base.json"))
+barrel = json.load(open(f"{A}/models/block/barrel_base.json"))
+S, OFF = 0.6, (3.2, 1.6, 1.4)
+def fit(p): return [round(p[i] * S + OFF[i], 4) for i in range(3)]
+barrel_elems = []
+for e in barrel["elements"]:
+    e = json.loads(json.dumps(e))
+    e["from"], e["to"] = fit(e["from"]), fit(e["to"])
+    for f in e["faces"].values():
+        f["texture"] = "#planks" if f["texture"] == "#texture" else f["texture"]
+    barrel_elems.append(e)
+overrides = []
+for i, wood in enumerate(WOODS):
+    m = json.loads(json.dumps(dolly))
+    planks = f"minecraft:block/{wood}_planks"
+    m["textures"].update({"planks": planks, "barrelband": "simplebarrels:block/barrelband"})
+    m["elements"] = m["elements"] + barrel_elems
+    w(f"{A}/models/item/dolly_{wood}.json", m)
+    overrides.append({"predicate": {"simplebarrels:carried": round((i + 1) / 16, 4)}, "model": f"simplebarrels:item/dolly_{wood}"})
+dolly["overrides"] = overrides
+w(f"{A}/models/item/dolly.json", dolly)

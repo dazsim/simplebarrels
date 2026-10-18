@@ -3,6 +3,9 @@ package com.workshopcraft.simplebarrels.forge;
 import com.workshopcraft.simplebarrels.SimpleBarrels;
 import com.workshopcraft.simplebarrels.block.BarrelBlockEntity;
 import com.workshopcraft.simplebarrels.client.BarrelRenderer;
+import com.workshopcraft.simplebarrels.client.DollyProperty;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import com.workshopcraft.simplebarrels.registry.ModContent;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
@@ -31,6 +34,8 @@ public class SimpleBarrelsForge {
         modBus.addListener(SimpleBarrelsForge::onRegister);
         if (FMLEnvironment.dist == Dist.CLIENT) {
             modBus.addListener((EntityRenderersEvent.RegisterRenderers e) -> e.registerBlockEntityRenderer(ModContent.BARREL_BE, BarrelRenderer::new));
+            modBus.addListener((FMLClientSetupEvent e) -> e.enqueueWork(() ->
+                    ItemProperties.register(ModContent.DOLLY, DollyProperty.ID, (stack, level, entity, seed) -> DollyProperty.get(stack))));
         }
         MinecraftForge.EVENT_BUS.addGenericListener(BlockEntity.class, SimpleBarrelsForge::onAttachCaps);
     }
