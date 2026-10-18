@@ -7,7 +7,19 @@ A, D = f"{ROOT}/assets/simplebarrels", f"{ROOT}/data/simplebarrels"
 def w(path, obj):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w") as f: json.dump(obj, f, indent=2); f.write("\n")
+def adv(name, has, base=None):
+    base = base or f"{D}"
+    def pred(i):
+        if v21: return {"items": i}
+        return {"tag": i[1:]} if i.startswith("#") else {"items": [i]}
+    crit = {"has_the_recipe": {"trigger": "minecraft:recipe_unlocked", "conditions": {"recipe": f"simplebarrels:{name}"}}}
+    for i in has:
+        crit["has_" + i.split(":")[-1].replace("/", "_")] = {"trigger": "minecraft:inventory_changed", "conditions": {"items": [pred(i)]}}
+    w(f"{base}/{ADV}/recipes/misc/{name}.json", {"parent": "minecraft:recipes/root", "criteria": crit,
+        "requirements": [list(crit)], "rewards": {"recipes": [f"simplebarrels:{name}"]}})
 def title(s): return " ".join(p.capitalize() for p in s.split("_"))
+v21 = True
+ADV = "advancement" if v21 else "advancements"
 lang = {"itemGroup.simplebarrels": "Simple Barrels"}
 for wood in WOODS:
     bid = f"{wood}_barrel"
@@ -20,22 +32,27 @@ for wood in WOODS:
         "entries": [{"type": "minecraft:item", "name": f"simplebarrels:{bid}",
         "functions": [{"function": "minecraft:copy_components", "source": "block_entity", "include": ["simplebarrels:upgrades"]}]}], "conditions": [{"condition": "minecraft:survives_explosion"}]}],
         "random_sequence": f"simplebarrels:blocks/{bid}"})
-    w(f"{D}/recipe/{bid}.json", {"type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["WIW", " C ", "WIW"],
+    w(f"{D}/recipe/{bid}.json", {"type": "minecraft:crafting_shaped", "category": "misc", "group": f"simplebarrels:{bid}", "pattern": ["WIW", " C ", "WIW"],
         "key": {"W": {"item": f"minecraft:{wood}_planks"}, "I": {"tag": "c:ingots/iron"}, "C": {"tag": "c:chests/wooden"}},
         "result": {"id": f"simplebarrels:{bid}", "count": 1}})
+    adv(bid, ["minecraft:chest", f"minecraft:{wood}_planks"])
     for frame, comp in [(True, False), (False, True), (True, True)]:
         suffix = ("_frame" if frame else "") + ("_comparator" if comp else "")
         key = {"W": {"item": f"minecraft:{wood}_planks"}, "I": {"tag": "c:ingots/iron"}, "C": {"tag": "c:chests/wooden"}}
         if frame: key["F"] = {"item": "minecraft:item_frame"}
         if comp: key["R"] = {"item": "minecraft:comparator"}
         flags = {k: True for k, v in [("show_count", comp), ("show_item", frame)] if v}
-        w(f"{D}/recipe/{bid}{suffix}.json", {"type": "minecraft:crafting_shaped", "category": "misc",
+        w(f"{D}/recipe/{bid}{suffix}.json", {"type": "minecraft:crafting_shaped", "category": "misc", "group": f"simplebarrels:{bid}",
             "pattern": ["WIW", ("F" if frame else " ") + "C" + ("R" if comp else " "), "WIW"], "key": key,
             "result": {"id": f"simplebarrels:{bid}", "count": 1, "components": {"simplebarrels:upgrades": flags}}})
+        adv(bid + suffix, ["minecraft:chest", f"minecraft:{wood}_planks"], None)
     lang[f"block.simplebarrels.{bid}"] = f"{title(wood)} Barrel"
-def shaped(name, pattern, key):
-    w(f"{D}/recipe/{name}.json", {"type": "minecraft:crafting_shaped", "category": "misc", "pattern": pattern, "key": key,
-        "result": {"id": f"simplebarrels:{name}", "count": 1}})
+def shaped(name, pattern, key, group=None):
+    adv(name, ["#simplebarrels:barrels"])
+    r = {"type": "minecraft:crafting_shaped", "category": "misc"}
+    if group: r["group"] = group
+    r.update({"pattern": pattern, "key": key, "result": {"id": f"simplebarrels:{name}", "count": 1}})
+    w(f"{D}/recipe/{name}.json", r)
 items = {"dolly": "Dolly", "comparator_upgrade": "Comparator Upgrade", "item_frame_upgrade": "Item Frame Upgrade"}
 for i in range(1, 5): items[f"mark{i}_compressor"] = f"Mark {i} Compressor Upgrade"
 for name, label in items.items():
@@ -45,9 +62,9 @@ for name, label in items.items():
 plus = [" A ", "ABA", " A "]
 shaped("comparator_upgrade", plus, {"A": {"item": "minecraft:stick"}, "B": {"item": "minecraft:comparator"}})
 shaped("item_frame_upgrade", plus, {"A": {"item": "minecraft:stick"}, "B": {"item": "minecraft:item_frame"}})
-shaped("mark1_compressor", plus, {"A": {"item": "minecraft:stick"}, "B": {"item": "minecraft:piston"}})
+shaped("mark1_compressor", plus, {"A": {"item": "minecraft:stick"}, "B": {"item": "minecraft:piston"}}, "simplebarrels:compressor")
 for i, mid in [(2, "c:ingots/iron"), (3, "c:ingots/gold"), (4, "c:gems/diamond")]:
-    shaped(f"mark{i}_compressor", plus, {"A": {"item": f"simplebarrels:mark{i-1}_compressor"}, "B": {"tag": mid}})
+    shaped(f"mark{i}_compressor", plus, {"A": {"item": f"simplebarrels:mark{i-1}_compressor"}, "B": {"tag": mid}}, "simplebarrels:compressor")
 shaped("dolly", ["I  ", "IS ", "III"], {"I": {"tag": "c:ingots/iron"}, "S": {"item": "minecraft:stick"}})
 ids = [f"simplebarrels:{x}_barrel" for x in WOODS]
 w(f"{D}/tags/block/barrels.json", {"values": ids})

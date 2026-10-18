@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
+  "group": "simplebarrels:crimson_barrel",
   "pattern": [
     "WIW",
     "FC ",
