@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
+  "group": "simplebarrels:warped_barrel",
   "pattern": [
     "WIW",
     "FCR",

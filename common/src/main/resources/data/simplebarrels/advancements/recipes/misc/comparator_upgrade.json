@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "simplebarrels:comparator_upgrade"
+      }
+    },
+    "has_barrels": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "simplebarrels:barrels"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_barrels"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "simplebarrels:comparator_upgrade"
+    ]
+  }
+}
