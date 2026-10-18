@@ -64,13 +64,8 @@ public class BarrelBlock extends BaseEntityBlock {
                                               InteractionHand hand, BlockHitResult hit) {
         if (held.getItem() instanceof DollyItem || held.getItem() instanceof UpgradeItem) return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
         if (!(level.getBlockEntity(pos) instanceof BarrelBlockEntity barrel)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        if (!barrel.canAccept(held)) {
-
-            return ItemInteractionResult.sidedSuccess(level.isClientSide);
-        }
-        if (!level.isClientSide) {
-            int moved = barrel.insert(held, held.getCount(), false);
-            held.shrink(moved);
+        if (barrel.canAccept(held) && !level.isClientSide) {
+            held.shrink(barrel.insert(held, held.getCount(), false));
         }
         return ItemInteractionResult.sidedSuccess(level.isClientSide);
     }
