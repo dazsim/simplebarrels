@@ -1,0 +1,33 @@
+{
+  "type": "simplebarrels:shaped_nbt",
+  "category": "misc",
+  "group": "simplebarrels:acacia_barrel",
+  "pattern": [
+    "WIW",
+    " CR",
+    "WIW"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:acacia_planks"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "R": {
+      "item": "minecraft:comparator"
+    }
+  },
+  "result": {
+    "item": "simplebarrels:acacia_barrel",
+    "count": 1,
+    "nbt": {
+      "BlockEntityTag": {
+        "ShowCount": true
+      }
+    }
+  }
+}

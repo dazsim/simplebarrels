@@ -1,0 +1,48 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "biomesoplenty"
+      ]
+    }
+  ],
+  "type": "simplebarrels:shaped_nbt",
+  "category": "misc",
+  "group": "simplebarrels:biomesoplenty/fir_barrel",
+  "pattern": [
+    "WIW",
+    " CR",
+    "WIW"
+  ],
+  "key": {
+    "W": {
+      "item": "biomesoplenty:fir_planks"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "R": {
+      "item": "minecraft:comparator"
+    }
+  },
+  "result": {
+    "item": "simplebarrels:modded_barrel",
+    "count": 1,
+    "nbt": {
+      "BlockEntityTag": {
+        "Wood": "biomesoplenty:fir_planks",
+        "ShowCount": true
+      }
+    }
+  }
+}

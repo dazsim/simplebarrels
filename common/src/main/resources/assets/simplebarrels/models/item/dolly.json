@@ -789,6 +789,12 @@
         "simplebarrels:carried": 0.875
       },
       "model": "simplebarrels:item/dolly_ender_chest"
+    },
+    {
+      "predicate": {
+        "simplebarrels:carried": 0.9375
+      },
+      "model": "simplebarrels:item/dolly_modded"
     }
   ]
 }

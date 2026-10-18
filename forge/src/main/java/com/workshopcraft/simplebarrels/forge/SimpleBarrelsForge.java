@@ -31,6 +31,7 @@ public class SimpleBarrelsForge {
 
     public SimpleBarrelsForge() {
         ModContent.dollyFactory = ForgeDollyItem::new;
+        ModContent.moddedItemFactory = ForgeModdedBarrelItem::new;
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener(SimpleBarrelsForge::onRegister);
         if (FMLEnvironment.dist == Dist.CLIENT) {
@@ -45,6 +46,7 @@ public class SimpleBarrelsForge {
         e.register(Registries.BLOCK, h -> ModContent.registerBlocks(h::register));
         e.register(Registries.ITEM, h -> ModContent.registerItems(h::register));
         e.register(Registries.BLOCK_ENTITY_TYPE, h -> ModContent.registerBlockEntities(h::register));
+        e.register(Registries.RECIPE_SERIALIZER, h -> ModContent.registerRecipeSerializers(h::register));
         e.register(Registries.CREATIVE_MODE_TAB, h -> ModContent.registerCreativeTabs(h::register));
     }
 

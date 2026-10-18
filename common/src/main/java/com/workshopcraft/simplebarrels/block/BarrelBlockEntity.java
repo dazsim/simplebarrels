@@ -8,6 +8,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -22,6 +23,8 @@ public class BarrelBlockEntity extends BlockEntity {
     // set by the upgrades or the crafting variants
     private boolean showCount = false;
     private boolean showItem = false;
+    // planks id, modded barrel only
+    private ResourceLocation wood;
 
     public Object platformStorage;
 
@@ -34,6 +37,7 @@ public class BarrelBlockEntity extends BlockEntity {
     public int getCapacity() { return capacity; }
     public boolean showsCount() { return showCount; }
     public boolean showsItem() { return showItem; }
+    public ResourceLocation getWood() { return wood; }
 
     // 0 for none, 1 to 4 for compressor marks
     public int compressorTier() {
@@ -126,12 +130,14 @@ public class BarrelBlockEntity extends BlockEntity {
             tag.putInt("Count", count);
         }
         getUpgrades().save(tag);
+        if (wood != null) tag.putString("Wood", wood.toString());
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
         setUpgrades(BarrelUpgrades.load(tag));
+        wood = tag.contains("Wood") ? ResourceLocation.tryParse(tag.getString("Wood")) : null;
         ItemStack loaded = tag.contains("Item") ? ItemStack.of(tag.getCompound("Item")) : ItemStack.EMPTY;
         setContentsRaw(loaded, loaded.isEmpty() ? 0 : tag.getInt("Count"));
     }

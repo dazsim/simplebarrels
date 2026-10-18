@@ -1,0 +1,48 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "regions_unexplored"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "regions_unexplored"
+      ]
+    }
+  ],
+  "type": "simplebarrels:shaped_nbt",
+  "category": "misc",
+  "group": "simplebarrels:regions_unexplored/palm_barrel",
+  "pattern": [
+    "WIW",
+    "FC ",
+    "WIW"
+  ],
+  "key": {
+    "W": {
+      "item": "regions_unexplored:palm_planks"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "F": {
+      "item": "minecraft:item_frame"
+    }
+  },
+  "result": {
+    "item": "simplebarrels:modded_barrel",
+    "count": 1,
+    "nbt": {
+      "BlockEntityTag": {
+        "Wood": "regions_unexplored:palm_planks",
+        "ShowItem": true
+      }
+    }
+  }
+}

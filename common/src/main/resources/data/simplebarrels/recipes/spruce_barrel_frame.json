@@ -1,0 +1,33 @@
+{
+  "type": "simplebarrels:shaped_nbt",
+  "category": "misc",
+  "group": "simplebarrels:spruce_barrel",
+  "pattern": [
+    "WIW",
+    "FC ",
+    "WIW"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:spruce_planks"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "F": {
+      "item": "minecraft:item_frame"
+    }
+  },
+  "result": {
+    "item": "simplebarrels:spruce_barrel",
+    "count": 1,
+    "nbt": {
+      "BlockEntityTag": {
+        "ShowItem": true
+      }
+    }
+  }
+}

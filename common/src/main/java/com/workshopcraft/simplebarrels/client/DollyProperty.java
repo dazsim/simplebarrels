@@ -28,6 +28,7 @@ public final class DollyProperty {
         if (block == Blocks.CHEST) return 12 / 16F;
         if (block == Blocks.TRAPPED_CHEST) return 13 / 16F;
         if (block == Blocks.ENDER_CHEST) return 14 / 16F;
+        if (block == ModContent.MODDED_BARREL) return 15 / 16F;
         return 0;
     }
 }

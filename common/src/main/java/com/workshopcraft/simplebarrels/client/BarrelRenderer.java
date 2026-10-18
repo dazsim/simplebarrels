@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.workshopcraft.simplebarrels.block.BarrelBlock;
 import com.workshopcraft.simplebarrels.block.BarrelBlockEntity;
+import com.workshopcraft.simplebarrels.block.ModdedBarrelBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -31,6 +32,7 @@ public class BarrelRenderer implements BlockEntityRenderer<BarrelBlockEntity> {
         if (be.getLevel() == null) return;
         Direction facing = be.getBlockState().getValue(BarrelBlock.FACING);
         int faceLight = LevelRenderer.getLightColor(be.getLevel(), be.getBlockPos().relative(facing));
+        if (be.getBlockState().getBlock() instanceof ModdedBarrelBlock) ModdedBarrelModel.render(be.getWood(), facing, pose, buffers, light, overlay);
 
         pose.pushPose();
         pose.translate(0.5, 0, 0.5);

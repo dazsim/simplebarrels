@@ -1,0 +1,48 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "natures_spirit"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "natures_spirit"
+      ]
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "simplebarrels:natures_spirit/saxaul_barrel_comparator"
+      }
+    },
+    "has_chest": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:chest"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_chest"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "simplebarrels:natures_spirit/saxaul_barrel_comparator"
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "natures_spirit"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "natures_spirit"
+      ]
+    }
+  ],
+  "type": "simplebarrels:shaped_nbt",
+  "category": "misc",
+  "group": "simplebarrels:natures_spirit/fir_barrel",
+  "pattern": [
+    "WIW",
+    " C ",
+    "WIW"
+  ],
+  "key": {
+    "W": {
+      "item": "natures_spirit:fir_planks"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    }
+  },
+  "result": {
+    "item": "simplebarrels:modded_barrel",
+    "count": 1,
+    "nbt": {
+      "BlockEntityTag": {
+        "Wood": "natures_spirit:fir_planks"
+      }
+    }
+  }
+}
