@@ -30,6 +30,7 @@ public class SimpleBarrelsForge {
     private static final net.minecraft.resources.ResourceLocation CAP_ID = SimpleBarrels.id("barrel_items");
 
     public SimpleBarrelsForge() {
+        ModContent.dollyFactory = ForgeDollyItem::new;
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener(SimpleBarrelsForge::onRegister);
         if (FMLEnvironment.dist == Dist.CLIENT) {

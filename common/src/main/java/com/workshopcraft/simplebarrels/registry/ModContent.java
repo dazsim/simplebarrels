@@ -29,6 +29,7 @@ public final class ModContent {
     public static BlockEntityType<BarrelBlockEntity> BARREL_BE;
     public static CreativeModeTab TAB;
     public static DollyItem DOLLY;
+    public static java.util.function.Function<Item.Properties, DollyItem> dollyFactory = DollyItem::new;
     public static final List<Item> UPGRADES_ITEMS = new ArrayList<>();
 
     private ModContent() {}
@@ -49,7 +50,7 @@ public final class ModContent {
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> r) {
         BARRELS.forEach((wood, block) -> r.accept(SimpleBarrels.id(wood.blockId()), new BlockItem(block, new Item.Properties())));
-        DOLLY = new DollyItem(new Item.Properties().stacksTo(1));
+        DOLLY = dollyFactory.apply(new Item.Properties().stacksTo(1));
         r.accept(SimpleBarrels.id("dolly"), DOLLY);
         String[] names = {"comparator_upgrade", "item_frame_upgrade", "mark1_compressor", "mark2_compressor", "mark3_compressor", "mark4_compressor"};
         for (UpgradeItem.Kind k : UpgradeItem.Kind.values()) {

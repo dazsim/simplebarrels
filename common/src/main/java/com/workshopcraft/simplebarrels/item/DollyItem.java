@@ -97,8 +97,4 @@ public class DollyItem extends Item {
         }
     }
 
-    @Override
-    public boolean isFoil(ItemStack stack) {
-        return stack.getTagElement(TAG) != null;
-    }
 }
