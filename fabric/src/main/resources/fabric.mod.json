@@ -7,6 +7,9 @@
     "authors": [
         "${mod_author}"
     ],
+    "contributors": [
+        "${credits}"
+    ],
     "contact": {
         "sources": "https://github.com/dazsim/simplebarrels"
     },

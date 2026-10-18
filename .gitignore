@@ -22,3 +22,8 @@ build
 eclipse
 run
 runs
+*.orig
+*.rej
+.vscode
+.DS_Store
+logs
