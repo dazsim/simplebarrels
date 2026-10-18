@@ -77,5 +77,19 @@ for i, wood in enumerate(WOODS):
     m["elements"] = m["elements"] + barrel_elems
     w(f"{A}/models/item/dolly_{wood}.json", m)
     overrides.append({"predicate": {"simplebarrels:carried": round((i + 1) / 16, 4)}, "model": f"simplebarrels:item/dolly_{wood}"})
+# chests use entity textures, so approximate them with block textures
+CHESTS = [("chest", "minecraft:block/oak_planks", "minecraft:block/iron_block"),
+          ("trapped_chest", "minecraft:block/oak_planks", "minecraft:block/redstone_block"),
+          ("ender_chest", "minecraft:block/obsidian", "minecraft:block/gold_block")]
+def box(f, t, tex):
+    return {"from": fit(f), "to": fit(t), "faces": {d: {"texture": tex} for d in ["down", "up", "north", "south", "west", "east"]}}
+chest_elems = [box([1, 0, 1], [15, 10, 15], "#body"), box([1, 10, 1], [15, 14, 15], "#body"),
+               box([1, 9.5, 0.9], [15, 10.5, 15.1], "#latch"), box([7, 7, 15], [9, 11, 16], "#latch")]
+for i, (name, body, latch) in enumerate(CHESTS):
+    m = json.loads(json.dumps(dolly))
+    m["textures"].update({"body": body, "latch": latch})
+    m["elements"] = m["elements"] + chest_elems
+    w(f"{A}/models/item/dolly_{name}.json", m)
+    overrides.append({"predicate": {"simplebarrels:carried": round((12 + i) / 16, 4)}, "model": f"simplebarrels:item/dolly_{name}"})
 dolly["overrides"] = overrides
 w(f"{A}/models/item/dolly.json", dolly)
