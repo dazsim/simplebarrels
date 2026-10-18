@@ -21,9 +21,9 @@ public class BarrelBlockEntity extends BlockEntity {
     private ItemStack template = ItemStack.EMPTY;
     private int count = 0;
     private int capacity = BASE_CAPACITY;
-    // old comp/frame flags, set by the crafting variants, cleared by the upgrades
-    private boolean hideCount = false;
-    private boolean hideItem = false;
+    // set by the upgrades or the crafting variants
+    private boolean showCount = false;
+    private boolean showItem = false;
 
     public Object platformStorage;
 
@@ -34,8 +34,8 @@ public class BarrelBlockEntity extends BlockEntity {
     public ItemStack getTemplate() { return template; }
     public int getCount() { return count; }
     public int getCapacity() { return capacity; }
-    public boolean showsCount() { return !hideCount; }
-    public boolean showsItem() { return !hideItem; }
+    public boolean showsCount() { return showCount; }
+    public boolean showsItem() { return showItem; }
 
     // 0 for none, 1 to 4 for compressor marks
     public int compressorTier() {
@@ -44,19 +44,19 @@ public class BarrelBlockEntity extends BlockEntity {
         return t;
     }
 
-    public BarrelUpgrades getUpgrades() { return new BarrelUpgrades(hideCount, hideItem, capacity); }
+    public BarrelUpgrades getUpgrades() { return new BarrelUpgrades(showCount, showItem, capacity); }
 
     public void setUpgrades(BarrelUpgrades u) {
-        hideCount = u.hideCount();
-        hideItem = u.hideItem();
+        showCount = u.showCount();
+        showItem = u.showItem();
         capacity = Math.max(BASE_CAPACITY, u.capacity());
     }
 
     // same rules as the old upgrade items, compressors must go in order
     public boolean applyUpgrade(UpgradeItem.Kind kind) {
         switch (kind) {
-            case COMPARATOR -> { if (!hideCount) return false; hideCount = false; }
-            case FRAME -> { if (!hideItem) return false; hideItem = false; }
+            case COMPARATOR -> { if (showCount) return false; showCount = true; }
+            case FRAME -> { if (showItem) return false; showItem = true; }
             default -> {
                 int from = BASE_CAPACITY << (kind.ordinal() - UpgradeItem.Kind.MK1.ordinal());
                 if (capacity != from) return false;
@@ -128,16 +128,16 @@ public class BarrelBlockEntity extends BlockEntity {
             tag.putInt("Count", count);
         }
         if (capacity != BASE_CAPACITY) tag.putInt("Capacity", capacity);
-        if (hideCount) tag.putBoolean("HideCount", true);
-        if (hideItem) tag.putBoolean("HideItem", true);
+        if (showCount) tag.putBoolean("ShowCount", true);
+        if (showItem) tag.putBoolean("ShowItem", true);
     }
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
         capacity = tag.contains("Capacity") ? tag.getInt("Capacity") : BASE_CAPACITY;
-        hideCount = tag.getBoolean("HideCount");
-        hideItem = tag.getBoolean("HideItem");
+        showCount = tag.getBoolean("ShowCount");
+        showItem = tag.getBoolean("ShowItem");
         ItemStack loaded = tag.contains("Item") ? ItemStack.parseOptional(registries, tag.getCompound("Item")) : ItemStack.EMPTY;
         setContentsRaw(loaded, loaded.isEmpty() ? 0 : tag.getInt("Count"));
     }
@@ -157,8 +157,8 @@ public class BarrelBlockEntity extends BlockEntity {
     @Override
     public void removeComponentsFromTag(CompoundTag tag) {
         tag.remove("Capacity");
-        tag.remove("HideCount");
-        tag.remove("HideItem");
+        tag.remove("ShowCount");
+        tag.remove("ShowItem");
     }
 
     @Override

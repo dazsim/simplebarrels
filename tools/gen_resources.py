@@ -28,7 +28,7 @@ for wood in WOODS:
         key = {"W": {"item": f"minecraft:{wood}_planks"}, "I": {"tag": "c:ingots/iron"}, "C": {"tag": "c:chests/wooden"}}
         if frame: key["F"] = {"item": "minecraft:item_frame"}
         if comp: key["R"] = {"item": "minecraft:comparator"}
-        flags = {k: True for k, v in [("hide_count", comp), ("hide_item", frame)] if v}
+        flags = {k: True for k, v in [("show_count", comp), ("show_item", frame)] if v}
         w(f"{D}/recipe/{bid}{suffix}.json", {"type": "minecraft:crafting_shaped", "category": "misc",
             "pattern": ["WIW", ("F" if frame else " ") + "C" + ("R" if comp else " "), "WIW"], "key": key,
             "result": {"id": f"simplebarrels:{bid}", "count": 1, "components": {"simplebarrels:upgrades": flags}}})
@@ -39,7 +39,8 @@ def shaped(name, pattern, key):
 items = {"dolly": "Dolly", "comparator_upgrade": "Comparator Upgrade", "item_frame_upgrade": "Item Frame Upgrade"}
 for i in range(1, 5): items[f"mark{i}_compressor"] = f"Mark {i} Compressor Upgrade"
 for name, label in items.items():
-    w(f"{A}/models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"simplebarrels:item/{name}"}})
+    if name != "dolly":  # dolly has a hand made 3d model
+        w(f"{A}/models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"simplebarrels:item/{name}"}})
     lang[f"item.simplebarrels.{name}"] = label
 plus = [" A ", "ABA", " A "]
 shaped("comparator_upgrade", plus, {"A": {"item": "minecraft:stick"}, "B": {"item": "minecraft:comparator"}})

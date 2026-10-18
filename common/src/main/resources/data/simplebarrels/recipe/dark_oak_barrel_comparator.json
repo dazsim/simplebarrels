@@ -25,7 +25,7 @@
     "count": 1,
     "components": {
       "simplebarrels:upgrades": {
-        "hide_count": true
+        "show_count": true
       }
     }
   }
