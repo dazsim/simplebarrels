@@ -1,0 +1,52 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "biomesoplenty"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "biomesoplenty"
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "simplebarrels:biomesoplenty/jacaranda_barrel",
+  "pattern": [
+    "WIW",
+    "FCN",
+    "WIW"
+  ],
+  "key": {
+    "W": {
+      "item": "biomesoplenty:jacaranda_planks"
+    },
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "C": {
+      "tag": "c:chests/wooden"
+    },
+    "F": {
+      "item": "minecraft:item_frame"
+    },
+    "N": {
+      "item": "simplebarrels:counter"
+    }
+  },
+  "result": {
+    "id": "simplebarrels:modded_barrel",
+    "count": 1,
+    "components": {
+      "simplebarrels:wood": "biomesoplenty:jacaranda_planks",
+      "simplebarrels:upgrades": {
+        "show_count": true,
+        "show_item": true
+      }
+    }
+  }
+}

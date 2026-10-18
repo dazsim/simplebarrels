@@ -6,7 +6,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 
 public class UpgradeItem extends Item {
-    public enum Kind { COMPARATOR, FRAME, MK1, MK2, MK3, MK4 }
+    public enum Kind { COUNTER, FRAME, MK1, MK2, MK3, MK4 }
 
     private final Kind kind;
 

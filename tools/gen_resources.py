@@ -37,31 +37,32 @@ for wood in WOODS:
         "key": {"W": {"item": f"minecraft:{wood}_planks"}, "I": {"tag": "c:ingots/iron"}, "C": {"tag": "c:chests/wooden"}},
         "result": {"id": f"simplebarrels:{bid}", "count": 1}})
     adv(bid, ["minecraft:chest", f"minecraft:{wood}_planks"])
-    for frame, comp in [(True, False), (False, True), (True, True)]:
-        suffix = ("_frame" if frame else "") + ("_comparator" if comp else "")
+    for frame, count in [(True, False), (False, True), (True, True)]:
+        suffix = ("_frame" if frame else "") + ("_counter" if count else "")
         key = {"W": {"item": f"minecraft:{wood}_planks"}, "I": {"tag": "c:ingots/iron"}, "C": {"tag": "c:chests/wooden"}}
         if frame: key["F"] = {"item": "minecraft:item_frame"}
-        if comp: key["R"] = {"item": "minecraft:comparator"}
-        flags = {k: True for k, v in [("show_count", comp), ("show_item", frame)] if v}
+        if count: key["N"] = {"item": "simplebarrels:counter"}
+        flags = {k: True for k, v in [("show_count", count), ("show_item", frame)] if v}
         w(f"{D}/recipe/{bid}{suffix}.json", {"type": "minecraft:crafting_shaped", "category": "misc", "group": f"simplebarrels:{bid}",
-            "pattern": ["WIW", ("F" if frame else " ") + "C" + ("R" if comp else " "), "WIW"], "key": key,
+            "pattern": ["WIW", ("F" if frame else " ") + "C" + ("N" if count else " "), "WIW"], "key": key,
             "result": {"id": f"simplebarrels:{bid}", "count": 1, "components": {"simplebarrels:upgrades": flags}}})
         adv(bid + suffix, ["minecraft:chest", f"minecraft:{wood}_planks"], None)
     lang[f"block.simplebarrels.{bid}"] = f"{title(wood)} Barrel"
-def shaped(name, pattern, key, group=None):
-    adv(name, ["#simplebarrels:barrels"])
+def shaped(name, pattern, key, group=None, has=("#simplebarrels:barrels",)):
+    adv(name, list(has))
     r = {"type": "minecraft:crafting_shaped", "category": "misc"}
     if group: r["group"] = group
     r.update({"pattern": pattern, "key": key, "result": {"id": f"simplebarrels:{name}", "count": 1}})
     w(f"{D}/recipe/{name}.json", r)
-items = {"dolly": "Dolly", "comparator_upgrade": "Comparator Upgrade", "item_frame_upgrade": "Item Frame Upgrade"}
+items = {"dolly": "Dolly", "counter": "Barrel Counter", "item_frame_upgrade": "Item Frame Upgrade"}
 for i in range(1, 5): items[f"mark{i}_compressor"] = f"Mark {i} Compressor Upgrade"
 for name, label in items.items():
     if name != "dolly":  # dolly has a hand made 3d model
         w(f"{A}/models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"simplebarrels:item/{name}"}})
     lang[f"item.simplebarrels.{name}"] = label
 plus = [" A ", "ABA", " A "]
-shaped("comparator_upgrade", plus, {"A": {"item": "minecraft:stick"}, "B": {"item": "minecraft:comparator"}})
+shaped("counter", ["RSR", "SPS", "RSR"], {"R": {"item": "minecraft:redstone"}, "S": {"item": "minecraft:stick"}, "P": {"item": "minecraft:paper"}},
+       has=["minecraft:paper", "#simplebarrels:barrels"])
 shaped("item_frame_upgrade", plus, {"A": {"item": "minecraft:stick"}, "B": {"item": "minecraft:item_frame"}})
 shaped("mark1_compressor", plus, {"A": {"item": "minecraft:stick"}, "B": {"item": "minecraft:piston"}}, "simplebarrels:compressor")
 for i, mid in [(2, "c:ingots/iron"), (3, "c:ingots/gold"), (4, "c:gems/diamond")]:
@@ -87,17 +88,17 @@ for mod, woods in MODDED.items():
     for wood in woods:
         planks, name = f"{mod}:{wood}_planks", f"{mod}/{wood}_barrel"
         lang[f"wood.simplebarrels.{mod}.{wood}"] = title(wood)
-        for frame, comp in [(False, False), (True, False), (False, True), (True, True)]:
-            suffix = ("_frame" if frame else "") + ("_comparator" if comp else "")
+        for frame, count in [(False, False), (True, False), (False, True), (True, True)]:
+            suffix = ("_frame" if frame else "") + ("_counter" if count else "")
             key = {"W": {"item": planks}, "I": {"tag": "c:ingots/iron"}, "C": {"tag": "c:chests/wooden"}}
             if frame: key["F"] = {"item": "minecraft:item_frame"}
-            if comp: key["R"] = {"item": "minecraft:comparator"}
+            if count: key["N"] = {"item": "simplebarrels:counter"}
             comps = {"simplebarrels:wood": planks}
-            flags = {k: True for k, v in [("show_count", comp), ("show_item", frame)] if v}
+            flags = {k: True for k, v in [("show_count", count), ("show_item", frame)] if v}
             if flags: comps["simplebarrels:upgrades"] = flags
             r = dict(when(mod))
             r.update({"type": "minecraft:crafting_shaped", "category": "misc", "group": f"simplebarrels:{name}",
-                "pattern": ["WIW", ("F" if frame else " ") + "C" + ("R" if comp else " "), "WIW"], "key": key,
+                "pattern": ["WIW", ("F" if frame else " ") + "C" + ("N" if count else " "), "WIW"], "key": key,
                 "result": {"id": "simplebarrels:modded_barrel", "count": 1, "components": comps}})
             w(f"{D}/recipe/{name}{suffix}.json", r)
             # chest only, the advancement must not name items that may not exist
