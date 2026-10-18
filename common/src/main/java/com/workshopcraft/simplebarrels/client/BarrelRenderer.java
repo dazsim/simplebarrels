@@ -34,7 +34,7 @@ public class BarrelRenderer implements BlockEntityRenderer<BarrelBlockEntity> {
         pose.translate(0, 0, 0.485);
 
         if (!be.isEmpty()) {
-            if (be.hasFrame()) {
+            if (be.showsItem()) {
                 pose.pushPose();
                 pose.translate(0, 0.56, 0);
                 pose.mulPose(Axis.YP.rotationDegrees(180));
@@ -43,7 +43,7 @@ public class BarrelRenderer implements BlockEntityRenderer<BarrelBlockEntity> {
                         faceLight, OverlayTexture.NO_OVERLAY, pose, buffers, be.getLevel(), 0);
                 pose.popPose();
             }
-            drawText(pose, buffers, String.valueOf(be.getCount()), 0, 0.3F, 0xFF000000, faceLight, true);
+            if (be.showsCount()) drawText(pose, buffers, String.valueOf(be.getCount()), 0, 0.3F, 0xFF000000, faceLight, true);
         }
         int tier = be.compressorTier();
         if (tier > 0) drawText(pose, buffers, String.valueOf(tier), -0.3F, 0.82F, 0xFFFFFF00, faceLight, false);

@@ -7,18 +7,18 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 
-public record BarrelUpgrades(boolean comparator, boolean frame, int capacity) {
+public record BarrelUpgrades(boolean hideCount, boolean hideItem, int capacity) {
     public static final BarrelUpgrades NONE = new BarrelUpgrades(false, false, BarrelBlockEntity.BASE_CAPACITY);
 
     public static final Codec<BarrelUpgrades> CODEC = RecordCodecBuilder.create(i -> i.group(
-            Codec.BOOL.optionalFieldOf("comparator", false).forGetter(BarrelUpgrades::comparator),
-            Codec.BOOL.optionalFieldOf("frame", false).forGetter(BarrelUpgrades::frame),
+            Codec.BOOL.optionalFieldOf("hide_count", false).forGetter(BarrelUpgrades::hideCount),
+            Codec.BOOL.optionalFieldOf("hide_item", false).forGetter(BarrelUpgrades::hideItem),
             Codec.INT.optionalFieldOf("capacity", BarrelBlockEntity.BASE_CAPACITY).forGetter(BarrelUpgrades::capacity)
     ).apply(i, BarrelUpgrades::new));
 
     public static final StreamCodec<ByteBuf, BarrelUpgrades> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.BOOL, BarrelUpgrades::comparator,
-            ByteBufCodecs.BOOL, BarrelUpgrades::frame,
+            ByteBufCodecs.BOOL, BarrelUpgrades::hideCount,
+            ByteBufCodecs.BOOL, BarrelUpgrades::hideItem,
             ByteBufCodecs.VAR_INT, BarrelUpgrades::capacity,
             BarrelUpgrades::new);
 

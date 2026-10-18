@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "WIW",
+    " CR",
+    "WIW"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:crimson_planks"
+    },
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "C": {
+      "tag": "c:chests/wooden"
+    },
+    "R": {
+      "item": "minecraft:comparator"
+    }
+  },
+  "result": {
+    "id": "simplebarrels:crimson_barrel",
+    "count": 1,
+    "components": {
+      "simplebarrels:upgrades": {
+        "hide_count": true
+      }
+    }
+  }
+}

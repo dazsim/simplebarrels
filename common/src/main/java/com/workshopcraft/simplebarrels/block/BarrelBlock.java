@@ -107,11 +107,4 @@ public class BarrelBlock extends BaseEntityBlock {
         super.onRemove(state, level, pos, newState, moved);
     }
 
-    @Override
-    protected boolean hasAnalogOutputSignal(BlockState state) { return true; }
-
-    @Override
-    protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
-        return level.getBlockEntity(pos) instanceof BarrelBlockEntity b ? b.comparatorSignal() : 0;
-    }
 }

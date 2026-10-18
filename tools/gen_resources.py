@@ -23,6 +23,15 @@ for wood in WOODS:
     w(f"{D}/recipe/{bid}.json", {"type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["WIW", " C ", "WIW"],
         "key": {"W": {"item": f"minecraft:{wood}_planks"}, "I": {"tag": "c:ingots/iron"}, "C": {"tag": "c:chests/wooden"}},
         "result": {"id": f"simplebarrels:{bid}", "count": 1}})
+    for frame, comp in [(True, False), (False, True), (True, True)]:
+        suffix = ("_frame" if frame else "") + ("_comparator" if comp else "")
+        key = {"W": {"item": f"minecraft:{wood}_planks"}, "I": {"tag": "c:ingots/iron"}, "C": {"tag": "c:chests/wooden"}}
+        if frame: key["F"] = {"item": "minecraft:item_frame"}
+        if comp: key["R"] = {"item": "minecraft:comparator"}
+        flags = {k: True for k, v in [("hide_count", comp), ("hide_item", frame)] if v}
+        w(f"{D}/recipe/{bid}{suffix}.json", {"type": "minecraft:crafting_shaped", "category": "misc",
+            "pattern": ["WIW", ("F" if frame else " ") + "C" + ("R" if comp else " "), "WIW"], "key": key,
+            "result": {"id": f"simplebarrels:{bid}", "count": 1, "components": {"simplebarrels:upgrades": flags}}})
     lang[f"block.simplebarrels.{bid}"] = f"{title(wood)} Barrel"
 def shaped(name, pattern, key):
     w(f"{D}/recipe/{name}.json", {"type": "minecraft:crafting_shaped", "category": "misc", "pattern": pattern, "key": key,
