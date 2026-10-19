@@ -177,11 +177,11 @@ if v26:
 # chests are drawn by DollyChestRenderer, these models only switch to the custom renderer
 for i, name in enumerate(["chest", "trapped_chest", "ender_chest"]):
     w(f"{A}/models/item/dolly_{name}.json", {"parent": "builtin/entity", "gui_light": "front",
-        "textures": {"particle": "simplebarrels:item/dolly"}, "display": dolly["display"]})
+        "textures": {"particle": "simplebarrels:block/dolly"}, "display": dolly["display"]})
     overrides.append({"predicate": {"simplebarrels:carried": round((12 + i) / 16, 4)}, "model": f"simplebarrels:item/dolly_{name}"})
 # modded barrels go through ModdedBarrelModel
 w(f"{A}/models/item/dolly_modded.json", {"parent": "builtin/entity", "gui_light": "front",
-    "textures": {"particle": "simplebarrels:item/dolly"}, "display": dolly["display"]})
+    "textures": {"particle": "simplebarrels:block/dolly"}, "display": dolly["display"]})
 overrides.append({"predicate": {"simplebarrels:carried": round(15 / 16, 4)}, "model": "simplebarrels:item/dolly_modded"})
 dolly["overrides"] = overrides
 w(f"{A}/models/item/dolly.json", dolly)

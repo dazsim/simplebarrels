@@ -1,7 +1,7 @@
 {
   "textures": {
-    "particle": "simplebarrels:item/dolly",
-    "texture": "simplebarrels:item/dolly",
+    "particle": "simplebarrels:block/dolly",
+    "texture": "simplebarrels:block/dolly",
     "planks": "minecraft:block/birch_planks",
     "barrelband": "simplebarrels:block/barrelband"
   },
