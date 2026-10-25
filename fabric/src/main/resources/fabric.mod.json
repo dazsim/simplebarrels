@@ -14,6 +14,7 @@
         "sources": "https://github.com/dazsim/simplebarrels"
     },
     "license": "${license}",
+    "icon": "simplebarrels_logo.png",
     "environment": "*",
     "accessWidener": "simplebarrels.accesswidener",
     "entrypoints": {
