@@ -8,6 +8,7 @@ displayName = "${mod_name}"
 credits = "${credits}"
 authors = "${mod_author}"
 description = '''${description}'''
+logoFile = "simplebarrels_logo.png"
 [[dependencies.${mod_id}]]
 modId = "neoforge"
 type = "required"
