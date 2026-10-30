@@ -3,7 +3,7 @@
   "textures": {
     "particle": "simplebarrels:block/copper_fluid_barrel",
     "texture": "simplebarrels:block/copper_fluid_barrel",
-    "barrelband": "simplebarrels:block/copper_fluid_barrel_band",
+    "barrelband": "simplebarrels:block/barrelband",
     "front": "simplebarrels:block/copper_fluid_barrel_front",
     "top": "simplebarrels:block/copper_fluid_barrel_top"
   }

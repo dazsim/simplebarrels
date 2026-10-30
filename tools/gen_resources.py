@@ -123,10 +123,10 @@ with open("common/src/main/java/com/workshopcraft/simplebarrels/registry/ModdedW
         for i in range(0, len(woods), 4):
             f.write("            " + " ".join(f'"{mod}:{x}_planks",' for x in woods[i:i + 4]) + "\n")
     f.write("    };\n\n    private ModdedWoods() {}\n}\n")
-# fluid barrels, keep FLUID_TIERS in sync with FluidTier.java. steel needs Simple Machines for its ingot
+# fluid barrels share the wooden barrel straps, keep FLUID_TIERS in sync with FluidTier.java. steel needs Simple Machines for its ingot
 FLUID_TIERS = ["copper", "iron", "steel"]
 fbase = json.load(open(f"{A}/models/block/barrel_base.json"))
-fbase["textures"] = {"particle": "#texture", "texture": "simplebarrels:block/copper_fluid_barrel", "barrelband": "simplebarrels:block/copper_fluid_barrel_band",
+fbase["textures"] = {"particle": "#texture", "texture": "simplebarrels:block/copper_fluid_barrel", "barrelband": "simplebarrels:block/barrelband",
     "front": "simplebarrels:block/copper_fluid_barrel_front", "top": "simplebarrels:block/copper_fluid_barrel_top"}
 # the front stave carries the window, the lid boards carry the port
 fbase["elements"][27]["faces"]["east"] = {"uv": [4, 3, 12, 13], "texture": "#front"}
@@ -138,7 +138,7 @@ for tier in FLUID_TIERS:
     rot = {"east": 0, "south": 90, "west": 180, "north": 270}
     w(f"{A}/blockstates/{bid}.json", {"variants": {f"facing={f}": ({"model": f"simplebarrels:block/{bid}", "y": y} if y else {"model": f"simplebarrels:block/{bid}"}) for f, y in rot.items()}})
     w(f"{A}/models/block/{bid}.json", {"parent": "simplebarrels:block/fluid_barrel_base", "textures": {"particle": tex, "texture": tex,
-        "barrelband": f"{tex}_band", "front": f"{tex}_front", "top": f"{tex}_top"}})
+        "barrelband": "simplebarrels:block/barrelband", "front": f"{tex}_front", "top": f"{tex}_top"}})
     w(f"{A}/models/item/{bid}.json", {"parent": f"simplebarrels:block/{bid}"})
     item_def(bid)
     w(f"{D}/loot_table/blocks/{bid}.json", {"type": "minecraft:block", "pools": [{"rolls": 1, "bonus_rolls": 0,
