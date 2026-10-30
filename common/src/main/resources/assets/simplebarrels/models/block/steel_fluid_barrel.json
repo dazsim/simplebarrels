@@ -1,0 +1,10 @@
+{
+  "parent": "simplebarrels:block/fluid_barrel_base",
+  "textures": {
+    "particle": "simplebarrels:block/steel_fluid_barrel",
+    "texture": "simplebarrels:block/steel_fluid_barrel",
+    "barrelband": "simplebarrels:block/steel_fluid_barrel_band",
+    "front": "simplebarrels:block/steel_fluid_barrel_front",
+    "top": "simplebarrels:block/steel_fluid_barrel_top"
+  }
+}

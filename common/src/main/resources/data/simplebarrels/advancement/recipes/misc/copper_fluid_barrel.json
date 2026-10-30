@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "simplebarrels:copper_fluid_barrel"
+      }
+    },
+    "has_glass_panes": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:glass_panes"
+          }
+        ]
+      }
+    },
+    "has_ingots_copper": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:ingots/copper"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_glass_panes",
+      "has_ingots_copper"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "simplebarrels:copper_fluid_barrel"
+    ]
+  }
+}

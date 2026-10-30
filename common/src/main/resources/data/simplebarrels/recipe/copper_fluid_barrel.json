@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "simplebarrels:fluid_barrel",
+  "pattern": [
+    "TIT",
+    " G ",
+    "TIT"
+  ],
+  "key": {
+    "T": "#c:ingots/copper",
+    "I": "#c:ingots/iron",
+    "G": "#c:glass_panes"
+  },
+  "result": {
+    "id": "simplebarrels:copper_fluid_barrel",
+    "count": 1
+  }
+}

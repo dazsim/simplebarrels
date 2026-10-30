@@ -1,0 +1,33 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "simplemachines"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "simplemachines"
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "simplebarrels:fluid_barrel",
+  "pattern": [
+    "TIT",
+    " G ",
+    "TIT"
+  ],
+  "key": {
+    "T": "#c:ingots/steel",
+    "I": "#c:ingots/iron",
+    "G": "#c:glass_panes"
+  },
+  "result": {
+    "id": "simplebarrels:steel_fluid_barrel",
+    "count": 1
+  }
+}

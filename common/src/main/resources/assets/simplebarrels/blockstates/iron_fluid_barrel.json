@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "simplebarrels:block/iron_fluid_barrel"
+    },
+    "facing=south": {
+      "model": "simplebarrels:block/iron_fluid_barrel",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "simplebarrels:block/iron_fluid_barrel",
+      "y": 180
+    },
+    "facing=north": {
+      "model": "simplebarrels:block/iron_fluid_barrel",
+      "y": 270
+    }
+  }
+}

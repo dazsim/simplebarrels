@@ -76,5 +76,10 @@
   "wood.simplebarrels.natures_spirit.wisteria": "Wisteria",
   "block.simplebarrels.modded_barrel": "Modded Barrel",
   "block.simplebarrels.modded_barrel.named": "%s Barrel",
-  "tooltip.simplebarrels.missing_mod": "%s (not installed)"
+  "tooltip.simplebarrels.missing_mod": "%s (not installed)",
+  "block.simplebarrels.copper_fluid_barrel": "Copper Fluid Barrel",
+  "block.simplebarrels.iron_fluid_barrel": "Iron Fluid Barrel",
+  "block.simplebarrels.steel_fluid_barrel": "Steel Fluid Barrel",
+  "tooltip.simplebarrels.fluid_barrel": "%s: %s / %s mB",
+  "tooltip.simplebarrels.fluid_barrel_empty": "Empty, holds %s buckets of one fluid"
 }
