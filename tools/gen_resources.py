@@ -123,9 +123,43 @@ with open("common/src/main/java/com/workshopcraft/simplebarrels/registry/ModdedW
         for i in range(0, len(woods), 4):
             f.write("            " + " ".join(f'"{mod}:{x}_planks",' for x in woods[i:i + 4]) + "\n")
     f.write("    };\n\n    private ModdedWoods() {}\n}\n")
+# fluid barrels, keep FLUID_TIERS in sync with FluidTier.java. steel needs Simple Machines for its ingot
+FLUID_TIERS = ["copper", "iron", "steel"]
+fbase = json.load(open(f"{A}/models/block/barrel_base.json"))
+fbase["textures"] = {"particle": "#texture", "texture": "simplebarrels:block/copper_fluid_barrel", "barrelband": "simplebarrels:block/copper_fluid_barrel_band",
+    "front": "simplebarrels:block/copper_fluid_barrel_front", "top": "simplebarrels:block/copper_fluid_barrel_top"}
+# the front stave carries the window, the lid boards carry the port
+fbase["elements"][27]["faces"]["east"] = {"uv": [4, 3, 12, 13], "texture": "#front"}
+for i in range(46, 51): fbase["elements"][i]["faces"]["up"]["texture"] = "#top"
+w(f"{A}/models/block/fluid_barrel_base.json", fbase)
+for tier in FLUID_TIERS:
+    bid = f"{tier}_fluid_barrel"
+    tex = f"simplebarrels:block/{bid}"
+    rot = {"east": 0, "south": 90, "west": 180, "north": 270}
+    w(f"{A}/blockstates/{bid}.json", {"variants": {f"facing={f}": ({"model": f"simplebarrels:block/{bid}", "y": y} if y else {"model": f"simplebarrels:block/{bid}"}) for f, y in rot.items()}})
+    w(f"{A}/models/block/{bid}.json", {"parent": "simplebarrels:block/fluid_barrel_base", "textures": {"particle": tex, "texture": tex,
+        "barrelband": f"{tex}_band", "front": f"{tex}_front", "top": f"{tex}_top"}})
+    w(f"{A}/models/item/{bid}.json", {"parent": f"simplebarrels:block/{bid}"})
+    item_def(bid)
+    w(f"{D}/loot_table/blocks/{bid}.json", {"type": "minecraft:block", "pools": [{"rolls": 1, "bonus_rolls": 0,
+        "entries": [{"type": "minecraft:item", "name": f"simplebarrels:{bid}",
+        "functions": [{"function": "minecraft:copy_components", "source": "block_entity", "include": ["simplebarrels:fluid", "simplebarrels:upgrades"]}]}],
+        "conditions": [{"condition": "minecraft:survives_explosion"}]}], "random_sequence": f"simplebarrels:blocks/{bid}"})
+    r = dict(when("simplemachines")) if tier == "steel" else {}
+    r.update({"type": "minecraft:crafting_shaped", "category": "misc", "group": "simplebarrels:fluid_barrel", "pattern": ["TIT", " G ", "TIT"],
+        "key": {"T": ing(f"#c:ingots/{tier}"), "I": ing("#c:ingots/iron"), "G": ing("#c:glass_panes")},
+        "result": {"id": f"simplebarrels:{bid}", "count": 1}})
+    w(f"{D}/recipe/{bid}.json", r)
+    adv(bid, ["#c:glass_panes"] if tier == "steel" else ["#c:glass_panes", f"#c:ingots/{tier}"], extra=when("simplemachines") if tier == "steel" else None)
+    lang[f"block.simplebarrels.{bid}"] = f"{title(tier)} Fluid Barrel"
+lang["tooltip.simplebarrels.fluid_barrel"] = "%s: %s / %s mB"
+lang["tooltip.simplebarrels.fluid_barrel_empty"] = "Empty, holds %s buckets of one fluid"
+fluid_ids = [f"simplebarrels:{t}_fluid_barrel" for t in FLUID_TIERS]
+
 ids = [f"simplebarrels:{x}_barrel" for x in WOODS] + ["simplebarrels:modded_barrel"]
 w(f"{D}/tags/block/barrels.json", {"values": ids})
 w(f"{ROOT}/data/minecraft/tags/block/mineable/axe.json", {"values": ids})
+w(f"{ROOT}/data/minecraft/tags/block/mineable/pickaxe.json", {"values": fluid_ids})
 w(f"{D}/tags/item/barrels.json", {"values": ids})
 w(f"{A}/lang/en_us.json", lang)
 

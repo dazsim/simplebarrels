@@ -1,6 +1,7 @@
 package com.workshopcraft.simplebarrels.item;
 
 import com.workshopcraft.simplebarrels.block.BarrelBlockEntity;
+import com.workshopcraft.simplebarrels.block.FluidBarrelBlockEntity;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
@@ -20,6 +21,12 @@ public class UpgradeItem extends Item {
     @Override
     public InteractionResult useOn(UseOnContext ctx) {
         if (ctx.getPlayer() == null || !ctx.getPlayer().isShiftKeyDown()) return InteractionResult.PASS;
+        if (kind == Kind.COUNTER && ctx.getLevel().getBlockEntity(ctx.getClickedPos()) instanceof FluidBarrelBlockEntity fluid) {
+            if (ctx.getLevel().isClientSide()) return InteractionResult.SUCCESS;
+            if (!fluid.addCounter()) return InteractionResult.FAIL;
+            if (!ctx.getPlayer().getAbilities().instabuild) ctx.getItemInHand().shrink(1);
+            return InteractionResult.CONSUME;
+        }
         if (!(ctx.getLevel().getBlockEntity(ctx.getClickedPos()) instanceof BarrelBlockEntity barrel)) return InteractionResult.PASS;
         if (ctx.getLevel().isClientSide()) return InteractionResult.SUCCESS;
         if (!barrel.applyUpgrade(kind)) return InteractionResult.FAIL;

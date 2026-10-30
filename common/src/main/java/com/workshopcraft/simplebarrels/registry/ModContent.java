@@ -3,10 +3,14 @@ package com.workshopcraft.simplebarrels.registry;
 import com.workshopcraft.simplebarrels.SimpleBarrels;
 import com.workshopcraft.simplebarrels.block.BarrelBlock;
 import com.workshopcraft.simplebarrels.block.BarrelBlockEntity;
+import com.workshopcraft.simplebarrels.block.FluidBarrelBlock;
+import com.workshopcraft.simplebarrels.block.FluidBarrelBlockEntity;
 import com.workshopcraft.simplebarrels.block.ModdedBarrelBlock;
 import com.workshopcraft.simplebarrels.item.BarrelUpgrades;
 import com.workshopcraft.simplebarrels.item.CarriedBlock;
 import com.workshopcraft.simplebarrels.item.DollyItem;
+import com.workshopcraft.simplebarrels.item.FluidBarrelItem;
+import com.workshopcraft.simplebarrels.item.FluidContents;
 import com.workshopcraft.simplebarrels.item.ModdedBarrelItem;
 import com.workshopcraft.simplebarrels.item.UpgradeItem;
 import net.minecraft.core.Registry;
@@ -24,6 +28,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -38,12 +43,18 @@ public final class ModContent {
     public static ModdedBarrelBlock MODDED_BARREL;
     public static ModdedBarrelItem MODDED_BARREL_ITEM;
     public static BlockEntityType<BarrelBlockEntity> BARREL_BE;
+    public static final Map<FluidTier, FluidBarrelBlock> FLUID_BARRELS = new EnumMap<>(FluidTier.class);
+    public static BlockEntityType<FluidBarrelBlockEntity> FLUID_BARREL_BE;
+    public static DataComponentType<FluidContents> FLUID;
     public static CreativeModeTab TAB;
     public static DollyItem DOLLY;
     public static final List<Item> UPGRADES_ITEMS = new ArrayList<>();
     public static DataComponentType<BarrelUpgrades> UPGRADES;
     public static DataComponentType<CarriedBlock> CARRIED_BLOCK;
     public static DataComponentType<Identifier> WOOD;
+
+    // only there when Simple Machines is
+    private static final Identifier STEEL_INGOT = Identifier.fromNamespaceAndPath("simplemachines", "steel_ingot");
 
     private ModContent() {}
 
@@ -57,6 +68,19 @@ public final class ModContent {
         Identifier id = SimpleBarrels.id("modded_barrel");
         MODDED_BARREL = new ModdedBarrelBlock(props(BarrelWood.OAK, id));
         r.accept(id, MODDED_BARREL);
+        for (FluidTier tier : FluidTier.values()) {
+            Identifier fid = SimpleBarrels.id(tier.blockId());
+            FluidBarrelBlock block = new FluidBarrelBlock(tier, BlockBehaviour.Properties.of()
+                    .setId(ResourceKey.create(Registries.BLOCK, fid))
+                    .mapColor(tier.mapColor)
+                    .sound(tier.sound)
+                    .instrument(NoteBlockInstrument.IRON_XYLOPHONE)
+                    .strength(3.0F, 6.0F)
+                    .pushReaction(PushReaction.BLOCK)
+                    .noOcclusion());
+            FLUID_BARRELS.put(tier, block);
+            r.accept(fid, block);
+        }
     }
 
     private static BlockBehaviour.Properties props(BarrelWood wood, Identifier id) {
@@ -82,6 +106,10 @@ public final class ModContent {
         Identifier modded = SimpleBarrels.id("modded_barrel");
         MODDED_BARREL_ITEM = new ModdedBarrelItem(MODDED_BARREL, item(modded).useBlockDescriptionPrefix());
         r.accept(modded, MODDED_BARREL_ITEM);
+        FLUID_BARRELS.forEach((tier, block) -> {
+            Identifier id = SimpleBarrels.id(tier.blockId());
+            r.accept(id, new FluidBarrelItem(block, item(id).useBlockDescriptionPrefix()));
+        });
         Identifier dolly = SimpleBarrels.id("dolly");
         DOLLY = new DollyItem(item(dolly).stacksTo(1));
         r.accept(dolly, DOLLY);
@@ -101,6 +129,8 @@ public final class ModContent {
         r.accept(SimpleBarrels.id("upgrades"), UPGRADES);
         r.accept(SimpleBarrels.id("carried_block"), CARRIED_BLOCK);
         r.accept(SimpleBarrels.id("wood"), WOOD);
+        FLUID = DataComponentType.<FluidContents>builder().persistent(FluidContents.CODEC).networkSynchronized(FluidContents.STREAM_CODEC).build();
+        r.accept(SimpleBarrels.id("fluid"), FLUID);
     }
 
     public static void registerBlockEntities(BiConsumer<Identifier, BlockEntityType<?>> r) {
@@ -108,6 +138,8 @@ public final class ModContent {
         blocks.add(MODDED_BARREL);
         BARREL_BE = new BlockEntityType<>(BarrelBlockEntity::new, blocks);
         r.accept(SimpleBarrels.id("barrel"), BARREL_BE);
+        FLUID_BARREL_BE = new BlockEntityType<>(FluidBarrelBlockEntity::new, new HashSet<>(FLUID_BARRELS.values()));
+        r.accept(SimpleBarrels.id("fluid_barrel"), FLUID_BARREL_BE);
     }
 
     public static void registerCreativeTabs(BiConsumer<Identifier, CreativeModeTab> r) {
@@ -120,6 +152,9 @@ public final class ModContent {
                         Identifier wood = Identifier.parse(p);
                         if (BuiltInRegistries.BLOCK.containsKey(wood)) out.accept(ModdedBarrelBlock.stack(wood));
                     }
+                    out.accept(FLUID_BARRELS.get(FluidTier.COPPER));
+                    out.accept(FLUID_BARRELS.get(FluidTier.IRON));
+                    if (BuiltInRegistries.ITEM.containsKey(STEEL_INGOT)) out.accept(FLUID_BARRELS.get(FluidTier.STEEL));
                     out.accept(DOLLY);
                     UPGRADES_ITEMS.forEach(out::accept);
                 })
