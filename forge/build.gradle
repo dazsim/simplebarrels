@@ -38,8 +38,20 @@ legacyForge {
 
 sourceSets.main.resources.srcDir 'src/generated/resources'
 
+repositories {
+    maven {
+        url = rootProject.file('../workshopcore-maven')
+    }
+}
+
 dependencies {
     compileOnly project(":common")
+    jarJar(implementation("com.workshopcraft.workshopcore:workshopcore-forge-1.20.1") {
+        version {
+            strictly("[1.0.0-alpha.9,2.0)")
+            prefer("1.0.0-alpha.9")
+        }
+    })
 }
 
 jar {

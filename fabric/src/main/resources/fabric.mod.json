@@ -29,7 +29,11 @@
         "fabricloader": ">=${fabric_loader_version}",
         "fabric-api": "*",
         "minecraft": "${minecraft_version}",
-        "java": ">=${java_version}"
+        "java": ">=${java_version}",
+        "workshopcore": ">=1.0.0-alpha.9 <2.0.0"
+    },
+    "custom": {
+        "workshopcore:features": ["dolly"]
     }
 }
   

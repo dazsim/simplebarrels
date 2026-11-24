@@ -4,7 +4,6 @@ import com.workshopcraft.simplebarrels.SimpleBarrels;
 import com.workshopcraft.simplebarrels.block.BarrelBlock;
 import com.workshopcraft.simplebarrels.block.BarrelBlockEntity;
 import com.workshopcraft.simplebarrels.block.ModdedBarrelBlock;
-import com.workshopcraft.simplebarrels.item.DollyItem;
 import com.workshopcraft.simplebarrels.item.ModdedBarrelItem;
 import com.workshopcraft.simplebarrels.item.NbtShapedRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -36,8 +35,6 @@ public final class ModContent {
     public static BlockEntityType<BarrelBlockEntity> BARREL_BE;
     public static final NbtShapedRecipe.Serializer NBT_SHAPED = new NbtShapedRecipe.Serializer();
     public static CreativeModeTab TAB;
-    public static DollyItem DOLLY;
-    public static java.util.function.Function<Item.Properties, DollyItem> dollyFactory = DollyItem::new;
     public static BiFunction<Block, Item.Properties, ModdedBarrelItem> moddedItemFactory = ModdedBarrelItem::new;
     public static final List<Item> UPGRADES_ITEMS = new ArrayList<>();
 
@@ -67,8 +64,6 @@ public final class ModContent {
         BARRELS.forEach((wood, block) -> r.accept(SimpleBarrels.id(wood.blockId()), new BlockItem(block, new Item.Properties())));
         MODDED_BARREL_ITEM = moddedItemFactory.apply(MODDED_BARREL, new Item.Properties());
         r.accept(SimpleBarrels.id("modded_barrel"), MODDED_BARREL_ITEM);
-        DOLLY = dollyFactory.apply(new Item.Properties().stacksTo(1));
-        r.accept(SimpleBarrels.id("dolly"), DOLLY);
         String[] names = {"counter", "item_frame_upgrade", "mark1_compressor", "mark2_compressor", "mark3_compressor", "mark4_compressor"};
         for (UpgradeItem.Kind k : UpgradeItem.Kind.values()) {
             UpgradeItem item = new UpgradeItem(k, new Item.Properties());
@@ -102,7 +97,6 @@ public final class ModContent {
                         ResourceLocation wood = new ResourceLocation(p);
                         if (BuiltInRegistries.BLOCK.containsKey(wood)) out.accept(ModdedBarrelBlock.stack(wood));
                     }
-                    out.accept(DOLLY);
                     UPGRADES_ITEMS.forEach(out::accept);
                 })
                 .build();

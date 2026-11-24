@@ -21,3 +21,11 @@ mandatory = true
 versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
+[[dependencies.${mod_id}]]
+modId = "workshopcore"
+mandatory = true
+versionRange = "[1.0.0-alpha.9,2.0)"
+ordering = "AFTER"
+side = "BOTH"
+[modproperties.${mod_id}]
+"workshopcore:features" = ["dolly"]
