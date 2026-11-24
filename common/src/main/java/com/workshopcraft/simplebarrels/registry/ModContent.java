@@ -5,8 +5,6 @@ import com.workshopcraft.simplebarrels.block.BarrelBlock;
 import com.workshopcraft.simplebarrels.block.BarrelBlockEntity;
 import com.workshopcraft.simplebarrels.block.ModdedBarrelBlock;
 import com.workshopcraft.simplebarrels.item.BarrelUpgrades;
-import com.workshopcraft.simplebarrels.item.CarriedBlock;
-import com.workshopcraft.simplebarrels.item.DollyItem;
 import com.workshopcraft.simplebarrels.item.ModdedBarrelItem;
 import com.workshopcraft.simplebarrels.item.UpgradeItem;
 import net.minecraft.core.component.DataComponentType;
@@ -35,10 +33,8 @@ public final class ModContent {
     public static ModdedBarrelItem MODDED_BARREL_ITEM;
     public static BlockEntityType<BarrelBlockEntity> BARREL_BE;
     public static CreativeModeTab TAB;
-    public static DollyItem DOLLY;
     public static final List<Item> UPGRADES_ITEMS = new ArrayList<>();
     public static DataComponentType<BarrelUpgrades> UPGRADES;
-    public static DataComponentType<CarriedBlock> CARRIED_BLOCK;
     public static DataComponentType<ResourceLocation> WOOD;
 
     private ModContent() {}
@@ -67,8 +63,6 @@ public final class ModContent {
         BARRELS.forEach((wood, block) -> r.accept(SimpleBarrels.id(wood.blockId()), new BlockItem(block, new Item.Properties())));
         MODDED_BARREL_ITEM = new ModdedBarrelItem(MODDED_BARREL, new Item.Properties());
         r.accept(SimpleBarrels.id("modded_barrel"), MODDED_BARREL_ITEM);
-        DOLLY = new DollyItem(new Item.Properties().stacksTo(1));
-        r.accept(SimpleBarrels.id("dolly"), DOLLY);
         String[] names = {"counter", "item_frame_upgrade", "mark1_compressor", "mark2_compressor", "mark3_compressor", "mark4_compressor"};
         for (UpgradeItem.Kind k : UpgradeItem.Kind.values()) {
             UpgradeItem item = new UpgradeItem(k, new Item.Properties());
@@ -79,9 +73,7 @@ public final class ModContent {
 
     public static void registerDataComponents(BiConsumer<ResourceLocation, DataComponentType<?>> r) {
         UPGRADES = DataComponentType.<BarrelUpgrades>builder().persistent(BarrelUpgrades.CODEC).networkSynchronized(BarrelUpgrades.STREAM_CODEC).build();
-        CARRIED_BLOCK = DataComponentType.<CarriedBlock>builder().persistent(CarriedBlock.CODEC).networkSynchronized(CarriedBlock.STREAM_CODEC).build();
         r.accept(SimpleBarrels.id("upgrades"), UPGRADES);
-        r.accept(SimpleBarrels.id("carried_block"), CARRIED_BLOCK);
         WOOD = DataComponentType.<ResourceLocation>builder().persistent(ResourceLocation.CODEC).networkSynchronized(ResourceLocation.STREAM_CODEC).build();
         r.accept(SimpleBarrels.id("wood"), WOOD);
     }
@@ -107,7 +99,6 @@ public final class ModContent {
                         ResourceLocation wood = ResourceLocation.parse(p);
                         if (BuiltInRegistries.BLOCK.containsKey(wood)) out.accept(ModdedBarrelBlock.stack(wood));
                     }
-                    out.accept(DOLLY);
                     UPGRADES_ITEMS.forEach(out::accept);
                 })
                 .build();

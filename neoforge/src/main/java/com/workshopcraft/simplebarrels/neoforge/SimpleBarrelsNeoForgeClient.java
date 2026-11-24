@@ -1,8 +1,6 @@
 package com.workshopcraft.simplebarrels.neoforge;
 
 import com.workshopcraft.simplebarrels.client.BarrelRenderer;
-import com.workshopcraft.simplebarrels.client.DollyChestRenderer;
-import com.workshopcraft.simplebarrels.client.DollyProperty;
 import com.workshopcraft.simplebarrels.client.ModdedBarrelModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -12,8 +10,6 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import com.workshopcraft.simplebarrels.registry.ModContent;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
@@ -47,11 +43,8 @@ public final class SimpleBarrelsNeoForgeClient {
 
     static void init(IEventBus modBus) {
         modBus.addListener((RegisterClientExtensionsEvent e) -> {
-            e.registerItem(extension(DollyChestRenderer::render), ModContent.DOLLY);
             e.registerItem(extension(ModdedBarrelModel::renderItem), ModContent.MODDED_BARREL_ITEM);
         });
         modBus.addListener((EntityRenderersEvent.RegisterRenderers e) -> e.registerBlockEntityRenderer(ModContent.BARREL_BE, BarrelRenderer::new));
-        modBus.addListener((FMLClientSetupEvent e) -> e.enqueueWork(() ->
-                ItemProperties.register(ModContent.DOLLY, DollyProperty.ID, (stack, level, entity, seed) -> DollyProperty.get(stack))));
     }
 }
