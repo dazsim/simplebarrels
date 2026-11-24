@@ -63,12 +63,11 @@ def shaped(name, pattern, key, group=None, has=("#simplebarrels:barrels",)):
     if group: r["group"] = group
     r.update({"pattern": pattern, "key": key, "result": {"id": f"simplebarrels:{name}", "count": 1}})
     w(f"{D}/recipe/{name}.json", r)
-items = {"dolly": "Dolly", "counter": "Barrel Counter", "item_frame_upgrade": "Item Frame Upgrade"}
+items = {"counter": "Barrel Counter", "item_frame_upgrade": "Item Frame Upgrade"}
 for i in range(1, 5): items[f"mark{i}_compressor"] = f"Mark {i} Compressor Upgrade"
 for name, label in items.items():
-    if name != "dolly":  # dolly has a hand made 3d model
-        w(f"{A}/models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"simplebarrels:item/{name}"}})
-        item_def(name)
+    w(f"{A}/models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"simplebarrels:item/{name}"}})
+    item_def(name)
     lang[f"item.simplebarrels.{name}"] = label
 plus = [" A ", "ABA", " A "]
 shaped("counter", ["RSR", "SPS", "RSR"], {"R": ing("minecraft:redstone"), "S": ing("minecraft:stick"), "P": ing("minecraft:paper")},
@@ -77,8 +76,6 @@ shaped("item_frame_upgrade", plus, {"A": ing("minecraft:stick"), "B": ing("minec
 shaped("mark1_compressor", plus, {"A": ing("minecraft:stick"), "B": ing("minecraft:piston")}, "simplebarrels:compressor")
 for i, mid in [(2, "c:ingots/iron"), (3, "c:ingots/gold"), (4, "c:gems/diamond")]:
     shaped(f"mark{i}_compressor", plus, {"A": ing(f"simplebarrels:mark{i-1}_compressor"), "B": ing("#" + mid)}, "simplebarrels:compressor")
-shaped("dolly", ["I  ", "IS ", "III"], {"I": ing("#c:ingots/iron"), "S": ing("minecraft:stick")})
-
 # modded woods, recipes only load when the mod is there. planks ids checked against the mod jars
 MODS = {"biomesoplenty": "Biomes O' Plenty", "regions_unexplored": "Regions Unexplored", "natures_spirit": "Nature's Spirit"}
 MODDED = {
@@ -161,6 +158,9 @@ w(f"{D}/tags/block/barrels.json", {"values": ids})
 w(f"{ROOT}/data/minecraft/tags/block/mineable/axe.json", {"values": ids})
 w(f"{ROOT}/data/minecraft/tags/block/mineable/pickaxe.json", {"values": fluid_ids})
 w(f"{D}/tags/item/barrels.json", {"values": ids})
+carry = ids + fluid_ids
+w(f"{ROOT}/data/workshopcore/tags/block/dolly_carryable.json", {"values": carry})
+w(f"{ROOT}/data/workshopcore/tags/item/dolly_carryable.json", {"values": carry})
 w(f"{A}/lang/en_us.json", lang)
 
 w(f"{A}/blockstates/modded_barrel.json", {"variants": {"": {"model": "simplebarrels:block/modded_barrel"}}})
@@ -177,45 +177,3 @@ w(f"{D}/loot_table/blocks/modded_barrel.json", {"type": "minecraft:block", "pool
     "entries": [{"type": "minecraft:item", "name": "simplebarrels:modded_barrel",
     "functions": [{"function": "minecraft:copy_components", "source": "block_entity", "include": ["simplebarrels:upgrades", "simplebarrels:wood"]}]}],
     "conditions": [{"condition": "minecraft:survives_explosion"}]}], "random_sequence": "simplebarrels:blocks/modded_barrel"})
-
-# loaded dolly: dolly model plus a scaled barrel on the plate, picked by the simplebarrels:carried predicate
-dolly = json.load(open("tools/models/dolly_base.json"))
-barrel = json.load(open(f"{A}/models/block/barrel_base.json"))
-S, OFF = 0.6, (3.2, 1.6, 1.4)
-def fit(p): return [round(p[i] * S + OFF[i], 4) for i in range(3)]
-barrel_elems = []
-for e in barrel["elements"]:
-    e = json.loads(json.dumps(e))
-    e["from"], e["to"] = fit(e["from"]), fit(e["to"])
-    for f in e["faces"].values():
-        f["texture"] = "#planks" if f["texture"] == "#texture" else f["texture"]
-    barrel_elems.append(e)
-overrides = []
-for i, wood in enumerate(WOODS):
-    m = json.loads(json.dumps(dolly))
-    planks = f"minecraft:block/{wood}_planks"
-    m["textures"].update({"planks": planks, "barrelband": "simplebarrels:block/barrelband"})
-    m["elements"] = m["elements"] + barrel_elems
-    w(f"{A}/models/item/dolly_{wood}.json", m)
-    overrides.append({"predicate": {"simplebarrels:carried": round((i + 1) / 16, 4)}, "model": f"simplebarrels:item/dolly_{wood}"})
-if v26:
-    # chests and modded barrels: plain dolly plus DollyLoadRenderer on the plate
-    loaded = {"type": "minecraft:composite", "models": [{"type": "minecraft:model", "model": "simplebarrels:item/dolly"},
-        {"type": "minecraft:special", "base": "simplebarrels:item/dolly", "model": {"type": "simplebarrels:dolly_load"}}]}
-    cases = [{"when": wood, "model": {"type": "minecraft:model", "model": f"simplebarrels:item/dolly_{wood}"}} for wood in WOODS]
-    cases.append({"when": ["chest", "trapped_chest", "ender_chest", "modded"], "model": loaded})
-    item_def("dolly", {"type": "minecraft:select", "property": "simplebarrels:carried", "cases": cases,
-        "fallback": {"type": "minecraft:model", "model": "simplebarrels:item/dolly"}})
-    w(f"{A}/models/item/dolly.json", dolly)
-    sys.exit()
-# chests are drawn by DollyChestRenderer, these models only switch to the custom renderer
-for i, name in enumerate(["chest", "trapped_chest", "ender_chest"]):
-    w(f"{A}/models/item/dolly_{name}.json", {"parent": "builtin/entity", "gui_light": "front",
-        "textures": {"particle": "simplebarrels:block/dolly"}, "display": dolly["display"]})
-    overrides.append({"predicate": {"simplebarrels:carried": round((12 + i) / 16, 4)}, "model": f"simplebarrels:item/dolly_{name}"})
-# modded barrels go through ModdedBarrelModel
-w(f"{A}/models/item/dolly_modded.json", {"parent": "builtin/entity", "gui_light": "front",
-    "textures": {"particle": "simplebarrels:block/dolly"}, "display": dolly["display"]})
-overrides.append({"predicate": {"simplebarrels:carried": round(15 / 16, 4)}, "model": "simplebarrels:item/dolly_modded"})
-dolly["overrides"] = overrides
-w(f"{A}/models/item/dolly.json", dolly)

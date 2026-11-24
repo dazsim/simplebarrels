@@ -1,7 +1,7 @@
 package com.workshopcraft.simplebarrels.block;
 
 import com.mojang.serialization.MapCodec;
-import com.workshopcraft.simplebarrels.item.DollyItem;
+import com.workshopcraft.simplebarrels.SimpleBarrels;
 import com.workshopcraft.simplebarrels.item.UpgradeItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -60,7 +60,7 @@ public class BarrelBlock extends BaseEntityBlock {
     @Override
     protected InteractionResult useItemOn(ItemStack held, BlockState state, Level level, BlockPos pos, Player player,
                                           InteractionHand hand, BlockHitResult hit) {
-        if (held.getItem() instanceof DollyItem || held.getItem() instanceof UpgradeItem) return InteractionResult.PASS;
+        if (held.is(SimpleBarrels.DOLLY) || held.getItem() instanceof UpgradeItem) return InteractionResult.PASS;
         if (!(level.getBlockEntity(pos) instanceof BarrelBlockEntity barrel)) return InteractionResult.TRY_WITH_EMPTY_HAND;
         if (barrel.canAccept(held) && !level.isClientSide()) {
             held.shrink(barrel.insert(held, held.getCount(), false));

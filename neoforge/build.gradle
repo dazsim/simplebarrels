@@ -3,6 +3,21 @@ plugins {
     id 'net.neoforged.moddev'
 }
 
+repositories {
+    maven {
+        url = rootProject.file('../workshopcore-maven')
+    }
+}
+
+dependencies {
+    jarJar(implementation("com.workshopcraft.workshopcore:workshopcore-neoforge-26.1.2") {
+        version {
+            strictly("[1.0.0-alpha.6,2.0)")
+            prefer("1.0.0-alpha.6")
+        }
+    })
+}
+
 neoForge {
     version = neoforge_version
     def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')

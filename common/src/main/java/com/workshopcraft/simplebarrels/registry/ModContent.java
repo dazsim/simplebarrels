@@ -7,8 +7,6 @@ import com.workshopcraft.simplebarrels.block.FluidBarrelBlock;
 import com.workshopcraft.simplebarrels.block.FluidBarrelBlockEntity;
 import com.workshopcraft.simplebarrels.block.ModdedBarrelBlock;
 import com.workshopcraft.simplebarrels.item.BarrelUpgrades;
-import com.workshopcraft.simplebarrels.item.CarriedBlock;
-import com.workshopcraft.simplebarrels.item.DollyItem;
 import com.workshopcraft.simplebarrels.item.FluidBarrelItem;
 import com.workshopcraft.simplebarrels.item.FluidContents;
 import com.workshopcraft.simplebarrels.item.ModdedBarrelItem;
@@ -47,10 +45,8 @@ public final class ModContent {
     public static BlockEntityType<FluidBarrelBlockEntity> FLUID_BARREL_BE;
     public static DataComponentType<FluidContents> FLUID;
     public static CreativeModeTab TAB;
-    public static DollyItem DOLLY;
     public static final List<Item> UPGRADES_ITEMS = new ArrayList<>();
     public static DataComponentType<BarrelUpgrades> UPGRADES;
-    public static DataComponentType<CarriedBlock> CARRIED_BLOCK;
     public static DataComponentType<Identifier> WOOD;
 
     // only there when Simple Machines is
@@ -110,9 +106,6 @@ public final class ModContent {
             Identifier id = SimpleBarrels.id(tier.blockId());
             r.accept(id, new FluidBarrelItem(block, item(id).useBlockDescriptionPrefix()));
         });
-        Identifier dolly = SimpleBarrels.id("dolly");
-        DOLLY = new DollyItem(item(dolly).stacksTo(1));
-        r.accept(dolly, DOLLY);
         String[] names = {"counter", "item_frame_upgrade", "mark1_compressor", "mark2_compressor", "mark3_compressor", "mark4_compressor"};
         for (UpgradeItem.Kind k : UpgradeItem.Kind.values()) {
             Identifier id = SimpleBarrels.id(names[k.ordinal()]);
@@ -124,10 +117,8 @@ public final class ModContent {
 
     public static void registerDataComponents(BiConsumer<Identifier, DataComponentType<?>> r) {
         UPGRADES = DataComponentType.<BarrelUpgrades>builder().persistent(BarrelUpgrades.CODEC).networkSynchronized(BarrelUpgrades.STREAM_CODEC).build();
-        CARRIED_BLOCK = DataComponentType.<CarriedBlock>builder().persistent(CarriedBlock.CODEC).networkSynchronized(CarriedBlock.STREAM_CODEC).build();
         WOOD = DataComponentType.<Identifier>builder().persistent(Identifier.CODEC).networkSynchronized(Identifier.STREAM_CODEC).build();
         r.accept(SimpleBarrels.id("upgrades"), UPGRADES);
-        r.accept(SimpleBarrels.id("carried_block"), CARRIED_BLOCK);
         r.accept(SimpleBarrels.id("wood"), WOOD);
         FLUID = DataComponentType.<FluidContents>builder().persistent(FluidContents.CODEC).networkSynchronized(FluidContents.STREAM_CODEC).build();
         r.accept(SimpleBarrels.id("fluid"), FLUID);
@@ -155,7 +146,6 @@ public final class ModContent {
                     out.accept(FLUID_BARRELS.get(FluidTier.COPPER));
                     out.accept(FLUID_BARRELS.get(FluidTier.IRON));
                     if (BuiltInRegistries.ITEM.containsKey(STEEL_INGOT)) out.accept(FLUID_BARRELS.get(FluidTier.STEEL));
-                    out.accept(DOLLY);
                     UPGRADES_ITEMS.forEach(out::accept);
                 })
                 .build();

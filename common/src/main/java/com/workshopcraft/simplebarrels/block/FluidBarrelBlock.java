@@ -1,6 +1,7 @@
 package com.workshopcraft.simplebarrels.block;
 
 import com.mojang.serialization.MapCodec;
+import com.workshopcraft.simplebarrels.SimpleBarrels;
 import com.workshopcraft.simplebarrels.registry.FluidTier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -70,6 +71,7 @@ public class FluidBarrelBlock extends BaseEntityBlock {
     @Override
     protected InteractionResult useItemOn(ItemStack held, BlockState state, Level level, BlockPos pos, Player player,
                                           InteractionHand hand, BlockHitResult hit) {
+        if (held.is(SimpleBarrels.DOLLY)) return InteractionResult.PASS;
         if (containers == null || !containers.isContainer(held)) return InteractionResult.TRY_WITH_EMPTY_HAND;
         if (level.isClientSide()) return InteractionResult.SUCCESS;
         if (containers.interact(level, pos, player, hand)) return InteractionResult.SUCCESS;
