@@ -24,7 +24,7 @@ side = "BOTH"
 [[dependencies.${mod_id}]]
 modId = "workshopcore"
 type = "required"
-versionRange = "[1.0.0-alpha.7,2.0)"
+versionRange = "[1.0.0-alpha.8,2.0)"
 ordering = "AFTER"
 side = "BOTH"
 [modproperties.${mod_id}]
