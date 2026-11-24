@@ -28,7 +28,7 @@
     "depends": {
         "fabricloader": ">=${fabric_loader_version}",
         "fabric-api": "*",
-        "workshopcore": ">=1.0.0-alpha.8 <2.0.0",
+        "workshopcore": ">=1.0.0-alpha.9 <2.0.0",
         "minecraft": "${fabric_minecraft_range}",
         "java": ">=${java_version}"
     },
