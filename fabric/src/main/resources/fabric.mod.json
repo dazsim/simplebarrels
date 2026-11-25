@@ -30,7 +30,7 @@
         "fabric-api": "*",
         "minecraft": "${minecraft_version}",
         "java": ">=${java_version}",
-        "workshopcore": ">=1.0.0-alpha.9 <2.0.0"
+        "workshopcore": ">=1.0.0-alpha.10 <2.0.0"
     },
     "custom": {
         "workshopcore:features": ["dolly"]
