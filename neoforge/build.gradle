@@ -12,8 +12,8 @@ repositories {
 dependencies {
     jarJar(implementation("com.workshopcraft.workshopcore:workshopcore-neoforge-1.21.1") {
         version {
-            strictly("[1.0.0-alpha.9,2.0)")
-            prefer("1.0.0-alpha.9")
+            strictly("[1.0.0-alpha.10,2.0)")
+            prefer("1.0.0-alpha.10")
         }
     })
 }
